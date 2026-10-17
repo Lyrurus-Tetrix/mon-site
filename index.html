@@ -124,13 +124,29 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 .hero.ready .fog.f1{animation:fog 40s ease-in-out infinite alternate,reveal 2s ease-in-out both}
 .hero.ready .fog.f2{animation:fog 62s ease-in-out infinite alternate-reverse,reveal 2s ease-in-out both}
 @media (prefers-reduced-motion:reduce){.hero .hero-bg::before,.hero .fog{opacity:1!important;animation:none!important}}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.cert{background:#fff;border:1px solid var(--line);border-left:3px solid var(--ridge);border-radius:12px;padding:18px 20px}
+.cert h3{margin:0 0 8px;font-size:1.05rem;line-height:1.35;color:var(--navy)}
+.cert.s h3{font-size:.95rem}
+.cert p{margin:3px 0;color:var(--muted);font-size:.9rem}
+.cert a{display:inline-block;margin-top:8px;color:var(--ridge);font-weight:700;font-size:.9rem}
+.sub{margin:40px 0 16px;font-weight:700;color:var(--navy);font-size:1.05rem}
+.enable{background:linear-gradient(135deg,var(--navy),var(--ridge));color:#fff;border-radius:14px;padding:36px 40px}
+.enable h2{color:#fff;margin-bottom:12px}
+.enable p{margin:0 0 22px;max-width:40em;color:#EAF1FF;font-size:1.05rem}
+.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.chips li{border:1px solid #ffffff70;border-radius:999px;padding:7px 16px;font-size:.92rem;background:#ffffff14}
+@media(max-width:760px){.enable{padding:28px 24px}}
+.enable{margin-bottom:8px}
+.enable h3{color:#fff;font-size:1.4rem;margin:0 0 12px}
+.sub.first{margin-top:36px}
 </style>
 <noscript><style>.hero:not(.ready) .hero-bg::before,.hero:not(.ready) .fog{opacity:1}</style></noscript>
 </head>
 <body>
 <header><div class="bar">
 <a class="brand" href="#top">Arnaud Gavanier</a>
-<nav><a href="#about" data-i="n_about"></a><a href="#services" data-i="n_svc"></a><a href="#experience" data-i="n_exp"></a><a href="#contact" data-i="n_con"></a></nav>
+<nav><a href="#about" data-i="n_about"></a><a href="#services" data-i="n_svc"></a><a href="#experience" data-i="n_exp"></a><a href="#certifications" data-i="n_cert"></a><a href="#contact" data-i="n_con"></a></nav>
 <div class="lang" role="group" aria-label="Language"><button data-l="en">EN</button><button data-l="fr">FR</button><button data-l="de">DE</button></div>
 </div></header>
 
@@ -209,6 +225,47 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 <div><h3 data-i="j2t"></h3><p class="jm" data-i="j2m"></p><p data-i="j2"></p></div>
 </div></details></section>
 
+<section id="certifications"><h2 data-i="ct_h"></h2>
+<div class="enable"><h3 data-i="ai_h"></h3><p data-i="ai_p"></p>
+<ul class="chips"><li data-i="ai_t1"></li><li data-i="ai_t2"></li><li data-i="ai_t3"></li><li data-i="ai_t4"></li></ul></div>
+<p class="sub first" data-i="ct_main"></p>
+<div class="cert-grid">
+<div class="cert"><h3>SAP Certified - Positioning Business Transformation Management Solutions</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2026-10"></time>, <span data-i="ct_exp"></span> <time data-date="2027-10"></time></p>
+<p><span data-i="ct_id"></span> C_BCBTM</p>
+<a href="https://www.credly.com/badges/22ba7486-f477-4b2e-8b77-d698119c1746/public_url" target="_blank" rel="noopener noreferrer" data-i="ct_ver"></a></div>
+<div class="cert"><h3>SAP Certified - Validating Business Transformation</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2026-07"></time>, <span data-i="ct_exp"></span> <time data-date="2027-07"></time></p>
+<p><span data-i="ct_id"></span> C_SIGVT_2601</p>
+<a href="https://www.credly.com/badges/72336142-a81d-4b26-be7c-5732eeb77250/public_url" target="_blank" rel="noopener noreferrer" data-i="ct_ver"></a></div>
+<div class="cert"><h3>SAP Certified - Positioning SAP Business Suite</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2026-02"></time>, <span data-i="ct_exp"></span> <time data-date="2027-02"></time></p>
+<p><span data-i="ct_id"></span> C_BCSBS</p>
+<a href="https://www.credly.com/badges/edc60ab8-e6fb-4644-9802-caaac4865541" target="_blank" rel="noopener noreferrer" data-i="ct_ver"></a></div>
+<div class="cert"><h3>SAP Certified Associate - Positioning SAP Business AI Solutions as part of SAP Business Suite</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2025-11"></time>, <span data-i="ct_exp"></span> <time data-date="2026-11"></time></p>
+<p><span data-i="ct_id"></span> C_BCBAI_2509</p>
+<a href="https://www.credly.com/badges/684ebb82-faf8-4f26-8243-9119b9b3ac9e/public_url" target="_blank" rel="noopener noreferrer" data-i="ct_ver"></a></div>
+</div>
+<p class="sub" data-i="ct_sub"></p>
+<div class="cert-grid">
+<div class="cert s"><h3>SAP Certified Associate - Implementation Consultant - SAP S/4HANA Cloud Public Edition</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2025-05"></time>, <span data-i="ct_exp"></span> <time data-date="2027-05"></time></p>
+<p><span data-i="ct_id"></span> C_S4CPB</p>
+<a href="https://www.credly.com/badges/e1d8f356-7b97-40e6-a6e6-3dfd7d0a1b4d/public_url" target="_blank" rel="noopener noreferrer" data-i="ct_ver"></a></div>
+<div class="cert s"><h3>SAP Certified Associate - Implementation Consultant - SAP S/4HANA Cloud Public Edition - Sales</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2025-04"></time>, <span data-i="ct_exp"></span> <time data-date="2027-04"></time></p>
+<p><span data-i="ct_id"></span> C_S4CS</p>
+<a href="https://www.credly.com/badges/b314be1d-6454-4af3-87e2-bebbb095f0c1/public_url" target="_blank" rel="noopener noreferrer" data-i="ct_ver"></a></div>
+<div class="cert s"><h3>SAP Certified Associate - Project Manager - SAP Activate</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2025-04"></time>, <span data-i="ct_exp"></span> <time data-date="2027-04"></time></p>
+<p><span data-i="ct_id"></span> C_ACT</p>
+<a href="https://www.credly.com/badges/94d15283-13be-47e7-963a-fbc2330e3928/public_url" target="_blank" rel="noopener noreferrer" data-i="ct_ver"></a></div>
+<div class="cert s"><h3>SAP Certified Associate - SAP S/4HANA Cloud Private Edition, Sales</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2025-03"></time>, <span data-i="ct_exp"></span> <time data-date="2027-03"></time></p>
+<p><span data-i="ct_id"></span> C_TS462</p></div>
+</div></section>
+
 <section id="contact"><div class="contact"><h2 data-i="c_h"></h2><p data-i="c_p"></p>
 <a class="btn p" href="contact.html" data-i="c_btn"></a>
 <a class="btn s" href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a></div></section>
@@ -250,6 +307,8 @@ e3t:"Deal shaping and presales",e3:"Led large S/4HANA and digital transformation
 j_h:"Earlier experience",j1t:"Project Manager, Swatch Group",j1m:"Biel/Bienne, Oct 2014 – May 2019",j1:"Delivered international SAP programs and business transformations with stakeholders across Finance, Logistics, Sales and Corporate Services, with end-to-end ownership of governance, risk, resources and budget across a multi-project portfolio.",j1a:"European principal company model rollout: Europe-wide intercompany operating model, standardized financial and logistics processes, stronger transfer pricing compliance.",j1b:"Sales and supply chain transformation: SAP-enabled process improvements supporting sales operations, product launches and supply chain efficiency across multiple brands.",j1c:"M&A integration: SAP integration and data harmonization for acquisitions, with rapid alignment to the Group’s global ERP landscape.",j1d:"Global SAP core model deployment: standardized rollout across international subsidiaries, with process harmonization, local adoption and structured end-user enablement.",j2t:"Consultant, Accenture",j2m:"Paris region, Jan 2008 – Oct 2014",j2:"SAP consultant and project lead, building a best-in-class project management capability and delivering business value on time, in scope and within budget.",
 hf1:"years delivering SAP programs",hf2:"industries served",hf3:"sides of the table: consulting and client-side",dq1:"of organizations redesign their processes when moving to S/4HANA",dq2:"do little or no re-engineering",dq3:"of these projects run late and over budget",f_tag:"SAP S/4HANA transformation, operating models and Business AI.",
 e_link:"View my Deloitte profile",f_dl:"Deloitte profile",
+n_cert:"Skills",ct_h:"Skills & Certifications",ct_main:"SAP certifications",ct_sub:"Also certified",ct_iss:"Issued",ct_exp:"expires",ct_id:"Credential ID",ct_ver:"Verify credential",
+ai_h:"AI & Digital Enablement",ai_p:"Applying AI tools to accelerate analysis, prototyping and delivery across business transformation initiatives.",ai_t1:"Claude Code",ai_t2:"AI-assisted development",ai_t3:"Git / GitHub",ai_t4:"LLM workflow design",
 c_h:"Let's talk",c_btn:"Send a message",c_p:"Planning a transformation or preparing an RFP? Send me a message."},
 fr:{n_about:"À propos",n_svc:"Services",n_exp:"Expérience",n_con:"Contact",
 h_title:"Leader de transformation d'entreprise sur les programmes SAP S/4HANA",
@@ -283,6 +342,8 @@ e3t:"Cadrage d'offres et avant-vente",e3:"Pilotage de grands RFP S/4HANA et de t
 j_h:"Expériences précédentes",j1t:"Chef de projet, Swatch Group",j1m:"Bienne, oct. 2014 – mai 2019",j1:"Pilotage de programmes SAP internationaux et de transformations métier avec les équipes Finance, Logistique, Ventes et Services corporate, en responsabilité de bout en bout de la gouvernance, des risques, des ressources et du budget d’un portefeuille multi-projets.",j1a:"Déploiement du modèle de société principale européenne : modèle opérationnel intercompany à l’échelle de l’Europe, processus financiers et logistiques standardisés, conformité des prix de transfert renforcée.",j1b:"Transformation ventes et supply chain : améliorations de processus portées par SAP pour les opérations commerciales, les lancements de produits et l’efficacité de la supply chain, sur plusieurs marques.",j1c:"Intégration d’acquisitions : intégration SAP et harmonisation des données, pour un alignement rapide sur le paysage ERP global du Groupe.",j1d:"Déploiement du modèle SAP global : déploiement standardisé dans les filiales internationales, avec harmonisation des processus, adoption locale et accompagnement structuré des utilisateurs.",j2t:"Consultant, Accenture",j2m:"Région parisienne, janv. 2008 – oct. 2014",j2:"Consultant SAP et chef de projet, au sein d’une équipe qui a construit une capacité de gestion de projet de premier plan, avec pour objectif de créer de la valeur métier dans les délais, le périmètre et le budget.",
 hf1:"ans à piloter des programmes SAP",hf2:"secteurs accompagnés",hf3:"côtés de la table : cabinet de conseil et entreprise cliente",dq1:"des organisations redéfinissent leurs processus lors du passage à S/4HANA",dq2:"n’effectuent que peu ou pas de réingénierie",dq3:"de ces projets sont en retard et dépassent leur budget",f_tag:"Transformation SAP S/4HANA, modèles opérationnels et Business AI.",
 e_link:"Voir mon profil Deloitte",f_dl:"Profil Deloitte",
+n_cert:"Compétences",ct_h:"Compétences & certifications",ct_main:"Certifications SAP",ct_sub:"Autres certifications",ct_iss:"Délivrée",ct_exp:"expire",ct_id:"Identifiant",ct_ver:"Vérifier l’accréditation",
+ai_h:"IA & Digital Enablement",ai_p:"Mise en œuvre d’outils d’IA pour accélérer l’analyse, le prototypage et la livraison dans les initiatives de transformation métier.",ai_t1:"Claude Code",ai_t2:"Développement assisté par l’IA",ai_t3:"Git / GitHub",ai_t4:"Conception de workflows LLM",
 c_h:"Parlons-en",c_btn:"Envoyer un message",c_p:"Un projet de transformation ou un appel d'offres en préparation ? Écrivez-moi."},
 de:{n_about:"Über mich",n_svc:"Leistungen",n_exp:"Erfahrung",n_con:"Kontakt",
 h_title:"Business-Transformation-Leader für SAP-S/4HANA-Programme",
@@ -316,10 +377,13 @@ e3t:"Deal Shaping und Presales",e3:"Leitung grosser S/4HANA- und Digitalisierung
 j_h:"Frühere Stationen",j1t:"Projektleiter, Swatch Group",j1m:"Biel/Bienne, Okt. 2014 – Mai 2019",j1:"Verantwortung für internationale SAP-Programme und Business-Transformationen mit Stakeholdern aus Finanzen, Logistik, Vertrieb und Corporate Services, inklusive Governance, Risiko-, Ressourcen- und Budgetsteuerung über ein Multiprojekt-Portfolio.",j1a:"Rollout des europäischen Principal-Company-Modells: europaweites Intercompany-Operating-Model, standardisierte Finanz- und Logistikprozesse, gestärkte Verrechnungspreis-Compliance.",j1b:"Transformation von Vertrieb und Supply Chain: SAP-gestützte Prozessverbesserungen für Vertriebsabläufe, Produktlancierungen und Supply-Chain-Effizienz über mehrere Marken.",j1c:"M&A-Integration: SAP-Integration und Datenharmonisierung bei Übernahmen, mit rascher Anbindung an die globale ERP-Landschaft des Konzerns.",j1d:"Rollout des globalen SAP-Kernmodells: standardisierter Rollout in internationalen Tochtergesellschaften mit Prozessharmonisierung, lokaler Akzeptanz und strukturierter Anwenderbefähigung.",j2t:"Consultant, Accenture",j2m:"Raum Paris, Jan. 2008 – Okt. 2014",j2:"SAP-Berater und Projektleiter; Aufbau einer erstklassigen Projektmanagement-Kompetenz im Team und Lieferung von Geschäftsnutzen termin-, umfangs- und budgetgerecht.",
 hf1:"Jahre SAP-Programme geleitet",hf2:"Branchen betreut",hf3:"Seiten des Tisches: Beratung und Kundenseite",dq1:"der Unternehmen gestalten ihre Prozesse beim Wechsel auf S/4HANA neu",dq2:"gestalten kaum oder gar nicht um",dq3:"dieser Projekte verzögern sich und überschreiten das Budget",f_tag:"SAP-S/4HANA-Transformation, Operating Models und Business AI.",
 e_link:"Mein Deloitte-Profil ansehen",f_dl:"Deloitte-Profil",
+n_cert:"Kompetenzen",ct_h:"Kompetenzen & Zertifizierungen",ct_main:"SAP-Zertifizierungen",ct_sub:"Weitere Zertifizierungen",ct_iss:"Ausgestellt",ct_exp:"läuft ab",ct_id:"Zertifikats-ID",ct_ver:"Zertifikat prüfen",
+ai_h:"KI & Digital Enablement",ai_p:"Einsatz von KI-Werkzeugen, um Analyse, Prototyping und Delivery in Business-Transformationsinitiativen zu beschleunigen.",ai_t1:"Claude Code",ai_t2:"KI-gestützte Entwicklung",ai_t3:"Git / GitHub",ai_t4:"Design von LLM-Workflows",
 c_h:"Sprechen wir",c_btn:"Nachricht senden",c_p:"Eine Transformation geplant oder eine Ausschreibung in Vorbereitung? Schreiben Sie mir."}
 };
 function setLang(l){
   document.documentElement.lang=l;
+  document.querySelectorAll("[data-date]").forEach(e=>{e.textContent=new Date(e.dataset.date+"-01T00:00:00").toLocaleDateString(l,{month:"short",year:"numeric"})});
   document.querySelectorAll("[data-i]").forEach(e=>{e.textContent=T[l][e.dataset.i]});
   document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===l));
   try{localStorage.setItem("lang",l)}catch(e){}
