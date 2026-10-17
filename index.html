@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arnaud Gavanier | SAP S/4HANA Transformation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A1F44;--navy2:#13306B;--ridge:#1B4287;--ink:#14213D;--muted:#55627A;--bg:#F4F6FA;--line:#D5DCE8;--sky:#8EB8FF}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Manrope,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+header{position:sticky;top:0;z-index:5;background:var(--navy);color:#fff}
+.bar{max-width:1040px;margin:auto;padding:14px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.brand{font-weight:800;text-decoration:none;margin-right:auto}
+nav a{text-decoration:none;margin-left:20px;font-size:.95rem;opacity:.85}
+nav a:hover{opacity:1}
+.lang button{background:none;border:1px solid #fff5;color:#fff;padding:4px 10px;border-radius:6px;cursor:pointer;font:inherit;font-size:.85rem;margin-left:6px}
+.lang button[aria-pressed="true"]{background:#fff;color:var(--navy)}
+.hero{background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;position:relative;overflow:hidden}
+.hero .in{max-width:1040px;margin:auto;padding:96px 24px 190px}
+.hero h1{font-size:clamp(2.2rem,5.5vw,4.2rem);line-height:1.08;margin:0 0 20px;max-width:15em;font-weight:800;letter-spacing:-.02em}
+.hero p{font-size:1.2rem;max-width:34em;margin:0 0 32px;color:#D6E2FA}
+.btn{display:inline-block;padding:13px 26px;border-radius:8px;text-decoration:none;font-weight:700;margin-right:12px;margin-bottom:10px}
+.btn.p{background:var(--sky);color:var(--navy)}
+.btn.s{border:1px solid #fff8;color:#fff}
+.ridge{position:absolute;left:0;bottom:-1px;width:100%;height:170px}
+section{max-width:1040px;margin:auto;padding:72px 24px 8px}
+h2{font-size:1.9rem;margin:0 0 28px;color:var(--navy);letter-spacing:-.01em}
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:48px}
+.about p{margin:0 0 16px;max-width:38em}
+.sectors{border-left:3px solid var(--navy);padding-left:20px;color:var(--muted)}
+.sectors strong{display:block;color:var(--navy);margin-bottom:8px}
+.sectors span{display:block}
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:0 40px}
+.svc div{border-top:2px solid var(--navy);padding:16px 0 28px}
+.svc h3{margin:0 0 6px;font-size:1.1rem;color:var(--navy)}
+.svc p{margin:0;color:var(--muted)}
+.role{font-weight:700;margin:-12px 0 28px;color:var(--muted)}
+.exp div{border-left:3px solid var(--ridge);padding:0 0 22px 22px;margin-left:4px}
+.exp h3{margin:0 0 4px;color:var(--navy)}
+.exp p{margin:0;max-width:44em;color:var(--muted)}
+.contact{background:var(--navy);color:#fff;border-radius:14px;padding:44px;margin-bottom:72px}
+.contact h2{color:#fff;margin-bottom:12px}
+.contact p{margin:0 0 24px;color:#D6E2FA}
+.diq .row{border-left:3px solid var(--ridge);padding:0 0 0 22px;margin-bottom:26px;max-width:46em}
+.diq .row p{margin:0}
+.diq .q{background:var(--navy);color:#fff;border-radius:14px;padding:28px 32px;font-size:1.25rem;font-weight:700;line-height:1.45;margin:8px 0 14px;max-width:46em}
+.diq .src{font-size:.85rem;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 24px 40px}
+@media(max-width:760px){.about{grid-template-columns:1fr;gap:28px}.hero .in{padding:64px 24px 150px}nav{display:none}.contact{padding:28px}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<a class="brand" href="#top">Arnaud Gavanier</a>
+<nav><a href="#about" data-i="n_about"></a><a href="#services" data-i="n_svc"></a><a href="#experience" data-i="n_exp"></a><a href="#contact" data-i="n_con"></a></nav>
+<div class="lang" role="group" aria-label="Language"><button data-l="en">EN</button><button data-l="fr">FR</button><button data-l="de">DE</button></div>
+</div></header>
+
+<div class="hero" id="top"><div class="in">
+<h1 data-i="h_title"></h1>
+<p data-i="h_sub"></p>
+<a class="btn p" href="#contact" data-i="h_cta"></a><a class="btn s" href="#services" data-i="h_cta2"></a>
+</div>
+<svg class="ridge" viewBox="0 0 1200 170" preserveAspectRatio="none" aria-hidden="true">
+<path d="M0 170V110L120 70 210 105 330 40 420 95 540 20 650 85 760 50 880 100 1000 45 1110 90 1200 60V170Z" fill="#1B4287" opacity=".55"/>
+<path d="M0 170V135L90 110 200 140 340 85 450 130 570 70 700 130 820 95 950 140 1070 105 1200 135V170Z" fill="#F4F6FA"/>
+</svg></div>
+
+<section id="diq" class="diq"><h2 data-i="d_h"></h2>
+<div class="row"><p data-i="d_1"></p></div>
+<div class="row"><p data-i="d_2"></p></div>
+<p class="q" data-i="d_3"></p>
+<p class="src"><span data-i="d_src"></span> <a href="https://www.businesswire.com/news/home/20260202883729/en" data-i="d_link"></a></p>
+</section>
+
+<section id="about"><h2 data-i="a_h"></h2>
+<div class="about"><div><p data-i="a_1"></p><p data-i="a_2"></p><p data-i="a_3"></p></div>
+<div class="sectors"><strong data-i="s_h"></strong><span data-i="s_1"></span><span data-i="s_2"></span><span data-i="s_3"></span><span data-i="s_4"></span><span data-i="s_5"></span></div></div></section>
+
+<section id="services"><h2 data-i="v_h"></h2>
+<div class="svc">
+<div><h3 data-i="v1t"></h3><p data-i="v1"></p></div>
+<div><h3 data-i="v2t"></h3><p data-i="v2"></p></div>
+<div><h3 data-i="v3t"></h3><p data-i="v3"></p></div>
+<div><h3 data-i="v4t"></h3><p data-i="v4"></p></div>
+<div><h3 data-i="v7t"></h3><p data-i="v7"></p></div>
+<div><h3 data-i="v5t"></h3><p data-i="v5"></p></div>
+<div><h3 data-i="v6t"></h3><p data-i="v6"></p></div>
+</div></section>
+
+<section id="experience"><h2 data-i="e_h"></h2><p class="role" data-i="e_role"></p>
+<div class="exp">
+<div><h3 data-i="e1t"></h3><p data-i="e1"></p></div>
+<div><h3 data-i="e2t"></h3><p data-i="e2"></p></div>
+<div><h3 data-i="e3t"></h3><p data-i="e3"></p></div>
+</div></section>
+
+<section id="contact"><div class="contact"><h2 data-i="c_h"></h2><p data-i="c_p"></p>
+<a class="btn p" href="contact.html" data-i="c_btn"></a>
+<a class="btn s" href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a></div></section>
+<footer>© Arnaud Gavanier</footer>
+
+<script>
+const T={
+en:{n_about:"About",n_svc:"Services",n_exp:"Experience",n_con:"Contact",
+h_title:"Business transformation leader for SAP S/4HANA programs",
+h_sub:"I help enterprises simplify their operating model and deploy global templates that scale, and put Business AI to practical use.",
+h_cta:"Get in touch",h_cta2:"What I offer",
+d_h:"Before you migrate",
+d_1:"Fewer than one in five organizations redesign their processes when they move to S/4HANA, while 49% do little or no re-engineering. Yet nearly 60% of these programs still finish behind schedule and over budget.",
+d_2:"Choosing the conservative path to protect schedule and budget does not appear to protect either: most programs overrun anyway, driven by underestimated complexity, growing scope and limited internal capacity, none of which a like-for-like move removes. The bigger cost arrives later, because the processes and data you carry over set the ceiling for the automation and AI use cases you can deploy after go-live. For every organization that redesigns, far more preserve (49% versus fewer than 20%), so the \"safe\" choice is also the crowded one.",
+d_3:"When you look at the processes you plan to carry over, which ones would you still want to be running unchanged once automation and AI are part of daily operations?",
+d_src:"Source: ISG, State of SAP Migrations, February 2026 (survey of 200+ senior decision-makers).",d_link:"ISG press release",
+a_h:"About",
+a_1:"Business transformation leader with extensive experience delivering large-scale SAP S/4HANA programs. My core expertise is enterprise transformation, operating model simplification and global template deployment, across Quote-to-Cash, Supply Chain and intercompany models.",
+a_2:"I focus on the practical application of Business AI to reshape enterprise operations, automate complex processes and accelerate value realization.",
+a_3:"Outside of work, I am a mountain enthusiast: climbing and ski touring across the Mont-Blanc massif, the Valais, the Bernese Oberland and the Vanoise.",
+s_h:"Sectors",s_1:"Life Sciences",s_2:"Consumer Goods",s_3:"Industrial Products",s_4:"Energy",s_5:"Public Sector",
+v_h:"What I offer",
+v1t:"ERP selection",v1:"Independent vendor and solution selection, aligned with your business case.",
+v2t:"Program lead",v2:"Leading large transformations from roadmap to global rollout.",
+v3t:"Lead-to-Cash expertise",v3:"Subject-matter expert in Quote-to-Cash, Supply Chain and intercompany processes.",
+v4t:"RFP shaping and management",v4:"Solution strategy, delivery model and commercial approach for large RFPs.",
+v7t:"RFP response",v7:"Writing and presenting winning responses, from solution to executive pitch.",
+v5t:"Quality assurance",v5:"Independent review of programs in flight, with clear recommendations.",
+v6t:"AI enablement",v6:"Business AI use cases and adoption, plus AI-driven practices for efficient, rapid and high-quality delivery.",
+e_h:"Experience",e_role:"Senior Manager, Deloitte Switzerland, SAP practice",
+e1t:"Global transformation leadership",e1:"End-to-end programs across Life Sciences, Consumer Goods, Industrial Products, Energy and Public Sector, with emphasis on global template design, scalability and value realization.",
+e2t:"End-to-end lifecycle support",e2:"Roadmap, target operating model, solution architecture, deployment, global rollout and Business AI adoption, as the link between business leadership and SAP delivery teams.",
+e3t:"Deal shaping and presales",e3:"Led large S/4HANA and digital transformation RFPs and steered C-level discussions to align scope with business outcomes.",
+c_h:"Let's talk",c_btn:"Send a message",c_p:"Planning a transformation or preparing an RFP? Send me a message."},
+fr:{n_about:"À propos",n_svc:"Services",n_exp:"Expérience",n_con:"Contact",
+h_title:"Leader de transformation d'entreprise sur les programmes SAP S/4HANA",
+h_sub:"J'aide les entreprises à simplifier leur modèle opérationnel et à déployer des templates globaux qui passent à l'échelle, et à mettre la Business AI en pratique.",
+h_cta:"Me contacter",h_cta2:"Mon offre",
+d_h:"Avant de migrer",
+d_1:"Moins d'une organisation sur cinq redéfinit ses processus lors du passage à S/4HANA, tandis que 49 % font peu ou pas de réingénierie. Pourtant, près de 60 % de ces programmes finissent quand même en retard et au-dessus du budget.",
+d_2:"Choisir la voie prudente pour protéger planning et budget ne semble protéger ni l'un ni l'autre : la plupart des programmes dérapent quand même, à cause d'une complexité sous-estimée, d'un périmètre qui s'étend et d'une capacité interne limitée, que ne supprime pas un déplacement à l'identique. Le coût le plus lourd arrive après : les processus et les données que vous reprenez fixent le plafond des cas d'usage d'automatisation et d'IA déployables après le go-live. Pour chaque organisation qui redessine, bien plus nombreuses sont celles qui préservent (49 % contre moins de 20 %) : le choix « sûr » est aussi le plus répandu.",
+d_3:"Parmi les processus que vous prévoyez de reprendre, lesquels voudriez-vous encore faire tourner à l'identique quand l'automatisation et l'IA feront partie du quotidien ?",
+d_src:"Source : ISG, State of SAP Migrations, février 2026 (enquête auprès de plus de 200 décideurs seniors).",d_link:"Communiqué ISG",
+a_h:"À propos",
+a_1:"Leader de transformation d'entreprise, avec une vaste expérience de programmes SAP S/4HANA à grande échelle. Mon expertise : transformation d'entreprise, simplification du modèle opérationnel et déploiement de templates globaux, sur les modèles Quote-to-Cash, Supply Chain et intercompany.",
+a_2:"Je me concentre sur l'application concrète de la Business AI pour transformer les opérations, automatiser les processus complexes et accélérer la création de valeur.",
+a_3:"En dehors du travail, je suis passionné de montagne : alpinisme et ski de randonnée dans le massif du Mont-Blanc, le Valais, l'Oberland bernois et la Vanoise.",
+s_h:"Secteurs",s_1:"Sciences de la vie",s_2:"Biens de consommation",s_3:"Produits industriels",s_4:"Énergie",s_5:"Secteur public",
+v_h:"Mon offre",
+v1t:"Sélection d'ERP",v1:"Sélection indépendante d'éditeur et de solution, alignée sur votre business case.",
+v2t:"Direction de programme",v2:"Pilotage de grandes transformations, de la feuille de route au déploiement mondial.",
+v3t:"Expertise Lead-to-Cash",v3:"Expert Quote-to-Cash, Supply Chain et processus intercompany.",
+v4t:"Cadrage et pilotage de RFP",v4:"Stratégie de solution, modèle de delivery et approche commerciale pour les grands appels d'offres.",
+v7t:"Réponse aux RFP",v7:"Rédaction et présentation de réponses gagnantes, de la solution à la soutenance exécutive.",
+v5t:"Assurance qualité",v5:"Revue indépendante des programmes en cours, avec des recommandations claires.",
+v6t:"Accompagnement IA",v6:"Cas d'usage et adoption de la Business AI, et pratiques appuyées sur l'IA pour une delivery efficace, rapide et de haute qualité.",
+e_h:"Expérience",e_role:"Senior Manager, Deloitte Suisse, practice SAP",
+e1t:"Direction de transformations globales",e1:"Programmes de bout en bout en Sciences de la vie, Biens de consommation, Produits industriels, Énergie et Secteur public, avec un accent sur la conception de templates globaux, la scalabilité et la création de valeur.",
+e2t:"Accompagnement sur tout le cycle de vie",e2:"Feuille de route, modèle opérationnel cible, architecture de solution, déploiement, rollout global et adoption de la Business AI, en lien entre la direction métier et les équipes SAP.",
+e3t:"Cadrage d'offres et avant-vente",e3:"Pilotage de grands RFP S/4HANA et de transformation digitale, et échanges au niveau C-level pour aligner le périmètre sur les résultats attendus.",
+c_h:"Parlons-en",c_btn:"Envoyer un message",c_p:"Un projet de transformation ou un appel d'offres en préparation ? Écrivez-moi."},
+de:{n_about:"Über mich",n_svc:"Leistungen",n_exp:"Erfahrung",n_con:"Kontakt",
+h_title:"Business-Transformation-Leader für SAP-S/4HANA-Programme",
+h_sub:"Ich unterstütze Unternehmen dabei, ihr Operating Model zu vereinfachen, skalierbare globale Templates auszurollen und Business AI praxisnah einzusetzen.",
+h_cta:"Kontakt aufnehmen",h_cta2:"Mein Angebot",
+d_h:"Bevor Sie migrieren",
+d_1:"Weniger als jedes fünfte Unternehmen gestaltet seine Prozesse beim Wechsel auf S/4HANA neu, während 49 % kaum oder gar nicht umgestalten. Dennoch enden fast 60 % dieser Programme mit Verzug und Budgetüberschreitung.",
+d_2:"Wer den vorsichtigen Weg wählt, um Termin und Budget zu schützen, schützt offenbar keines von beiden: Die meisten Programme laufen trotzdem aus dem Ruder, getrieben von unterschätzter Komplexität, wachsendem Umfang und knappen internen Kapazitäten, die ein 1:1-Umzug nicht beseitigt. Der grössere Preis kommt später: Die übernommenen Prozesse und Daten setzen die Obergrenze für Automatisierungs- und KI-Anwendungsfälle nach dem Go-live. Auf jedes Unternehmen, das neu gestaltet, kommen deutlich mehr, die bewahren (49 % gegenüber unter 20 %). Die «sichere» Wahl ist also auch die verbreitetste.",
+d_3:"Welche der Prozesse, die Sie übernehmen wollen, möchten Sie noch unverändert betreiben, wenn Automatisierung und KI zum Alltag gehören?",
+d_src:"Quelle: ISG, State of SAP Migrations, Februar 2026 (Befragung von über 200 Entscheidungsträgern).",d_link:"ISG-Pressemitteilung",
+a_h:"Über mich",
+a_1:"Business-Transformation-Leader mit langjähriger Erfahrung in der Umsetzung grosser SAP-S/4HANA-Programme. Mein Schwerpunkt: Unternehmenstransformation, Vereinfachung des Operating Models und globaler Template-Rollout, mit Fokus auf Quote-to-Cash, Supply Chain und Intercompany-Modelle.",
+a_2:"Ich konzentriere mich auf den praktischen Einsatz von Business AI, um Abläufe neu zu gestalten, komplexe Prozesse zu automatisieren und den Nutzen schneller zu realisieren.",
+a_3:"Privat bin ich begeisterter Bergsportler: Klettern und Skitouren im Mont-Blanc-Massiv, im Wallis, im Berner Oberland und in der Vanoise.",
+s_h:"Branchen",s_1:"Life Sciences",s_2:"Konsumgüter",s_3:"Industrieprodukte",s_4:"Energie",s_5:"Öffentlicher Sektor",
+v_h:"Mein Angebot",
+v1t:"ERP-Auswahl",v1:"Unabhängige Anbieter- und Lösungsauswahl, ausgerichtet auf Ihren Business Case.",
+v2t:"Programmleitung",v2:"Leitung grosser Transformationen von der Roadmap bis zum globalen Rollout.",
+v3t:"Lead-to-Cash-Expertise",v3:"Fachexperte für Quote-to-Cash, Supply Chain und Intercompany-Prozesse.",
+v4t:"RFP-Gestaltung und -Steuerung",v4:"Lösungsstrategie, Delivery-Modell und kommerzieller Ansatz für grosse Ausschreibungen.",
+v7t:"RFP-Antwort",v7:"Erstellung und Präsentation überzeugender Angebote, von der Lösung bis zum Executive Pitch.",
+v5t:"Qualitätssicherung",v5:"Unabhängige Prüfung laufender Programme mit klaren Empfehlungen.",
+v6t:"AI Enablement",v6:"Business-AI-Use-Cases und Adoption sowie KI-gestützte Arbeitsweisen für eine effiziente, schnelle und qualitativ hochwertige Delivery.",
+e_h:"Erfahrung",e_role:"Senior Manager, Deloitte Schweiz, SAP Practice",
+e1t:"Globale Transformationsleitung",e1:"End-to-End-Programme in Life Sciences, Konsumgütern, Industrieprodukten, Energie und öffentlichem Sektor, mit Schwerpunkt auf globalem Template-Design, Skalierbarkeit und Wertrealisierung.",
+e2t:"Begleitung über den gesamten Lebenszyklus",e2:"Roadmap, Ziel-Operating-Model, Lösungsarchitektur, Deployment, globaler Rollout und Business-AI-Adoption, als Bindeglied zwischen Geschäftsleitung und SAP-Delivery-Teams.",
+e3t:"Deal Shaping und Presales",e3:"Leitung grosser S/4HANA- und Digitalisierungs-RFPs und Steuerung von C-Level-Gesprächen, um den Umfang auf die Geschäftsziele abzustimmen.",
+c_h:"Sprechen wir",c_btn:"Nachricht senden",c_p:"Eine Transformation geplant oder eine Ausschreibung in Vorbereitung? Schreiben Sie mir."}
+};
+function setLang(l){
+  document.documentElement.lang=l;
+  document.querySelectorAll("[data-i]").forEach(e=>{e.textContent=T[l][e.dataset.i]});
+  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===l));
+  try{localStorage.setItem("lang",l)}catch(e){}
+}
+document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+let start="en";try{start=localStorage.getItem("lang")||"en"}catch(e){}
+setLang(T[start]?start:"en");
+</script>
+</body>
+</html>
