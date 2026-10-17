@@ -32,13 +32,22 @@ section{max-width:1040px;margin:auto;padding:72px 24px 8px}
 h2{font-size:1.9rem;margin:0 0 28px;color:var(--navy);letter-spacing:-.01em}
 .about{display:grid;grid-template-columns:1.4fr 1fr;gap:48px}
 .about p{margin:0 0 16px;max-width:38em}
+.photo{display:block;width:100%;max-width:260px;aspect-ratio:4/5;object-fit:cover;border-radius:14px;margin-bottom:28px}
 .sectors{border-left:3px solid var(--navy);padding-left:20px;color:var(--muted)}
 .sectors strong{display:block;color:var(--navy);margin-bottom:8px}
 .sectors span{display:block}
-.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:0 40px}
-.svc div{border-top:2px solid var(--navy);padding:16px 0 28px}
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0 40px}
+.svc>div{position:relative;border-top:2px solid var(--navy);padding:16px 0 28px;outline-offset:4px}
 .svc h3{margin:0 0 6px;font-size:1.1rem;color:var(--navy)}
 .svc p{margin:0;color:var(--muted)}
+.tip{display:none;position:absolute;left:0;right:0;top:calc(100% - 22px);z-index:6;background:#fff;border:1px solid var(--line);border-top:3px solid var(--ridge);border-radius:10px;padding:8px 18px 16px;box-shadow:0 14px 34px rgba(10,31,68,.2)}
+.svc>div:hover .tip,.svc>div:focus .tip,.svc>div:focus-within .tip{display:block}
+.svc>div:hover h3,.svc>div:focus h3{text-decoration:underline;text-decoration-color:var(--ridge);text-underline-offset:4px}
+.hint{margin:-14px 0 24px;color:var(--muted);font-size:.9rem}
+.st{display:flex;gap:14px;align-items:baseline;margin:10px 0 0}
+.st b{min-width:78px;font-size:1.4rem;color:var(--navy);letter-spacing:-.01em}
+.st span{color:var(--muted);font-size:.9rem;line-height:1.4}
+.sr{font-size:.78rem;color:var(--muted);margin-top:14px!important}
 .role{font-weight:700;margin:-12px 0 28px;color:var(--muted)}
 .exp div{border-left:3px solid var(--ridge);padding:0 0 22px 22px;margin-left:4px}
 .exp h3{margin:0 0 4px;color:var(--navy)}
@@ -80,17 +89,47 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 24px 40px
 
 <section id="about"><h2 data-i="a_h"></h2>
 <div class="about"><div><p data-i="a_1"></p><p data-i="a_2"></p><p data-i="a_3"></p></div>
-<div class="sectors"><strong data-i="s_h"></strong><span data-i="s_1"></span><span data-i="s_2"></span><span data-i="s_3"></span><span data-i="s_4"></span><span data-i="s_5"></span></div></div></section>
+<div><img class="photo" src="photo.jpg" alt="Arnaud Gavanier" onerror="this.style.display='none'">
+<div class="sectors"><strong data-i="s_h"></strong><span data-i="s_1"></span><span data-i="s_2"></span><span data-i="s_3"></span><span data-i="s_4"></span><span data-i="s_5"></span></div></div></div></section>
 
 <section id="services"><h2 data-i="v_h"></h2>
+<p class="hint" data-i="v_hint"></p>
 <div class="svc">
-<div><h3 data-i="v1t"></h3><p data-i="v1"></p></div>
-<div><h3 data-i="v2t"></h3><p data-i="v2"></p></div>
-<div><h3 data-i="v3t"></h3><p data-i="v3"></p></div>
-<div><h3 data-i="v4t"></h3><p data-i="v4"></p></div>
-<div><h3 data-i="v7t"></h3><p data-i="v7"></p></div>
-<div><h3 data-i="v5t"></h3><p data-i="v5"></p></div>
-<div><h3 data-i="v6t"></h3><p data-i="v6"></p></div>
+<div tabindex="0"><h3 data-i="v1t"></h3><p data-i="v1"></p>
+<div class="tip"><div class="st"><b>55%</b><span data-i="st_a1"></span></div>
+<div class="st"><b>51%</b><span data-i="st_a2"></span></div>
+<div class="st"><b>30%</b><span data-i="st_a3"></span></div>
+<p class="sr"><span data-i="v_src"></span> <a href="https://erp-software.org/en/erp-statistics/">Panorama 2026 ERP Report (via erp-software.org)</a></p></div></div>
+<div tabindex="0"><h3 data-i="v2t"></h3><p data-i="v2"></p>
+<div class="tip"><div class="st"><b>55%</b><span data-i="st_b1"></span></div>
+<div class="st"><b>34%</b><span data-i="st_b2"></span></div>
+<div class="st"><b>~60%</b><span data-i="st_b3"></span></div>
+<p class="sr"><span data-i="v_src"></span> <a href="https://sapinsider.org/research-reports/sapinsider-benchmark-research-erp-migration-and-transformation-2026/">SAPinsider 2026</a>, <a href="https://www.businesswire.com/news/home/20260202883729/en">ISG 2026</a></p></div></div>
+<div tabindex="0"><h3 data-i="v3t"></h3><p data-i="v3"></p>
+<div class="tip"><div class="st"><b>$1.7T</b><span data-i="st_c1"></span></div>
+<div class="st"><b>$600B</b><span data-i="st_c2"></span></div>
+<div class="st"><b>18</b><span data-i="st_c3"></span></div>
+<p class="sr"><span data-i="v_src"></span> <a href="https://www.businesswire.com/news/home/20250818205819/en/The-Hackett-Group-2025-Working-Capital-Survey-Payables-Rebound-but-Receivables-and-Inventory-Lag">Hackett Group 2025</a></p></div></div>
+<div tabindex="0"><h3 data-i="v4t"></h3><p data-i="v4"></p>
+<div class="tip"><div class="st"><b>17%</b><span data-i="st_d1"></span></div>
+<div class="st"><b>5%</b><span data-i="st_d2"></span></div>
+<div class="st"><b>90%</b><span data-i="st_d3"></span></div>
+<p class="sr"><span data-i="v_src"></span> <a href="https://gcom.pdo.aws.gartner.com/smarterwithgartner/b2b-sales-reps-maximize-customer-interactions">Gartner</a></p></div></div>
+<div tabindex="0"><h3 data-i="v7t"></h3><p data-i="v7"></p>
+<div class="tip"><div class="st"><b>76%</b><span data-i="st_e1"></span></div>
+<div class="st"><b>24%</b><span data-i="st_e2"></span></div>
+<div class="st"><b>45%</b><span data-i="st_e3"></span></div>
+<p class="sr"><span data-i="v_src"></span> <a href="https://www.pokerstrategy.com/news/world-of-poker/New-Report-Concludes-Its-a-Game-of-Skill_17618/">Cigital study, 2009</a>, <a href="https://link.loopio.com/hubfs/loopio-trends-report-2025-digital.pdf">Loopio 2025</a></p></div></div>
+<div tabindex="0"><h3 data-i="v5t"></h3><p data-i="v5"></p>
+<div class="tip"><div class="st"><b>1/6</b><span data-i="st_f1"></span></div>
+<div class="st"><b>+200%</b><span data-i="st_f2"></span></div>
+<div class="st"><b>+70%</b><span data-i="st_f3"></span></div>
+<p class="sr"><span data-i="v_src"></span> <a href="https://papers.ssrn.com/abstract=2229735">Flyvbjerg & Budzier, 2011</a></p></div></div>
+<div tabindex="0"><h3 data-i="v6t"></h3><p data-i="v6"></p>
+<div class="tip"><div class="st"><b>39%</b><span data-i="st_g1"></span></div>
+<div class="st"><b>6%</b><span data-i="st_g2"></span></div>
+<div class="st"><b>≤10%</b><span data-i="st_g3"></span></div>
+<p class="sr"><span data-i="v_src"></span> <a href="https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/the-state-of-ai-2025">McKinsey, State of AI 2025</a></p></div></div>
 </div></section>
 
 <section id="experience"><h2 data-i="e_h"></h2><p class="role" data-i="e_role"></p>
@@ -126,9 +165,10 @@ v1t:"ERP selection",v1:"Independent vendor and solution selection, aligned with 
 v2t:"Program lead",v2:"Leading large transformations from roadmap to global rollout.",
 v3t:"Lead-to-Cash expertise",v3:"Subject-matter expert in Quote-to-Cash, Supply Chain and intercompany processes.",
 v4t:"RFP shaping and management",v4:"Solution strategy, delivery model and commercial approach for large RFPs.",
-v7t:"RFP response",v7:"Writing and presenting winning responses, from solution to executive pitch.",
+v7t:"RFP response",v7:"Writing and presenting winning responses, from solution to executive pitch. Like poker, the best hand rarely wins the deal: the strategy behind your response does.",
 v5t:"Quality assurance",v5:"Independent review of programs in flight, with clear recommendations.",
 v6t:"AI enablement",v6:"Business AI use cases and adoption, plus AI-driven practices for efficient, rapid and high-quality delivery.",
+st_a1:"of over-budget ERP projects needed extra technology nobody planned for",st_a2:"were pushed over budget by scope expansion",st_a3:"of ERP projects finish over budget",st_b1:"of organizations have deployed S/4HANA in some form",st_b2:"have fully completed the transition",st_b3:"of SAP migrations run late and over budget",st_c1:"of excess working capital sits in the 1,000 largest US listed companies",st_c2:"of it is locked in receivables, the largest share",st_c3:"days of DSO separate top performers from the median",st_d1:"of a buyer's journey is spent meeting suppliers",st_d2:"of buyer time goes to each supplier when three compete",st_d3:"of buyers loop back to an earlier step in the process",st_e1:"of 103M online poker hands ended before showdown: decisions, not cards, settled them",st_e2:"were won at showdown by the best hand",st_e3:"average RFP win rate across industries",st_f1:"of IT projects becomes a \"black swan\"",st_f2:"average cost overrun on those projects",st_f3:"average schedule overrun on the same projects",st_g1:"of organizations report any enterprise-level profit impact from AI",st_g2:"are AI high performers, with 5%+ of EBIT from AI",st_g3:"scale AI agents in any single function",v_src:"Source:",v_hint:"Hover over (or tap) a service to see the numbers behind it.",
 e_h:"Experience",e_role:"Senior Manager, Deloitte Switzerland, SAP practice",
 e1t:"Global transformation leadership",e1:"End-to-end programs across Life Sciences, Consumer Goods, Industrial Products, Energy and Public Sector, with emphasis on global template design, scalability and value realization.",
 e2t:"End-to-end lifecycle support",e2:"Roadmap, target operating model, solution architecture, deployment, global rollout and Business AI adoption, as the link between business leadership and SAP delivery teams.",
@@ -153,9 +193,10 @@ v1t:"Sélection d'ERP",v1:"Sélection indépendante d'éditeur et de solution, a
 v2t:"Direction de programme",v2:"Pilotage de grandes transformations, de la feuille de route au déploiement mondial.",
 v3t:"Expertise Lead-to-Cash",v3:"Expert Quote-to-Cash, Supply Chain et processus intercompany.",
 v4t:"Cadrage et pilotage de RFP",v4:"Stratégie de solution, modèle de delivery et approche commerciale pour les grands appels d'offres.",
-v7t:"Réponse aux RFP",v7:"Rédaction et présentation de réponses gagnantes, de la solution à la soutenance exécutive.",
+v7t:"Réponse aux RFP",v7:"Rédaction et présentation de réponses gagnantes, de la solution à la soutenance exécutive. Comme au poker, la meilleure main gagne rarement : c'est la stratégie de votre réponse qui fait la différence.",
 v5t:"Assurance qualité",v5:"Revue indépendante des programmes en cours, avec des recommandations claires.",
 v6t:"Accompagnement IA",v6:"Cas d'usage et adoption de la Business AI, et pratiques appuyées sur l'IA pour une delivery efficace, rapide et de haute qualité.",
+st_a1:"des projets ERP en dépassement ont nécessité une technologie non prévue",st_a2:"ont dérapé à cause d'un périmètre qui s'étend",st_a3:"des projets ERP finissent au-dessus du budget",st_b1:"des organisations ont déployé S/4HANA sous une forme ou une autre",st_b2:"ont terminé la transition",st_b3:"des migrations SAP sont en retard et au-dessus du budget",st_c1:"de fonds de roulement excédentaire dans les 1 000 premières sociétés cotées américaines",st_c2:"sont immobilisés dans les créances clients, la plus grande part",st_c3:"jours de DSO séparent les meilleurs de la médiane",st_d1:"du parcours d'achat est passé avec les fournisseurs",st_d2:"du temps de l'acheteur pour chaque fournisseur quand trois sont en lice",st_d3:"des acheteurs reviennent à une étape précédente du processus",st_e1:"des 103 M de mains de poker en ligne se sont terminées avant l'abattage : les décisions, pas les cartes, ont tranché",st_e2:"ont été gagnées à l'abattage par la meilleure main",st_e3:"taux de réussite moyen aux RFP, tous secteurs confondus",st_f1:"des projets IT devient un « cygne noir »",st_f2:"de dépassement de coût moyen sur ces projets",st_f3:"de retard moyen sur ces mêmes projets",st_g1:"des organisations constatent un impact de l'IA sur leur résultat d'entreprise",st_g2:"sont des « high performers » de l'IA, avec 5 % ou plus de l'EBIT issu de l'IA",st_g3:"déploient des agents IA à grande échelle dans une fonction donnée",v_src:"Source :",v_hint:"Survolez (ou touchez) un service pour voir les chiffres qui le sous-tendent.",
 e_h:"Expérience",e_role:"Senior Manager, Deloitte Suisse, practice SAP",
 e1t:"Direction de transformations globales",e1:"Programmes de bout en bout en Sciences de la vie, Biens de consommation, Produits industriels, Énergie et Secteur public, avec un accent sur la conception de templates globaux, la scalabilité et la création de valeur.",
 e2t:"Accompagnement sur tout le cycle de vie",e2:"Feuille de route, modèle opérationnel cible, architecture de solution, déploiement, rollout global et adoption de la Business AI, en lien entre la direction métier et les équipes SAP.",
@@ -180,9 +221,10 @@ v1t:"ERP-Auswahl",v1:"Unabhängige Anbieter- und Lösungsauswahl, ausgerichtet a
 v2t:"Programmleitung",v2:"Leitung grosser Transformationen von der Roadmap bis zum globalen Rollout.",
 v3t:"Lead-to-Cash-Expertise",v3:"Fachexperte für Quote-to-Cash, Supply Chain und Intercompany-Prozesse.",
 v4t:"RFP-Gestaltung und -Steuerung",v4:"Lösungsstrategie, Delivery-Modell und kommerzieller Ansatz für grosse Ausschreibungen.",
-v7t:"RFP-Antwort",v7:"Erstellung und Präsentation überzeugender Angebote, von der Lösung bis zum Executive Pitch.",
+v7t:"RFP-Antwort",v7:"Erstellung und Präsentation überzeugender Angebote, von der Lösung bis zum Executive Pitch. Wie beim Poker gewinnt selten die beste Hand: Die Strategie hinter Ihrer Antwort entscheidet.",
 v5t:"Qualitätssicherung",v5:"Unabhängige Prüfung laufender Programme mit klaren Empfehlungen.",
 v6t:"AI Enablement",v6:"Business-AI-Use-Cases und Adoption sowie KI-gestützte Arbeitsweisen für eine effiziente, schnelle und qualitativ hochwertige Delivery.",
+st_a1:"der ERP-Projekte mit Budgetüberschreitung brauchten ungeplante Zusatztechnologie",st_a2:"gerieten durch Umfangserweiterung über das Budget",st_a3:"der ERP-Projekte überschreiten das Budget",st_b1:"der Unternehmen haben S/4HANA in irgendeiner Form eingeführt",st_b2:"haben den Wechsel vollständig abgeschlossen",st_b3:"der SAP-Migrationen verzögern sich und überschreiten das Budget",st_c1:"überschüssiges Working Capital bei den 1.000 grössten börsenkotierten US-Unternehmen",st_c2:"davon stecken in Forderungen, dem grössten Anteil",st_c3:"Tage DSO trennen die Besten vom Median",st_d1:"der Kaufreise verbringen Käufer im Gespräch mit Anbietern",st_d2:"der Käuferzeit entfallen auf jeden Anbieter, wenn drei konkurrieren",st_d3:"der Käufer kehren zu einem früheren Schritt zurück",st_e1:"von 103 Mio. Online-Pokerhänden endeten vor dem Showdown: Entscheidungen, nicht Karten, gaben den Ausschlag",st_e2:"wurden im Showdown mit der besten Hand gewonnen",st_e3:"durchschnittliche RFP-Gewinnquote über alle Branchen",st_f1:"der IT-Projekte wird zum «Schwarzen Schwan»",st_f2:"durchschnittliche Kostenüberschreitung bei diesen Projekten",st_f3:"durchschnittliche Terminüberschreitung bei denselben Projekten",st_g1:"der Unternehmen sehen überhaupt einen Gewinneffekt durch KI auf Unternehmensebene",st_g2:"sind KI-High-Performer mit mindestens 5 % des EBIT aus KI",st_g3:"skalieren KI-Agenten in einer einzelnen Funktion",v_src:"Quelle:",v_hint:"Fahren Sie über einen Service (oder tippen Sie darauf), um die Zahlen dahinter zu sehen.",
 e_h:"Erfahrung",e_role:"Senior Manager, Deloitte Schweiz, SAP Practice",
 e1t:"Globale Transformationsleitung",e1:"End-to-End-Programme in Life Sciences, Konsumgütern, Industrieprodukten, Energie und öffentlichem Sektor, mit Schwerpunkt auf globalem Template-Design, Skalierbarkeit und Wertrealisierung.",
 e2t:"Begleitung über den gesamten Lebenszyklus",e2:"Roadmap, Ziel-Operating-Model, Lösungsarchitektur, Deployment, globaler Rollout und Business-AI-Adoption, als Bindeglied zwischen Geschäftsleitung und SAP-Delivery-Teams.",
