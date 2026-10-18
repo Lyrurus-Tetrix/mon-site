@@ -56,10 +56,12 @@ th{background:var(--bg);color:var(--navy)}
 td input[type=date]{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:6px}
 .fine{font-size:.85rem;color:var(--muted)}
 @media print{header,.top,#params,.noprint{display:none!important}body{background:#fff}main{padding:0}.sec,.card{break-inside:avoid;box-shadow:none}}
+.home{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--navy);text-decoration:none;font-weight:700;padding:8px 16px;border-radius:8px;margin-right:auto}
+.home:hover{background:var(--sky)}
 </style>
 </head>
 <body>
-<header><div class="bar"><a class="brand" href="index.html">Arnaud Gavanier</a><a href="assessment.html">Readiness assessment</a></div></header>
+<header><div class="bar"><a class="home" href="index.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span>Home</span></a></div></header>
 <section class="top"><div class="in"><h1>SAP ERP RFP Readiness Checklist Generator</h1>
 <p>Select your parameters below to generate your tailored Request for Proposal (RFP) roadmap.</p></div></section>
 
@@ -108,11 +110,11 @@ const RF={cost:["4","5","7"],speed:["3","4","8"],std:["3","4","7"],ai:["6","7"]}
 const PBAN={
  str:"You are at Strategy & Business Case: finalize sections 1, 2 and the evaluation model (5) before releasing any RFP. Sections 6 and 8 can wait.",
  rfp:"You are at Vendor Selection & RFP: work through all sections in order and complete the milestone dates in section 8 before releasing the package.",
- imp:"You are in Implementation: use this list to audit your integrator's contract and governance. Spotlight on sections 4 and 7, including the risk matrix.",
+ imp:"You are in Implementation: use this list to audit your integrator's contract and governance. Spotlight on sections 4 and 7, including the de-risking strategy.",
  tra:"You are in Active Transformation: spotlight on governance (4), clean core, upgrade cycles and AI (7), and re-baseline sections 3 and 3b if scope grows."};
 const RBAN={
- cost:"Priority: Cost Optimization. Insist on the strict TCO template (5), compare internal effort with integrator effort (4) and demand AI-driven delivery to reduce cost (7).",
- speed:"Priority: Speed to Market. Hold the timeline hard (8), set decision gates early (4) and cap local variation, which is the usual source of delay (3).",
+ cost:"Priority: Cost Optimization. Insist on the standardized pricing templates (5), compare internal effort with integrator effort (4) and demand AI-driven delivery to reduce cost (7).",
+ speed:"Priority: Speed to Market. Hold the timeline hard (8), agree the de-risking strategy early (4) and cap local variation, which is the usual source of delay (3).",
  std:"Priority: Standardisation. Fix the global core policy up front (3), enforce Fit-to-Standard (4) and require clean-core proof (7).",
  ai:"Priority: Innovation & AI. Make section 7 a scoring criterion and script demos that show AI on your own scope (6)."};
 const MILES=[
@@ -152,12 +154,11 @@ function sections(S){
   {id:"4",t:"Implementation Approach & Governance",i:[
    ["Mandate the methodology",meth],
    ["Define team resource allocation","Outline your internal team's availability (subject matter experts) versus what you expect from the system integrator (SI)."],
-   ["Establish governance gates","Set clear milestone expectations, steering committee cadences and change-request approval processes."],
-   ["Program de-risking & mitigation strategy","Require the partner to submit a formal Risk & Mitigation Matrix addressing complex elements (e.g., legacy data migration gaps, business downtime at go-live, change-management resistance)."]]},
+   ["Program de-risking & mitigation strategy","Require the partner to submit a comprehensive strategy for de-risking the program."]]},
   {id:"5",t:"Evaluation Criteria & Scoring",i:[
    ["Create a weighted scoring model","Define your matrix (e.g., 40% functional fit, 30% commercial cost, 20% technical architecture, 10% vendor chemistry)."],
    ["Establish minimum thresholds","Determine “deal-breakers” (e.g., at least 3 live references in your specific industry)."],
-   ["Standardize pricing templates","Provide vendors with a strict Total Cost of Ownership (TCO) spreadsheet covering licenses, implementation, support and hidden hypercare costs."]]},
+   ["Standardize pricing templates","Send vendors comprehensive spreadsheet templates covering all costs, experience levels and shoring models. License or tool costs must be justified by efficiency and effort reduction."]]},
   {id:"6",t:"Vendor Demonstrations & Oral Presentations",i:[
    ["Script your demo scenarios","Do not let vendors show canned presentations. Provide 3 to 5 real-world business scenarios. Ideas for your scope: "+by(DEMO)+"."],
    ["Score the team, not just the salesperson","Require the proposed Project Manager and Lead Solution Architects to present, not just the sales team."],

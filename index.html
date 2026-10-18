@@ -161,13 +161,19 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 .diq .q{max-width:none}
 .dgrid .row{width:100%}
 .facts b{font-variant-numeric:tabular-nums}
+.btn.dk{background:var(--navy);color:#fff}
+.btn.dk:hover{background:var(--ridge)}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.tool{background:#fff;border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:12px;padding:26px 28px}
+.tool h3{margin:0 0 8px;color:var(--navy);font-size:1.25rem}
+.tool p{margin:0 0 20px;color:var(--muted)}
 </style>
 <noscript><style>.hero:not(.ready) .hero-bg::before,.hero:not(.ready) .fog{opacity:1}</style></noscript>
 </head>
 <body>
 <header><div class="bar">
 <a class="brand" href="#top">Arnaud Gavanier</a>
-<nav><a href="#about" data-i="n_about"></a><a href="#services" data-i="n_svc"></a><a href="#experience" data-i="n_exp"></a><a href="#certifications" data-i="n_cert"></a><a href="assessment.html" data-i="n_assess"></a><a href="rfp-checklist.html" data-i="n_rfp"></a><a href="#contact" data-i="n_con"></a></nav>
+<nav><a href="#about" data-i="n_about"></a><a href="#services" data-i="n_svc"></a><a href="#experience" data-i="n_exp"></a><a href="#certifications" data-i="n_cert"></a><a href="transformation-readiness.html" data-i="n_assess"></a><a href="rfp-checklist.html" data-i="n_rfp"></a><a href="#contact" data-i="n_con"></a></nav>
 <div class="lang" role="group" aria-label="Language"><button data-l="en">EN</button><button data-l="fr">FR</button><button data-l="de">DE</button></div>
 </div></header>
 
@@ -242,6 +248,12 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 <div><h3 data-i="j2t"></h3><p class="jm" data-i="j2m"></p><p data-i="j2"></p></div>
 </div></details></section>
 
+<section id="tools"><h2 data-i="tl_h"></h2>
+<div class="tools">
+<div class="tool"><h3 data-i="tl_1t"></h3><p data-i="tl_1p"></p><a class="btn dk" href="transformation-readiness.html" data-i="tl_1b"></a></div>
+<div class="tool"><h3 data-i="tl_2t"></h3><p data-i="tl_2p"></p><a class="btn dk" href="rfp-checklist.html" data-i="tl_2b"></a></div>
+</div></section>
+
 <section id="certifications"><h2 data-i="ct_h"></h2>
 <div class="enable"><h3 data-i="ai_h"></h3><p data-i="ai_p"></p>
 <ul class="chips"><li data-i="ai_t1"></li><li data-i="ai_t2"></li><li data-i="ai_t3"></li><li data-i="ai_t4"></li></ul></div>
@@ -287,7 +299,7 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 <a class="btn p" href="contact.html" data-i="c_btn"></a>
 <a class="btn s" href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a></div></section>
 <footer class="foot"><div class="fin"><div><strong>Arnaud Gavanier</strong><p data-i="f_tag"></p></div>
-<div class="links"><a href="#about" data-i="n_about"></a><a href="#services" data-i="n_svc"></a><a href="#experience" data-i="n_exp"></a><a href="assessment.html" data-i="n_assess"></a><a href="rfp-checklist.html" data-i="n_rfp"></a><a href="contact.html" data-i="c_btn"></a><a href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a><a href="https://www.deloitte.com/ch/en/about/people/profiles.agavanier+fea06dc5.html" target="_blank" rel="noopener noreferrer" data-i="f_dl"></a></div></div>
+<div class="links"><a href="#about" data-i="n_about"></a><a href="#services" data-i="n_svc"></a><a href="#experience" data-i="n_exp"></a><a href="transformation-readiness.html" data-i="n_assess"></a><a href="rfp-checklist.html" data-i="n_rfp"></a><a href="contact.html" data-i="c_btn"></a><a href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a><a href="https://www.deloitte.com/ch/en/about/people/profiles.agavanier+fea06dc5.html" target="_blank" rel="noopener noreferrer" data-i="f_dl"></a></div></div>
 <p class="cp">© Arnaud Gavanier</p></footer>
 
 <script>
@@ -327,7 +339,8 @@ e_link:"View my Deloitte profile",f_dl:"Deloitte profile",
 n_cert:"Skills",ct_h:"Skills & Certifications",ct_main:"SAP certifications",ct_sub:"Also certified",ct_iss:"Issued",ct_exp:"expires",ct_id:"Credential ID",ct_ver:"Verify credential",
 ai_h:"AI & Digital Enablement",ai_p:"Applying AI tools to accelerate analysis, prototyping and delivery across business transformation initiatives.",ai_t1:"Claude Code",ai_t2:"AI-assisted development",ai_t3:"Git / GitHub",ai_t4:"LLM workflow design",
 dq_h:"What the study found",
-n_assess:"Assessment",n_rfp:"RFP checklist",
+n_assess:"Readiness assessment",n_rfp:"RFP checklist",
+tl_h:"Interactive tools",tl_1t:"Transformation readiness assessment",tl_1p:"25 questions across 8 dimensions to see how ready your organization is for a transformation, with a radar view and a gap matrix.",tl_1b:"Start the assessment",tl_2t:"RFP checklist generator",tl_2p:"Choose your project type, scope, phase and priority to get a tailored SAP ERP RFP checklist and milestone plan.",tl_2b:"Generate my checklist",
 c_h:"Let's talk",c_btn:"Send a message",c_p:"Planning a transformation or preparing an RFP? Send me a message."},
 fr:{n_about:"À propos",n_svc:"Services",n_exp:"Expérience",n_con:"Contact",
 h_title:"Leader de transformation d'entreprise sur les programmes SAP S/4HANA",
@@ -364,7 +377,8 @@ e_link:"Voir mon profil Deloitte",f_dl:"Profil Deloitte",
 n_cert:"Compétences",ct_h:"Compétences & certifications",ct_main:"Certifications SAP",ct_sub:"Autres certifications",ct_iss:"Délivrée",ct_exp:"expire",ct_id:"Identifiant",ct_ver:"Vérifier l’accréditation",
 ai_h:"IA & Digital Enablement",ai_p:"Mise en œuvre d’outils d’IA pour accélérer l’analyse, le prototypage et la livraison dans les initiatives de transformation métier.",ai_t1:"Claude Code",ai_t2:"Développement assisté par l’IA",ai_t3:"Git / GitHub",ai_t4:"Conception de workflows LLM",
 dq_h:"Ce que montre l’étude",
-n_assess:"Évaluation",n_rfp:"Checklist RFP",
+n_assess:"Évaluation de maturité",n_rfp:"Checklist RFP",
+tl_h:"Outils interactifs",tl_1t:"Évaluation de la maturité et de la préparation",tl_1p:"25 questions réparties en 8 dimensions pour mesurer la préparation de votre organisation à une transformation, avec un radar et une matrice des écarts.",tl_1b:"Démarrer l’évaluation",tl_2t:"Générateur de checklist RFP",tl_2p:"Choisissez le type de projet, le périmètre, la phase et la priorité pour obtenir une checklist RFP SAP ERP adaptée et un plan de jalons (en anglais).",tl_2b:"Générer ma checklist",
 c_h:"Parlons-en",c_btn:"Envoyer un message",c_p:"Un projet de transformation ou un appel d'offres en préparation ? Écrivez-moi."},
 de:{n_about:"Über mich",n_svc:"Leistungen",n_exp:"Erfahrung",n_con:"Kontakt",
 h_title:"Business-Transformation-Leader für SAP-S/4HANA-Programme",
@@ -401,7 +415,8 @@ e_link:"Mein Deloitte-Profil ansehen",f_dl:"Deloitte-Profil",
 n_cert:"Kompetenzen",ct_h:"Kompetenzen & Zertifizierungen",ct_main:"SAP-Zertifizierungen",ct_sub:"Weitere Zertifizierungen",ct_iss:"Ausgestellt",ct_exp:"läuft ab",ct_id:"Zertifikats-ID",ct_ver:"Zertifikat prüfen",
 ai_h:"KI & Digital Enablement",ai_p:"Einsatz von KI-Werkzeugen, um Analyse, Prototyping und Delivery in Business-Transformationsinitiativen zu beschleunigen.",ai_t1:"Claude Code",ai_t2:"KI-gestützte Entwicklung",ai_t3:"Git / GitHub",ai_t4:"Design von LLM-Workflows",
 dq_h:"Was die Studie zeigt",
-n_assess:"Assessment",n_rfp:"RFP-Checkliste",
+n_assess:"Readiness-Assessment",n_rfp:"RFP-Checkliste",
+tl_h:"Interaktive Tools",tl_1t:"Reifegrad-Assessment für Transformationen",tl_1p:"25 Fragen in 8 Dimensionen, um zu sehen, wie bereit Ihr Unternehmen für eine Transformation ist, mit Radar-Ansicht und Gap-Matrix (auf Englisch oder Französisch).",tl_1b:"Assessment starten",tl_2t:"RFP-Checklisten-Generator",tl_2p:"Wählen Sie Projekttyp, Umfang, Phase und Priorität und erhalten Sie eine massgeschneiderte SAP-ERP-RFP-Checkliste samt Meilensteinplan (auf Englisch).",tl_2b:"Checkliste erstellen",
 c_h:"Sprechen wir",c_btn:"Nachricht senden",c_p:"Eine Transformation geplant oder eine Ausschreibung in Vorbereitung? Schreiben Sie mir."}
 };
 function setLang(l){
