@@ -205,15 +205,17 @@ function compute(){
   const avg=sc.map(a=>a.reduce((x,y)=>x+y,0)/a.length);
   return {sc,avg,overall:avg.reduce((x,y)=>x+y,0)/avg.length};
 }
-function challenge(di,R){
+function challenge(di,R,lg){
+  lg=lg||L;
   const v=R.avg[di];let t=CH[di][band(v)==="r"?0:band(v)==="a"?1:2];
   if(di===4&&R.avg[0]>3.8&&v<3)t=OV5;
   if(di===6&&v>=3&&R.avg[3]<2.5)t=OV7;
-  return t[L==="fr"?1:0];
+  return t[lg==="fr"?1:0];
 }
-function gapText(di,R){
-  const v=R.avg[di],tg=TG[di],i=L==="fr"?1:0,o=L==="fr"?2:0;
-  if(v>=tg)return T[L].none;
+function gapText(di,R,lg){
+  lg=lg||L;
+  const v=R.avg[di],tg=TG[di],o=lg==="fr"?2:0;
+  if(v>=tg)return T[lg].none;
   const k=R.sc[di].indexOf(Math.min.apply(null,R.sc[di]));
   return D[di].q[k][o]+" (−"+(tg-v).toFixed(1)+")";
 }
@@ -295,7 +297,9 @@ f.addEventListener("submit",async e=>{
     d.q.forEach((q,qi)=>lines.push("   Q"+(di+1)+"."+(qi+1)+" "+q[0]+": "+R.sc[di][qi]));
   });
   const b=band(R.overall),status=b==="r"?T.en.bs[0]:b==="a"?T.en.bm[0]:T.en.bg[0];
-  const msg="Overall average: "+R.overall.toFixed(1)+"/5 ("+status+")\nLanguage: "+L+"\nName: "+nm+"\nEmail: "+em+"\nCompany: "+(co||"-")+"\n\n"+lines.join("\n");
+  const matrix=D.map((d,di)=>(di+1)+". "+d.n[0]+" | Avg "+R.avg[di].toFixed(1)+" | Target "+TG[di].toFixed(1)+" | Gap / blind spot: "+gapText(di,R,"en")+" | Challenge & impact: "+challenge(di,R,"en"));
+  const msg="Overall average: "+R.overall.toFixed(1)+"/5 ("+status+")\nLanguage: "+L+"\nName: "+nm+"\nEmail: "+em+"\nCompany: "+(co||"-")+
+    "\n\nDIMENSION SUMMARY AND GAP MATRIX\n"+matrix.join("\n\n")+"\n\nDETAILED ANSWERS\n"+lines.join("\n");
   btn.disabled=true;btn.textContent=T[L].sending;say("");
   try{
     const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
