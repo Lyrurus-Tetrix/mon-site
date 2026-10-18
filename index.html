@@ -168,6 +168,7 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 .tool h3{margin:0 0 8px;color:var(--navy);font-size:1.25rem}
 .tool p{margin:0 0 20px;color:var(--muted)}
 .no-offer [data-feature="offer"],.no-tools [data-feature="tools"]{display:none!important}
+.form-off [data-feature="form"],.form-on [data-feature="deloitte"]{display:none!important}
 </style>
 <noscript><style>.hero:not(.ready) .hero-bg::before,.hero:not(.ready) .fog{opacity:1}</style></noscript>
 <script src="config.js"></script>
@@ -298,11 +299,13 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 <p><span data-i="ct_id"></span> C_TS462</p></div>
 </div></section>
 
-<section id="contact"><div class="contact"><h2 data-i="c_h"></h2><p data-i="c_p"></p>
-<a class="btn p" href="contact.html" data-i="c_btn"></a>
+<section id="contact"><div class="contact"><h2 data-i="c_h"></h2><p data-feature="form" data-i="c_p"></p>
+<p data-feature="deloitte" data-i="c_p2"></p>
+<a class="btn p" href="contact.html" data-feature="form" data-i="c_btn"></a>
+<a class="btn p" href="https://www.deloitte.com/ch/en/about/people/profiles.agavanier+fea06dc5.html" target="_blank" rel="noopener noreferrer" data-feature="deloitte" data-i="c_dl"></a>
 <a class="btn s" href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a></div></section>
 <footer class="foot"><div class="fin"><div><strong>Arnaud Gavanier</strong><p data-i="f_tag"></p></div>
-<div class="links"><a href="#about" data-i="n_about"></a><a href="#services" data-feature="offer" data-i="n_svc"></a><a href="#experience" data-i="n_exp"></a><a href="transformation-readiness.html" data-feature="tools" data-i="n_assess"></a><a href="rfp-checklist.html" data-feature="tools" data-i="n_rfp"></a><a href="contact.html" data-i="c_btn"></a><a href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a><a href="https://www.deloitte.com/ch/en/about/people/profiles.agavanier+fea06dc5.html" target="_blank" rel="noopener noreferrer" data-i="f_dl"></a></div></div>
+<div class="links"><a href="#about" data-i="n_about"></a><a href="#services" data-feature="offer" data-i="n_svc"></a><a href="#experience" data-i="n_exp"></a><a href="transformation-readiness.html" data-feature="tools" data-i="n_assess"></a><a href="rfp-checklist.html" data-feature="tools" data-i="n_rfp"></a><a href="contact.html" data-feature="form" data-i="c_btn"></a><a href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a><a href="https://www.deloitte.com/ch/en/about/people/profiles.agavanier+fea06dc5.html" target="_blank" rel="noopener noreferrer" data-i="f_dl"></a></div></div>
 <p class="cp">© Arnaud Gavanier</p></footer>
 
 <script>
@@ -344,6 +347,7 @@ ai_h:"AI & Digital Enablement",ai_p:"Applying AI tools to accelerate analysis, p
 dq_h:"What the study found",
 n_assess:"Readiness assessment",n_rfp:"RFP checklist",
 tl_h:"Interactive tools",tl_1t:"Transformation readiness assessment",tl_1p:"25 questions across 8 dimensions to see how ready your organization is for a transformation, with a radar view and a gap matrix.",tl_1b:"Start the assessment",tl_2t:"RFP checklist generator",tl_2p:"Choose your project type, scope, phase and priority to get a tailored SAP ERP RFP checklist and milestone plan.",tl_2b:"Generate my checklist",
+c_p2:"Planning a transformation or preparing an RFP? Get in touch through my Deloitte profile or on LinkedIn.",c_dl:"Contact me via Deloitte",
 c_h:"Let's talk",c_btn:"Send a message",c_p:"Planning a transformation or preparing an RFP? Send me a message."},
 fr:{n_about:"À propos",n_svc:"Services",n_exp:"Expérience",n_con:"Contact",
 h_title:"Leader de transformation d'entreprise sur les programmes SAP S/4HANA",
@@ -382,6 +386,7 @@ ai_h:"IA & Digital Enablement",ai_p:"Mise en œuvre d’outils d’IA pour accé
 dq_h:"Ce que montre l’étude",
 n_assess:"Évaluation de maturité",n_rfp:"Checklist RFP",
 tl_h:"Outils interactifs",tl_1t:"Évaluation de la maturité et de la préparation",tl_1p:"25 questions réparties en 8 dimensions pour mesurer la préparation de votre organisation à une transformation, avec un radar et une matrice des écarts.",tl_1b:"Démarrer l’évaluation",tl_2t:"Générateur de checklist RFP",tl_2p:"Choisissez le type de projet, le périmètre, la phase et la priorité pour obtenir une checklist RFP SAP ERP adaptée et un plan de jalons (en anglais).",tl_2b:"Générer ma checklist",
+c_p2:"Un projet de transformation ou un appel d’offres en préparation ? Contactez-moi via mon profil Deloitte ou sur LinkedIn.",c_dl:"Me contacter via Deloitte",
 c_h:"Parlons-en",c_btn:"Envoyer un message",c_p:"Un projet de transformation ou un appel d'offres en préparation ? Écrivez-moi."},
 de:{n_about:"Über mich",n_svc:"Leistungen",n_exp:"Erfahrung",n_con:"Kontakt",
 h_title:"Business-Transformation-Leader für SAP-S/4HANA-Programme",
@@ -420,6 +425,7 @@ ai_h:"KI & Digital Enablement",ai_p:"Einsatz von KI-Werkzeugen, um Analyse, Prot
 dq_h:"Was die Studie zeigt",
 n_assess:"Readiness-Assessment",n_rfp:"RFP-Checkliste",
 tl_h:"Interaktive Tools",tl_1t:"Reifegrad-Assessment für Transformationen",tl_1p:"25 Fragen in 8 Dimensionen, um zu sehen, wie bereit Ihr Unternehmen für eine Transformation ist, mit Radar-Ansicht und Gap-Matrix (auf Englisch oder Französisch).",tl_1b:"Assessment starten",tl_2t:"RFP-Checklisten-Generator",tl_2p:"Wählen Sie Projekttyp, Umfang, Phase und Priorität und erhalten Sie eine massgeschneiderte SAP-ERP-RFP-Checkliste samt Meilensteinplan (auf Englisch).",tl_2b:"Checkliste erstellen",
+c_p2:"Eine Transformation geplant oder eine Ausschreibung in Vorbereitung? Erreichen Sie mich über mein Deloitte-Profil oder auf LinkedIn.",c_dl:"Kontakt über Deloitte",
 c_h:"Sprechen wir",c_btn:"Nachricht senden",c_p:"Eine Transformation geplant oder eine Ausschreibung in Vorbereitung? Schreiben Sie mir."}
 };
 function setLang(l){
