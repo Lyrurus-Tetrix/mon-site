@@ -24,7 +24,7 @@ label{display:block;font-weight:700;margin:0 0 6px;color:var(--navy)}
 input,textarea{width:100%;font:inherit;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);margin-bottom:20px}
 textarea{min-height:170px;resize:vertical}
 .btn{background:var(--navy);color:#fff;border:0;border-radius:8px;padding:13px 28px;font:inherit;font-weight:700;cursor:pointer}
-.btn:disabled{opacity:.6;cursor:wait}
+.btn:disabled{background:#8A94A8;color:#fff;opacity:1;cursor:not-allowed}
 .hp{position:absolute;left:-9999px;height:0;overflow:hidden}
 #status{margin:20px 0 0;font-weight:700}
 #status.ok{color:#1B6B3A}
@@ -67,47 +67,68 @@ const T={
 en:{t:"Get in touch",intro:"Planning a transformation or preparing an RFP? Tell me a bit about it and I will get back to you.",
 l_name:"Your name",l_email:"Your email",l_msg:"Your message",send:"Send message",sending:"Sending...",
 ok:"Thank you, your message has been sent.",err:"Something went wrong. Please try again, or reach out on LinkedIn.",
-miss:"Please fill in your name, a valid email and a message.",key:"The form is not configured yet.",
-note:"Your message is delivered by email through the Web3Forms service and used only to reply to you.",back:"Back to the site"},
+miss:"Please fill in your name, a valid email and a message.",key:"The form is not configured yet.",wait:"Please wait a moment before sending.",again:"A message was already sent from this browser. Please try again in a few minutes.",
+note:"Your message is delivered by email through the Web3Forms service and used only to reply to you.",sentbtn:"Already sent",lock:"A message was already sent from this browser. You can send another in about {m} min.",back:"Back to the site"},
 fr:{t:"Me contacter",intro:"Un projet de transformation ou un appel d'offres en préparation ? Décrivez-le-moi en quelques lignes et je reviens vers vous.",
 l_name:"Votre nom",l_email:"Votre e-mail",l_msg:"Votre message",send:"Envoyer",sending:"Envoi en cours...",
 ok:"Merci, votre message a bien été envoyé.",err:"Une erreur est survenue. Réessayez, ou contactez-moi sur LinkedIn.",
-miss:"Merci de renseigner votre nom, un e-mail valide et un message.",key:"Le formulaire n'est pas encore configuré.",
-note:"Votre message est transmis par e-mail via le service Web3Forms et utilisé uniquement pour vous répondre.",back:"Retour au site"},
+miss:"Merci de renseigner votre nom, un e-mail valide et un message.",key:"Le formulaire n'est pas encore configuré.",wait:"Merci de patienter un instant avant d’envoyer.",again:"Un message a déjà été envoyé depuis ce navigateur. Réessayez dans quelques minutes.",
+note:"Votre message est transmis par e-mail via le service Web3Forms et utilisé uniquement pour vous répondre.",sentbtn:"Déjà envoyé",lock:"Un message a déjà été envoyé depuis ce navigateur. Vous pourrez en envoyer un autre dans environ {m} min.",back:"Retour au site"},
 de:{t:"Kontakt aufnehmen",intro:"Eine Transformation geplant oder eine Ausschreibung in Vorbereitung? Schildern Sie mir kurz Ihr Anliegen, ich melde mich bei Ihnen.",
 l_name:"Ihr Name",l_email:"Ihre E-Mail",l_msg:"Ihre Nachricht",send:"Nachricht senden",sending:"Wird gesendet...",
 ok:"Vielen Dank, Ihre Nachricht wurde gesendet.",err:"Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie mir auf LinkedIn.",
-miss:"Bitte geben Sie Ihren Namen, eine gültige E-Mail und eine Nachricht ein.",key:"Das Formular ist noch nicht konfiguriert.",
-note:"Ihre Nachricht wird per E-Mail über den Dienst Web3Forms zugestellt und nur zur Beantwortung verwendet.",back:"Zurück zur Website"}
+miss:"Bitte geben Sie Ihren Namen, eine gültige E-Mail und eine Nachricht ein.",key:"Das Formular ist noch nicht konfiguriert.",wait:"Bitte warten Sie einen Moment vor dem Senden.",again:"Von diesem Browser wurde bereits eine Nachricht gesendet. Bitte versuchen Sie es in einigen Minuten erneut.",
+note:"Ihre Nachricht wird per E-Mail über den Dienst Web3Forms zugestellt und nur zur Beantwortung verwendet.",sentbtn:"Bereits gesendet",lock:"Von diesem Browser wurde bereits eine Nachricht gesendet. Sie können in etwa {m} Min. eine weitere senden.",back:"Zurück zur Website"}
 };
 let L="en";
 function setLang(l){
   L=l;document.documentElement.lang=l;
   document.querySelectorAll("[data-i]").forEach(e=>{e.textContent=T[l][e.dataset.i]});
   document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===l));
+  try{refreshSend(false)}catch(e){}   // not ready yet on the very first call
   try{localStorage.setItem("lang",l)}catch(e){}
 }
 document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>setLang(b.dataset.l));
 let start="en";try{start=localStorage.getItem("lang")||"en"}catch(e){}
 setLang(T[start]?start:"en");
 
+const COOLDOWN=10*60*1000,SENT_KEY="sent_contact";   // after a successful send, block further emails from this browser for 10 minutes
+function cooldownLeft(){try{return Math.max(0,(+localStorage.getItem(SENT_KEY)||0)+COOLDOWN-Date.now())}catch(e){return 0}}
+function markSent(){try{localStorage.setItem(SENT_KEY,String(Date.now()))}catch(e){}}
+let busyFlag=false,lockTimer=0;
+function refreshSend(keep){   // grey out the send button while an email from this browser is still locked
+  const b=document.getElementById("send"),s=document.getElementById("status"),left=cooldownLeft();
+  clearTimeout(lockTimer);
+  if(left>0){
+    b.disabled=true;b.textContent=T[L].sentbtn;
+    if(!keep||s.className==="lock"){s.textContent=T[L].lock.replace("{m}",Math.ceil(left/60000));s.className="lock"}
+    lockTimer=setTimeout(()=>refreshSend(true),Math.min(left,60000)+250);
+  }else if(!busyFlag){
+    b.disabled=false;b.textContent=T[L].send;
+    if(s.className==="lock"){s.textContent="";s.className=""}
+  }
+}
+const T0=Date.now();
 const f=document.getElementById("f"),st=document.getElementById("status"),btn=document.getElementById("send");
+refreshSend(false);
 function say(msg,cls){st.textContent=msg;st.className=cls||""}
 f.addEventListener("submit",async e=>{
   e.preventDefault();
   const d=Object.fromEntries(new FormData(f));
   if(!d.name.trim()||!/^\S+@\S+\.\S+$/.test(d.email)||!d.message.trim()){say(T[L].miss,"err");return}
   if(ACCESS_KEY==="YOUR_ACCESS_KEY"){say(T[L].key,"err");return}
-  btn.disabled=true;btn.textContent=T[L].sending;say("");
+  if(cooldownLeft()>0){say(T[L].again,"err");return}
+  if(Date.now()-T0<3000){say(T[L].wait,"err");return}      // form filled faster than a human can
+  busyFlag=true;btn.disabled=true;btn.textContent=T[L].sending;say("");
   try{
     const r=await fetch("https://api.web3forms.com/submit",{method:"POST",
       headers:{"Content-Type":"application/json",Accept:"application/json"},
       body:JSON.stringify({access_key:ACCESS_KEY,subject:"New message from your website",from_name:"Website contact form",
         name:d.name,email:d.email,message:d.message,botcheck:f.botcheck.checked})});
     const j=await r.json();
-    if(j.success){say(T[L].ok,"ok");f.reset()}else{say(T[L].err,"err")}
+    if(j.success){say(T[L].ok,"ok");f.reset();markSent()}else{say(T[L].err,"err")}
   }catch(x){say(T[L].err,"err")}
-  btn.disabled=false;btn.textContent=T[L].send;
+  busyFlag=false;refreshSend(true);
 });
 </script>
 </body>

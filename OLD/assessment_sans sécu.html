@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business Transformation Maturity & Readiness Assessment | Arnaud Gavanier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A1F44;--navy2:#13306B;--ridge:#1B4287;--ink:#14213D;--muted:#3B4760;--bg:#F4F6FA;--line:#C5CEDD;--sky:#8EB8FF}
+*{box-sizing:border-box}
+body{margin:0;font-family:Manrope,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+header{background:var(--navy);color:#fff}
+.bar{max-width:1040px;margin:auto;padding:14px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.brand{font-weight:800;text-decoration:none;margin-right:auto}
+.lang button{background:none;border:1px solid #fff5;color:#fff;padding:4px 10px;border-radius:6px;cursor:pointer;font:inherit;font-size:.85rem;margin-left:6px}
+.lang button[aria-pressed="true"]{background:#fff;color:var(--navy)}
+.top{background:linear-gradient(180deg,var(--navy),var(--navy2));color:#fff}
+.top .in{max-width:1040px;margin:auto;padding:64px 24px 56px}
+.top h1{font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.12;margin:0 0 18px;letter-spacing:-.02em;max-width:18em}
+.top p{margin:0;max-width:44em;font-size:1.1rem;color:#EAF1FF}
+main{max-width:1040px;margin:auto;padding:40px 24px 72px}
+h2{font-size:1.5rem;margin:0 0 12px;color:var(--navy)}
+.legend{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px 28px;margin-bottom:28px}
+.legend p{margin:0 0 14px;color:var(--muted)}
+.legend ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.legend li{border-left:3px solid var(--ridge);padding-left:12px;font-size:.92rem;color:var(--muted)}
+.legend b{display:block;color:var(--navy)}
+.prog{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin-bottom:12px;display:flex;align-items:center;gap:14px;font-weight:700;color:var(--navy)}
+.prog .track{flex:1;height:8px;background:#DCE3EF;border-radius:99px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--ridge);transition:width .3s}
+.dim{background:#fff;border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:12px;padding:24px 28px;margin-bottom:20px}
+.dim h3{margin:0 0 4px;font-size:1.25rem;color:var(--navy)}
+.dim .foc{margin:0 0 18px;color:var(--muted)}
+.q{padding:16px 0;border-top:1px solid var(--line)}
+.q b{color:var(--navy)}
+.q p{margin:2px 0 12px}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.pill{position:relative}
+.pill input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.pill span{display:flex;align-items:center;justify-content:center;width:48px;height:44px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-weight:700;color:var(--navy)}
+.pill input:hover+span{border-color:var(--ridge)}
+.pill input:checked+span{background:var(--navy);border-color:var(--navy);color:#fff}
+.pill input:focus-visible+span{outline:3px solid var(--sky);outline-offset:2px}
+.sel{display:block;margin-top:8px;min-height:1.4em;font-size:.88rem;color:var(--muted)}
+.who{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px 28px;margin:28px 0 16px}
+label.l{display:block;font-weight:700;margin:0 0 6px;color:var(--navy)}
+.who input[type=text],.who input[type=email]{width:100%;font:inherit;padding:12px 14px;border:1px solid var(--line);border-radius:8px;margin-bottom:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+.consent{display:flex;gap:10px;align-items:flex-start;margin:0 0 20px;color:var(--muted)}
+.consent input{margin-top:6px}
+.btn{background:var(--navy);color:#fff;border:0;border-radius:8px;padding:14px 30px;font:inherit;font-weight:700;cursor:pointer}
+.btn:disabled{opacity:.6;cursor:wait}
+.hp{position:absolute;left:-9999px;height:0;overflow:hidden}
+#status{margin:18px 0 0;font-weight:700}
+#status.ok{color:#1B6B3A}
+#status.err{color:#A12A2A}
+.note{font-size:.85rem;color:var(--muted);margin-top:24px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}.dim,.who,.legend{padding:20px}}
+.res{background:#fff;border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:12px;padding:28px;margin-bottom:28px}
+.res h3{margin:30px 0 12px;color:var(--navy);font-size:1.2rem}
+.rtop{display:grid;grid-template-columns:minmax(260px,460px) 1fr;gap:28px;align-items:center}
+.rl{margin:0;font-size:.85rem;color:var(--muted)}
+.rl i{display:inline-block;width:22px;height:0;border-top:3px solid #1B4287;vertical-align:middle;margin:0 6px 0 0}
+.rl i.k2{border-top:3px dashed #2FA8CC;margin-left:16px}
+.badge{border-radius:12px;padding:26px 28px;border:2px solid}
+.badge small{display:block;font-weight:700}
+.badge strong{display:block;font-size:2.6rem;line-height:1.1;margin:2px 0 8px}
+.badge b{display:block;font-size:1.25rem}
+.badge.r{background:#FBEAEA;border-color:#A12A2A;color:#7A1B1B}
+.badge.a{background:#FFF3D6;border-color:#C98A00;color:#6B4600}
+.badge.g{background:#E6F4EA;border-color:#1B6B3A;color:#14502B}
+.tw{overflow-x:auto}
+.tw table{border-collapse:collapse;width:100%;min-width:760px}
+.tw th,.tw td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.92rem}
+.tw th{background:var(--bg);color:var(--navy)}
+.sc{font-weight:800;white-space:nowrap}
+.sc i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.sc.r i{background:#A12A2A}.sc.a i{background:#E0A526}.sc.g i{background:#1B6B3A}
+.btn.alt{background:#fff;color:var(--navy);border:1px solid var(--navy);margin-top:22px}
+@media(max-width:760px){.rtop{grid-template-columns:1fr}.res{padding:20px}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<a class="brand" href="index.html">Arnaud Gavanier</a>
+<div class="lang" role="group" aria-label="Language"><button data-l="en">EN</button><button data-l="fr">FR</button></div>
+</div></header>
+
+<section class="top"><div class="in"><h1 data-i="t"></h1><p data-i="concept"></p></div></section>
+
+<main>
+<section id="res" class="res" hidden aria-live="polite"></section>
+<div class="legend"><h2 data-i="how"></h2><p data-i="how_p"></p><ol id="scale"></ol></div>
+<div class="prog" role="status" aria-live="polite"><span id="pt"></span><div class="track"><i id="bar"></i></div></div>
+<form id="f" novalidate>
+<div id="dims"></div>
+<div class="who">
+<h2 data-i="who_h"></h2>
+<div class="grid2">
+<div><label class="l" for="nm" data-i="l_name"></label><input id="nm" type="text" autocomplete="name"></div>
+<div><label class="l" for="em" data-i="l_email"></label><input id="em" type="email" autocomplete="email"></div>
+</div>
+<label class="l" for="co" data-i="l_co"></label><input id="co" type="text" autocomplete="organization">
+<label class="consent"><input type="checkbox" id="ok"><span data-i="consent"></span></label>
+<input class="hp" type="checkbox" id="bot" tabindex="-1" autocomplete="off" aria-hidden="true">
+<button class="btn" type="submit" id="send" data-i="send"></button>
+<p id="status" role="status" aria-live="polite"></p>
+</div>
+</form>
+<p class="note" data-i="note"></p>
+<a href="index.html" data-i="back"></a>
+</main>
+
+<script>
+const ACCESS_KEY="e55a5d88-0544-40b7-a704-7d0ed1174a7f";
+
+const T={
+en:{res_h:"Your results",res_r:"Maturity profile by dimension",res_o:"Overall score",res_tg:"Target",res_cur:"Your score",
+res_t:"Dimension summary and gap matrix",th1:"Assessment Dimension",th2:"Avg. Score",th3:"Target",th4:"The Gap / Blind Spot",th5:"Immediate Challenge & Impact",none:"None",again:"Start over",
+bs:["Not Ready / High Risk","Halt and remediate fundamentals"],bm:["Conditionally Ready","Proceed with targeted risk mitigation"],bg:["Ready","Proceed to launch"],t:"Business Transformation Maturity and Readiness Assessment",
+concept:"This assessment measures both maturity (where you are now) and readiness (how prepared you are for the upcoming change). The goal is to identify gaps, risks and additional challenges, so you can plan accordingly. 25 questions across 8 dimensions.",
+how:"How to answer",how_p:"For each question, rate your organization on a scale of 1 to 5.",
+who_h:"Your details",l_name:"Your name",l_email:"Work email",l_co:"Company (optional)",
+consent:"I agree to share my answers with Arnaud Gavanier so he can follow up with me.",
+send:"Send my answers",sending:"Sending...",prog:"answered",
+miss:"Please answer every question (remaining: ",miss2:").",info:"Please enter your name and a valid email, and tick the consent box.",
+ok:"Thank you. Your results are displayed at the top of the page, and your answers have been sent to me. I will come back to you with a tailored readout.",err:"Something went wrong. Please try again, or reach out on LinkedIn.",
+note:"Your answers are delivered by email through the Web3Forms service and used only to follow up with you.",back:"Back to the site"},
+fr:{res_h:"Vos résultats",res_r:"Profil de maturité par dimension",res_o:"Score global",res_tg:"Cible",res_cur:"Votre score",
+res_t:"Synthèse par dimension et matrice des écarts",th1:"Dimension évaluée",th2:"Score moyen",th3:"Cible",th4:"Écart / angle mort",th5:"Défi immédiat et impact",none:"Aucun",again:"Recommencer",
+bs:["Pas prêt / Risque élevé","Stopper et corriger les fondamentaux"],bm:["Prêt sous conditions","Avancer avec une réduction ciblée des risques"],bg:["Prêt","Passer au lancement"],t:"Évaluation de la maturité et de la préparation à la transformation métier",
+concept:"Cette évaluation mesure à la fois la maturité (où vous en êtes aujourd’hui) et la préparation (votre degré de préparation au changement à venir). L’objectif est d’identifier les écarts, les risques et les défis supplémentaires pour mieux planifier. 25 questions réparties en 8 dimensions.",
+how:"Comment répondre",how_p:"Pour chaque question, évaluez votre organisation sur une échelle de 1 à 5.",
+who_h:"Vos coordonnées",l_name:"Votre nom",l_email:"E-mail professionnel",l_co:"Entreprise (facultatif)",
+consent:"J’accepte de partager mes réponses avec Arnaud Gavanier afin qu’il me recontacte.",
+send:"Envoyer mes réponses",sending:"Envoi en cours...",prog:"réponses",
+miss:"Merci de répondre à toutes les questions (restantes : ",miss2:").",info:"Merci de saisir votre nom, un e-mail valide et de cocher la case de consentement.",
+ok:"Merci. Vos résultats s’affichent en haut de la page et vos réponses m’ont été transmises. Je reviens vers vous avec une restitution personnalisée.",err:"Une erreur est survenue. Réessayez, ou contactez-moi sur LinkedIn.",
+note:"Vos réponses sont transmises par e-mail via le service Web3Forms et utilisées uniquement pour vous recontacter.",back:"Retour au site"}
+};
+const SC={
+en:[["Ad-hoc / Unaware","No formal approach; high risk of transformation failure."],["Reactive / Aware","Gaps are recognized, but actions are taken only when problems arise."],["Defined / Progressing","A structured approach exists; gaps are documented, and mitigation plans are forming."],["Managed / Predictable","Standardized approach across most areas; actively managing transformation risks."],["Optimized / Continuous","Fully ready; resilient to gaps, with continuous improvement built-in."]],
+fr:[["Ad hoc / Non conscient","Aucune approche formelle ; risque élevé d’échec de la transformation."],["Réactif / Conscient","Les écarts sont reconnus, mais on n’agit qu’en cas de problème."],["Défini / En progression","Une approche structurée existe ; les écarts sont documentés et des plans d’atténuation se mettent en place."],["Maîtrisé / Prévisible","Approche standardisée dans la plupart des domaines ; gestion active des risques de la transformation."],["Optimisé / Continu","Pleinement prêt ; résilient face aux écarts, avec amélioration continue intégrée."]]
+};
+// each dimension: n=[EN,FR] name, f=[EN,FR] focus, q=[ [titleEN,textEN,titleFR,textFR], ... ]
+const D=[
+{n:["Clarity of Business Objectives","Clarté des objectifs métier"],f:["Ensuring the transformation is driven by strategy, not just technology.","S’assurer que la transformation est portée par la stratégie, pas seulement par la technologie."],q:[
+["Strategic Alignment","Are the business goals of this transformation explicitly defined, documented, and tied to overall company strategy?","Alignement stratégique","Les objectifs métier de cette transformation sont-ils explicitement définis, documentés et reliés à la stratégie globale de l’entreprise ?"],
+["Value Definition & KPI Traceability","Are the expected financial or operational benefits clearly quantified, and do we know how to measure them post-go-live?","Définition de la valeur et suivi des KPI","Les bénéfices financiers ou opérationnels attendus sont-ils clairement chiffrés, et sait-on comment les mesurer après le go-live ?"],
+["Leadership & Vision Communication","Is there a unified vision among executives, and has it been effectively communicated down to the operational teams?","Vision et communication du leadership","Existe-t-il une vision partagée entre les dirigeants, et a-t-elle été efficacement relayée jusqu’aux équipes opérationnelles ?"]]},
+{n:["Process Standardization","Standardisation des processus"],f:["Understanding current workflows and the complexity gap moving to target states.","Comprendre les processus actuels et l’ampleur de l’écart vers les états cibles."],q:[
+["Core Process Documentation","To what extent are current (\"As-Is\") key operational processes documented and understood across teams?","Documentation des processus clés","Dans quelle mesure les processus opérationnels clés actuels (« As-Is ») sont-ils documentés et compris dans les équipes ?"],
+["Variance & Customization Awareness","Have we identified the local specificities or \"shadow processes\" that deviate from standard operating procedures?","Variantes et spécificités","Avons-nous identifié les spécificités locales ou « processus parallèles » qui s’écartent des procédures standard ?"],
+["Gap & Impact Identification","Is the organization aware of the specific operational gaps between current processes and the target (\"To-Be\") standard?","Écarts et impacts","L’organisation a-t-elle conscience des écarts opérationnels précis entre les processus actuels et le standard cible (« To-Be ») ?"]]},
+{n:["Governance and Accountabilities","Gouvernance et responsabilités"],f:["Decision-making speed, ownership, and conflict resolution during the project.","Rapidité de décision, appropriation et résolution des conflits pendant le projet."],q:[
+["Steering & Decision-Making","Is there a clear, empowered steering committee capable of making fast decisions (e.g., resolving scope creep or budget trade-offs)?","Pilotage et décision","Existe-t-il un comité de pilotage clair, doté de pouvoirs, capable de décider vite (par exemple pour arbitrer une dérive du périmètre ou du budget) ?"],
+["Process & Data Ownership","Are Business Process Owners (BPOs) and Data Owners clearly designated and given the authority to sign off on design changes?","Propriété des processus et des données","Les responsables de processus (BPO) et les responsables des données sont-ils clairement désignés et habilités à valider les changements de conception ?"],
+["Escalation & Conflict Resolution","Is there a well-defined path to resolve deadlocks between different departments or between internal teams and external integrators?","Escalade et résolution des conflits","Existe-t-il un circuit défini pour débloquer les désaccords entre départements, ou entre équipes internes et intégrateurs externes ?"]]},
+{n:["Data Quality","Qualité des données"],f:["Cleanliness and structure of the foundational data required for the new system.","Propreté et structure des données de base nécessaires au nouveau système."],q:[
+["Data Health Assessment","Have we audited the quality, completeness, and duplication levels of our legacy master data (customers, vendors, products)?","Santé des données","Avons-nous audité la qualité, l’exhaustivité et les doublons de nos données de référence historiques (clients, fournisseurs, produits) ?"],
+["Data Governance & Standards","Do we have defined rules for data maintenance, or is data managed in siloes with high risk of corruption?","Gouvernance et standards","Disposons-nous de règles de maintenance des données, ou celles-ci sont-elles gérées en silos avec un fort risque de corruption ?"],
+["Remediation Capabilities","Do we have the dedicated business resources required to clean, enrich, and validate data before it is migrated?","Capacité de remédiation","Disposons-nous des ressources métier dédiées pour nettoyer, enrichir et valider les données avant leur migration ?"]]},
+{n:["Internal Delivery Capacity","Capacité de delivery interne"],f:["Skill levels, availability, and change fatigue of your internal workforce.","Compétences, disponibilité et fatigue du changement des équipes internes."],q:[
+["Resource Availability & Backfill","Are key subject matter experts (SMEs) freed up from their daily operational duties to focus on the project, or are they expected to double-hat?","Disponibilité et remplacement","Les experts métier clés sont-ils libérés de leurs tâches quotidiennes pour se consacrer au projet, ou doivent-ils cumuler les deux rôles ?"],
+["Technical & Project Competencies","Does the internal IT and project management team possess the skills required to deliver this specific type of transformation?","Compétences techniques et projet","Les équipes IT et de gestion de projet internes possèdent-elles les compétences nécessaires pour mener ce type précis de transformation ?"],
+["Change Management & Culture","How resilient is the organization to change, and do we have a structured Change Management plan to tackle user resistance?","Conduite du changement et culture","Quelle est la capacité de l’organisation à absorber le changement, et disposons-nous d’un plan de conduite du changement structuré pour traiter les résistances ?"]]},
+{n:["Migration Strategy","Stratégie de migration"],f:["De-risking the transition from legacy systems to the new environment.","Réduire les risques du passage des systèmes historiques au nouvel environnement."],q:[
+["Technical Deployment Strategy","Has a clear migration approach (e.g., Big Bang vs. Phased/Wave rollout) been chosen based on business risk tolerance?","Stratégie de déploiement","Une approche de migration claire (par exemple Big Bang ou déploiement par vagues) a-t-elle été choisie en fonction de la tolérance au risque métier ?"],
+["Rollback & Business Continuity","Is there a high-level business continuity plan (BCP) in case the migration experiences critical issues during cutover?","Retour arrière et continuité","Existe-t-il un plan de continuité d’activité (PCA) de haut niveau en cas de problème critique pendant la bascule ?"],
+["Legacy System Decommissioning","Is there a clear strategy on what happens to historical data and legacy applications post-migration?","Décommissionnement du legacy","Une stratégie claire existe-t-elle pour les données historiques et les applications existantes après la migration ?"]]},
+{n:["AI Use Case Readiness","Préparation aux cas d’usage d’IA"],f:["Laying the groundwork for future cognitive automation and predictive analytics.","Poser les bases de l’automatisation cognitive et de l’analytique prédictive."],q:[
+["Data Architecture for AI","Is our data architecture designed to easily feed pipelines (e.g., structured, accessible via APIs, stored securely) for AI model consumption?","Architecture de données pour l’IA","Notre architecture de données est-elle conçue pour alimenter facilement des pipelines (structurée, accessible par API, stockée de façon sécurisée) pour les modèles d’IA ?"],
+["Use Case Identification & ROI","Have we identified specific business problems that AI is uniquely positioned to solve, rather than just pursuing AI as a trend?","Cas d’usage et ROI","Avons-nous identifié des problèmes métier précis que l’IA est particulièrement à même de résoudre, plutôt que de suivre l’IA comme une tendance ?"],
+["Ethical, Security, & Legal Frameworks","Does the organization have guidelines regarding data privacy, IP protection, and shadow AI usage?","Cadres éthique, sécurité et juridique","L’organisation dispose-t-elle de règles sur la confidentialité des données, la protection de la propriété intellectuelle et l’usage de l’IA « fantôme » ?"]]}
+,{n:["Project Foundation & Procurement Readiness","Fondations du projet et préparation des achats"],f:["Securing the budget, timeline, technology, and ecosystem required to launch.","Sécuriser le budget, le calendrier, la technologie et l’écosystème nécessaires au lancement."],q:[
+["Financial Budgeting & Allocations","Has the total investment (including software licenses, hardware, partner fees, internal backfilling, and contingency funds) been fully budgeted and approved?","Budgétisation et allocations financières","L’investissement total (licences logicielles, matériel, honoraires des partenaires, remplacement interne et provisions pour imprévus) a-t-il été entièrement budgété et approuvé ?"],
+["Timeline & Milestones Definition","Have we established realistic, baseline target start and end dates for the transformation, including key phase gates?","Calendrier et jalons","Avons-nous établi des dates cibles de début et de fin réalistes pour la transformation, y compris les principaux jalons de passage de phase ?"],
+["Vendor & Partner Selection","Have we identified, vetted, and shortlisted potential implementation partners (SI) with proven experience in our industry?","Sélection des fournisseurs et partenaires","Avons-nous identifié, évalué et présélectionné des partenaires d’intégration (SI) ayant une expérience avérée dans notre secteur ?"],
+["ERP Solution & Architecture Landscape","Have we officially selected our target ERP platform, and has the future architectural landscape (integrations, cloud vs. on-premise, satellite apps) been decided?","Solution ERP et paysage d’architecture","Avons-nous officiellement choisi notre plateforme ERP cible, et le futur paysage d’architecture (intégrations, cloud ou sur site, applications satellites) est-il arrêté ?"]]}
+];
+const TOTAL=D.reduce((a,d)=>a+d.q.length,0);
+
+const TG=[4.5,4.0,4.0,4.0,3.5,4.0,3.5,4.5];
+const SH=[["Objectives","Objectifs"],["Processes","Processus"],["Governance","Gouvernance"],["Data","Données"],["Capacity","Capacité"],["Migration","Migration"],["AI","IA"],["Foundation","Fondations"]];
+// immediate challenge & impact by band: [low, mid, high], each [EN, FR]
+const CH=[
+[["Transformation lacks a strategic anchor; scope and benefits will be contested.","La transformation manque d’ancrage stratégique ; périmètre et bénéfices seront contestés."],["Goals exist but benefits and communication need sharpening before design starts.","Les objectifs existent, mais bénéfices et communication doivent être précisés avant la conception."],["Good executive buy-in; ensure operational teams feel included.","Bon soutien de la direction ; veillez à impliquer les équipes opérationnelles."]],
+[["High process variance: risk of scope creep, and the implementation partner will struggle with the To-Be design.","Forte variabilité des processus : risque de dérive du périmètre, et le partenaire d’intégration aura du mal avec la conception To-Be."],["Partial process visibility: unknown local variants will surface as change requests.","Visibilité partielle des processus : des variantes locales inconnues réapparaîtront en demandes de changement."],["Processes are well understood; freeze the baseline before design to protect this.","Processus bien compris ; figez la référence avant la conception pour préserver cet acquis."]],
+[["Decisions will stall and conflicts escalate without clear ownership.","Les décisions vont bloquer et les conflits s’aggraver faute de responsabilités claires."],["Decisions might stall during critical design phases; clarify data and process ownership.","Les décisions risquent de bloquer pendant les phases de conception critiques ; clarifiez la propriété des données et des processus."],["Clear authority and escalation paths; keep the steering rhythm tight.","Autorité et escalade claires ; maintenez un rythme de pilotage soutenu."]],
+[["Critical risk: will delay migration or corrupt the new ERP landscape.","Risque critique : retard de la migration ou corruption du nouveau paysage ERP."],["Data issues are known but not remediated; plan cleansing capacity early.","Problèmes de données connus mais non traités ; planifiez tôt la capacité de nettoyage."],["Solid data foundation; keep ownership and standards active during the project.","Base de données solide ; maintenez propriétaires et standards actifs pendant le projet."]],
+[["Burnout risk: project milestones will likely slip.","Risque d’épuisement : les jalons du projet vont probablement glisser."],["Capacity is stretched; backfill key SMEs and plan for change fatigue.","Capacité sous tension ; remplacez les experts clés et anticipez la fatigue du changement."],["Capacity and skills are in place; protect SME availability.","Capacité et compétences en place ; protégez la disponibilité des experts."]],
+[["No clear migration or rollback approach: technical risk during the cutover window.","Pas d’approche de migration ni de retour arrière claire : risque technique pendant la bascule."],["Approach partly defined; confirm rollback and continuity before planning cutover.","Approche en partie définie ; confirmez retour arrière et continuité avant de planifier la bascule."],["Migration approach and fallback are defined; keep rehearsing cutover.","Approche de migration et plan de repli définis ; poursuivez les répétitions de bascule."]],
+[["AI ambitions are premature; fix data and use cases first.","Les ambitions IA sont prématurées ; traitez d’abord les données et les cas d’usage."],["Groundwork under way; sharpen use cases and guardrails.","Les bases se mettent en place ; précisez les cas d’usage et les garde-fous."],["Ready to scale AI use cases on a sound foundation.","Prêt à déployer des cas d’usage d’IA sur une base solide."]],
+[["Budget, timeline, partner or ERP choices are still open: launch is premature.","Budget, calendrier, partenaire ou choix ERP encore ouverts : le lancement est prématuré."],["Foundation partly in place; lock budget, partner and architecture decisions before launch.","Fondations partiellement en place ; verrouillez budget, partenaire et architecture avant le lancement."],["Budget, ERP solution and partners are locked in.","Budget, solution ERP et partenaires sont verrouillés."]]
+];
+const OV5=["Leadership wants the change but key SMEs are double-hatting: burnout risk, milestones will likely slip.","La direction veut le changement mais les experts clés cumulent deux rôles : risque d’épuisement, jalons susceptibles de glisser."];
+const OV7=["Technology ready, data isn’t: AI initiatives will fail until Data Quality is fixed.","Technologie prête, données non : les initiatives IA échoueront tant que la qualité des données n’est pas corrigée."];
+let LAST=null;
+const band=v=>v<2.5?"r":(v>3.8?"g":"a");
+function compute(){
+  const sc=D.map((d,di)=>d.q.map((q,qi)=>A["q"+(di+1)+"_"+(qi+1)]));
+  const avg=sc.map(a=>a.reduce((x,y)=>x+y,0)/a.length);
+  return {sc,avg,overall:avg.reduce((x,y)=>x+y,0)/avg.length};
+}
+function challenge(di,R,lg){
+  lg=lg||L;
+  const v=R.avg[di];let t=CH[di][band(v)==="r"?0:band(v)==="a"?1:2];
+  if(di===4&&R.avg[0]>3.8&&v<3)t=OV5;
+  if(di===6&&v>=3&&R.avg[3]<2.5)t=OV7;
+  return t[lg==="fr"?1:0];
+}
+function gapText(di,R,lg){
+  lg=lg||L;
+  const v=R.avg[di],tg=TG[di],o=lg==="fr"?2:0;
+  if(v>=tg)return T[lg].none;
+  const k=R.sc[di].indexOf(Math.min.apply(null,R.sc[di]));
+  return D[di].q[k][o]+" (−"+(tg-v).toFixed(1)+")";
+}
+function radar(R){
+  const cx=230,cy=215,Rr=125,n=D.length,pt=(v,k)=>{const a=-Math.PI/2+2*Math.PI*k/n,r=Rr*v/5;return [cx+r*Math.cos(a),cy+r*Math.sin(a)]};
+  const poly=vals=>vals.map((v,k)=>pt(v,k).map(x=>x.toFixed(1)).join(",")).join(" ");
+  let g="";
+  for(let r=1;r<=5;r++)g+=`<polygon points="${poly(Array(n).fill(r))}" fill="none" stroke="#C5CEDD" stroke-width="1"/>`;
+  for(let k=0;k<n;k++){const e=pt(5,k),l=pt(5.9,k),c=Math.cos(-Math.PI/2+2*Math.PI*k/n);
+    g+=`<line x1="${cx}" y1="${cy}" x2="${e[0].toFixed(1)}" y2="${e[1].toFixed(1)}" stroke="#C5CEDD"/>`+
+       `<text x="${l[0].toFixed(1)}" y="${(l[1]+4).toFixed(1)}" font-size="12" font-weight="700" fill="#14213D" text-anchor="${c>.3?"start":c<-.3?"end":"middle"}">${SH[k][L==="fr"?1:0]}</text>`;}
+  g+=`<polygon points="${poly(TG)}" fill="none" stroke="#2FA8CC" stroke-width="2" stroke-dasharray="5 4"/>`;
+  g+=`<polygon points="${poly(R.avg)}" fill="rgba(27,66,135,.25)" stroke="#1B4287" stroke-width="2.5"/>`;
+  R.avg.forEach((v,k)=>{const q=pt(v,k);g+=`<circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="4" fill="#1B4287"/>`});
+  return `<svg viewBox="0 0 460 430" role="img" aria-label="${T[L].res_r}" style="width:100%;max-width:460px">${g}</svg>`+
+    `<p class="rl"><i class="k1"></i>${T[L].res_cur} <i class="k2"></i>${T[L].res_tg}</p>`;
+}
+function showResults(R,scroll){
+  LAST=R;const t=T[L],b=band(R.overall),bt=b==="r"?t.bs:b==="a"?t.bm:t.bg,i=L==="fr"?1:0;
+  const rows=D.map((d,di)=>{const v=R.avg[di];
+    return `<tr><td><b>${di+1}. ${d.n[i]}</b></td><td><span class="sc ${band(v)}"><i></i>${v.toFixed(1)}</span></td><td>${TG[di].toFixed(1)}</td><td>${gapText(di,R)}</td><td>${challenge(di,R)}</td></tr>`}).join("");
+  const el=document.getElementById("res");
+  el.innerHTML=`<h2>${t.res_h}</h2><div class="rtop"><div>${radar(R)}</div>`+
+    `<div class="badge ${b}"><div><small>${t.res_o}</small><strong>${R.overall.toFixed(1)} / 5</strong><b>${bt[0]}</b><span>${bt[1]}</span></div></div></div>`+
+    `<h3>${t.res_t}</h3><div class="tw"><table><thead><tr><th>${t.th1}</th><th>${t.th2}</th><th>${t.th3}</th><th>${t.th4}</th><th>${t.th5}</th></tr></thead><tbody>${rows}</tbody></table></div>`+
+    `<button type="button" class="btn alt" id="again">${t.again}</button>`;
+  el.hidden=false;
+  document.getElementById("again").onclick=()=>{A={};LAST=null;el.hidden=true;f.reset();render();say("");window.scrollTo({top:0,behavior:"smooth"})};
+  if(scroll)el.scrollIntoView({behavior:"smooth",block:"start"});
+}
+let L="en",A={};
+
+function render(){
+  const i=L==="fr"?1:0, o=L==="fr"?2:0;
+  document.getElementById("scale").innerHTML=SC[L].map((s,k)=>`<li><b>${k+1}. ${s[0]}</b>${s[1]}</li>`).join("");
+  document.getElementById("dims").innerHTML=D.map((d,di)=>`<div class="dim"><h3>${d.n[i]}</h3><p class="foc">${d.f[i]}</p>`+
+    d.q.map((q,qi)=>{const id=`q${di+1}_${qi+1}`;
+      return `<div class="q"><p><b>${di+1}.${qi+1} ${q[o]}</b><br>${q[o+1]}</p><div class="opts" role="radiogroup" aria-label="${q[o]}">`+
+      [1,2,3,4,5].map(n=>`<label class="pill"><input type="radio" name="${id}" value="${n}"${A[id]===n?" checked":""} title="${SC[L][n-1][0]}"><span>${n}</span></label>`).join("")+
+      `</div><span class="sel" id="s_${id}">${A[id]?A[id]+" – "+SC[L][A[id]-1][0]:""}</span></div>`}).join("")+`</div>`).join("");
+  progress();
+}
+function progress(){
+  const n=Object.keys(A).length;
+  document.getElementById("pt").textContent=n+" / "+TOTAL+" "+T[L].prog;
+  document.getElementById("bar").style.width=(n/TOTAL*100)+"%";
+}
+function setLang(l){
+  L=l;document.documentElement.lang=l;
+  document.querySelectorAll("[data-i]").forEach(e=>{e.textContent=T[l][e.dataset.i]});
+  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===l));
+  render();
+  if(LAST)showResults(LAST,false);
+  try{localStorage.setItem("lang",l)}catch(e){}
+}
+document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+document.getElementById("dims").addEventListener("change",e=>{
+  if(e.target.type!=="radio")return;
+  const v=+e.target.value;A[e.target.name]=v;
+  document.getElementById("s_"+e.target.name).textContent=v+" – "+SC[L][v-1][0];
+  progress();
+});
+let start="en";try{start=localStorage.getItem("lang")||"en"}catch(e){}
+setLang(T[start]?start:"en");
+
+const f=document.getElementById("f"),st=document.getElementById("status"),btn=document.getElementById("send");
+function say(m,c){st.textContent=m;st.className=c||""}
+f.addEventListener("submit",async e=>{
+  e.preventDefault();
+  const missing=TOTAL-Object.keys(A).length;
+  if(missing>0){say(T[L].miss+missing+T[L].miss2,"err");
+    for(let d=1;d<=D.length;d++)for(let q=1;q<=D[d-1].q.length;q++){if(!A["q"+d+"_"+q]){document.querySelector('[name="q'+d+'_'+q+'"]').closest(".q").scrollIntoView({behavior:"smooth",block:"center"});return}}}
+  const nm=document.getElementById("nm").value.trim(),em=document.getElementById("em").value.trim(),co=document.getElementById("co").value.trim();
+  if(!nm||!/^\S+@\S+\.\S+$/.test(em)||!document.getElementById("ok").checked){say(T[L].info,"err");return}
+  const R=compute();showResults(R,true);
+  const lines=[];
+  D.forEach((d,di)=>{
+    lines.push((di+1)+". "+d.n[0]+": "+R.avg[di].toFixed(1)+"/5 (target "+TG[di].toFixed(1)+")");
+    d.q.forEach((q,qi)=>lines.push("   Q"+(di+1)+"."+(qi+1)+" "+q[0]+": "+R.sc[di][qi]));
+  });
+  const b=band(R.overall),status=b==="r"?T.en.bs[0]:b==="a"?T.en.bm[0]:T.en.bg[0];
+  const matrix=D.map((d,di)=>(di+1)+". "+d.n[0]+" | Avg "+R.avg[di].toFixed(1)+" | Target "+TG[di].toFixed(1)+" | Gap / blind spot: "+gapText(di,R,"en")+" | Challenge & impact: "+challenge(di,R,"en"));
+  const msg="Overall average: "+R.overall.toFixed(1)+"/5 ("+status+")\nLanguage: "+L+"\nName: "+nm+"\nEmail: "+em+"\nCompany: "+(co||"-")+
+    "\n\nDIMENSION SUMMARY AND GAP MATRIX\n"+matrix.join("\n\n")+"\n\nDETAILED ANSWERS\n"+lines.join("\n");
+  btn.disabled=true;btn.textContent=T[L].sending;say("");
+  try{
+    const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
+      body:JSON.stringify({access_key:ACCESS_KEY,subject:"Readiness assessment: "+(co||nm),from_name:"Assessment form",name:nm,email:em,message:msg,botcheck:document.getElementById("bot").checked})});
+    const j=await r.json();
+    say(j.success?T[L].ok:T[L].err,j.success?"ok":"err");
+  }catch(x){say(T[L].err,"err")}
+  btn.disabled=false;btn.textContent=T[L].send;
+});
+</script>
+</body>
+</html>

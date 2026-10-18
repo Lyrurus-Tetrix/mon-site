@@ -52,7 +52,7 @@ label.l{display:block;font-weight:700;margin:0 0 6px;color:var(--navy)}
 .consent{display:flex;gap:10px;align-items:flex-start;margin:0 0 20px;color:var(--muted)}
 .consent input{margin-top:6px}
 .btn{background:var(--navy);color:#fff;border:0;border-radius:8px;padding:14px 30px;font:inherit;font-weight:700;cursor:pointer}
-.btn:disabled{opacity:.6;cursor:wait}
+.btn:disabled{background:#8A94A8;color:#fff;opacity:1;cursor:not-allowed}
 .hp{position:absolute;left:-9999px;height:0;overflow:hidden}
 #status{margin:18px 0 0;font-weight:700}
 #status.ok{color:#1B6B3A}
@@ -126,9 +126,9 @@ how:"How to answer",how_p:"For each question, rate your organization on a scale 
 who_h:"Your details",l_name:"Your name",l_email:"Work email",l_co:"Company (optional)",
 consent:"I agree to share my answers with Arnaud Gavanier so he can follow up with me.",
 send:"Send my answers",sending:"Sending...",prog:"answered",
-miss:"Please answer every question (remaining: ",miss2:").",info:"Please enter your name and a valid email, and tick the consent box.",
+miss:"Please answer every question (remaining: ",miss2:").",info:"Please enter your name and a valid email, and tick the consent box.",again:"Your results are shown above. Your answers were already sent a few minutes ago, so no new email was sent.",
 ok:"Thank you. Your results are displayed at the top of the page, and your answers have been sent to me. I will come back to you with a tailored readout.",err:"Something went wrong. Please try again, or reach out on LinkedIn.",
-note:"Your answers are delivered by email through the Web3Forms service and used only to follow up with you.",back:"Back to the site"},
+note:"Your answers are delivered by email through the Web3Forms service and used only to follow up with you.",sentbtn:"Already sent",lock:"Your answers were already sent from this browser. You can submit again in about {m} min.",back:"Back to the site"},
 fr:{res_h:"Vos résultats",res_r:"Profil de maturité par dimension",res_o:"Score global",res_tg:"Cible",res_cur:"Votre score",
 res_t:"Synthèse par dimension et matrice des écarts",th1:"Dimension évaluée",th2:"Score moyen",th3:"Cible",th4:"Écart / angle mort",th5:"Défi immédiat et impact",none:"Aucun",again:"Recommencer",
 bs:["Pas prêt / Risque élevé","Stopper et corriger les fondamentaux"],bm:["Prêt sous conditions","Avancer avec une réduction ciblée des risques"],bg:["Prêt","Passer au lancement"],t:"Évaluation de la maturité et de la préparation à la transformation métier",
@@ -137,9 +137,9 @@ how:"Comment répondre",how_p:"Pour chaque question, évaluez votre organisation
 who_h:"Vos coordonnées",l_name:"Votre nom",l_email:"E-mail professionnel",l_co:"Entreprise (facultatif)",
 consent:"J’accepte de partager mes réponses avec Arnaud Gavanier afin qu’il me recontacte.",
 send:"Envoyer mes réponses",sending:"Envoi en cours...",prog:"réponses",
-miss:"Merci de répondre à toutes les questions (restantes : ",miss2:").",info:"Merci de saisir votre nom, un e-mail valide et de cocher la case de consentement.",
+miss:"Merci de répondre à toutes les questions (restantes : ",miss2:").",info:"Merci de saisir votre nom, un e-mail valide et de cocher la case de consentement.",again:"Vos résultats s’affichent ci-dessus. Vos réponses ont déjà été envoyées il y a quelques minutes, aucun nouvel e-mail n’a donc été envoyé.",
 ok:"Merci. Vos résultats s’affichent en haut de la page et vos réponses m’ont été transmises. Je reviens vers vous avec une restitution personnalisée.",err:"Une erreur est survenue. Réessayez, ou contactez-moi sur LinkedIn.",
-note:"Vos réponses sont transmises par e-mail via le service Web3Forms et utilisées uniquement pour vous recontacter.",back:"Retour au site"}
+note:"Vos réponses sont transmises par e-mail via le service Web3Forms et utilisées uniquement pour vous recontacter.",sentbtn:"Déjà envoyé",lock:"Vos réponses ont déjà été envoyées depuis ce navigateur. Vous pourrez les renvoyer dans environ {m} min.",back:"Retour au site"}
 };
 const SC={
 en:[["Ad-hoc / Unaware","No formal approach; high risk of transformation failure."],["Reactive / Aware","Gaps are recognized, but actions are taken only when problems arise."],["Defined / Progressing","A structured approach exists; gaps are documented, and mitigation plans are forming."],["Managed / Predictable","Standardized approach across most areas; actively managing transformation risks."],["Optimized / Continuous","Fully ready; resilient to gaps, with continuous improvement built-in."]],
@@ -243,7 +243,7 @@ function showResults(R,scroll){
     `<h3>${t.res_t}</h3><div class="tw"><table><thead><tr><th>${t.th1}</th><th>${t.th2}</th><th>${t.th3}</th><th>${t.th4}</th><th>${t.th5}</th></tr></thead><tbody>${rows}</tbody></table></div>`+
     `<button type="button" class="btn alt" id="again">${t.again}</button>`;
   el.hidden=false;
-  document.getElementById("again").onclick=()=>{A={};LAST=null;el.hidden=true;f.reset();render();say("");window.scrollTo({top:0,behavior:"smooth"})};
+  document.getElementById("again").onclick=()=>{A={};LAST=null;el.hidden=true;f.reset();render();say("");refreshSend(false);window.scrollTo({top:0,behavior:"smooth"})};
   if(scroll)el.scrollIntoView({behavior:"smooth",block:"start"});
 }
 let L="en",A={};
@@ -269,6 +269,7 @@ function setLang(l){
   document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===l));
   render();
   if(LAST)showResults(LAST,false);
+  try{refreshSend(false)}catch(e){}   // not ready yet on the very first call
   try{localStorage.setItem("lang",l)}catch(e){}
 }
 document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>setLang(b.dataset.l));
@@ -281,7 +282,24 @@ document.getElementById("dims").addEventListener("change",e=>{
 let start="en";try{start=localStorage.getItem("lang")||"en"}catch(e){}
 setLang(T[start]?start:"en");
 
+const COOLDOWN=10*60*1000,SENT_KEY="sent_assess";   // after a successful send, block further emails from this browser for 10 minutes
+function cooldownLeft(){try{return Math.max(0,(+localStorage.getItem(SENT_KEY)||0)+COOLDOWN-Date.now())}catch(e){return 0}}
+function markSent(){try{localStorage.setItem(SENT_KEY,String(Date.now()))}catch(e){}}
+let busyFlag=false,lockTimer=0;
+function refreshSend(keep){   // grey out the send button while an email from this browser is still locked
+  const b=document.getElementById("send"),s=document.getElementById("status"),left=cooldownLeft();
+  clearTimeout(lockTimer);
+  if(left>0){
+    b.disabled=true;b.textContent=T[L].sentbtn;
+    if(!keep||s.className==="lock"){s.textContent=T[L].lock.replace("{m}",Math.ceil(left/60000));s.className="lock"}
+    lockTimer=setTimeout(()=>refreshSend(true),Math.min(left,60000)+250);
+  }else if(!busyFlag){
+    b.disabled=false;b.textContent=T[L].send;
+    if(s.className==="lock"){s.textContent="";s.className=""}
+  }
+}
 const f=document.getElementById("f"),st=document.getElementById("status"),btn=document.getElementById("send");
+refreshSend(false);
 function say(m,c){st.textContent=m;st.className=c||""}
 f.addEventListener("submit",async e=>{
   e.preventDefault();
@@ -291,6 +309,7 @@ f.addEventListener("submit",async e=>{
   const nm=document.getElementById("nm").value.trim(),em=document.getElementById("em").value.trim(),co=document.getElementById("co").value.trim();
   if(!nm||!/^\S+@\S+\.\S+$/.test(em)||!document.getElementById("ok").checked){say(T[L].info,"err");return}
   const R=compute();showResults(R,true);
+  if(cooldownLeft()>0){say(T[L].again,"ok");return}      // results stay visible, but no further email
   const lines=[];
   D.forEach((d,di)=>{
     lines.push((di+1)+". "+d.n[0]+": "+R.avg[di].toFixed(1)+"/5 (target "+TG[di].toFixed(1)+")");
@@ -300,14 +319,15 @@ f.addEventListener("submit",async e=>{
   const matrix=D.map((d,di)=>(di+1)+". "+d.n[0]+" | Avg "+R.avg[di].toFixed(1)+" | Target "+TG[di].toFixed(1)+" | Gap / blind spot: "+gapText(di,R,"en")+" | Challenge & impact: "+challenge(di,R,"en"));
   const msg="Overall average: "+R.overall.toFixed(1)+"/5 ("+status+")\nLanguage: "+L+"\nName: "+nm+"\nEmail: "+em+"\nCompany: "+(co||"-")+
     "\n\nDIMENSION SUMMARY AND GAP MATRIX\n"+matrix.join("\n\n")+"\n\nDETAILED ANSWERS\n"+lines.join("\n");
-  btn.disabled=true;btn.textContent=T[L].sending;say("");
+  busyFlag=true;btn.disabled=true;btn.textContent=T[L].sending;say("");
   try{
     const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
       body:JSON.stringify({access_key:ACCESS_KEY,subject:"Readiness assessment: "+(co||nm),from_name:"Assessment form",name:nm,email:em,message:msg,botcheck:document.getElementById("bot").checked})});
     const j=await r.json();
     say(j.success?T[L].ok:T[L].err,j.success?"ok":"err");
+    if(j.success){markSent()}
   }catch(x){say(T[L].err,"err")}
-  btn.disabled=false;btn.textContent=T[L].send;
+  busyFlag=false;refreshSend(true);
 });
 </script>
 </body>
