@@ -167,20 +167,23 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 .tool{background:#fff;border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:12px;padding:26px 28px}
 .tool h3{margin:0 0 8px;color:var(--navy);font-size:1.25rem}
 .tool p{margin:0 0 20px;color:var(--muted)}
+.no-offer [data-feature="offer"],.no-tools [data-feature="tools"]{display:none!important}
 </style>
 <noscript><style>.hero:not(.ready) .hero-bg::before,.hero:not(.ready) .fog{opacity:1}</style></noscript>
+<script src="config.js"></script>
+<script src="features.js"></script>
 </head>
 <body>
 <header><div class="bar">
 <a class="brand" href="#top">Arnaud Gavanier</a>
-<nav><a href="#about" data-i="n_about"></a><a href="#services" data-i="n_svc"></a><a href="#experience" data-i="n_exp"></a><a href="#certifications" data-i="n_cert"></a><a href="transformation-readiness.html" data-i="n_assess"></a><a href="rfp-checklist.html" data-i="n_rfp"></a><a href="#contact" data-i="n_con"></a></nav>
+<nav><a href="#about" data-i="n_about"></a><a href="#services" data-feature="offer" data-i="n_svc"></a><a href="#experience" data-i="n_exp"></a><a href="#certifications" data-i="n_cert"></a><a href="transformation-readiness.html" data-feature="tools" data-i="n_assess"></a><a href="rfp-checklist.html" data-feature="tools" data-i="n_rfp"></a><a href="#contact" data-i="n_con"></a></nav>
 <div class="lang" role="group" aria-label="Language"><button data-l="en">EN</button><button data-l="fr">FR</button><button data-l="de">DE</button></div>
 </div></header>
 
 <div class="hero" id="top"><div class="hero-bg" aria-hidden="true"></div><div class="fog f1" aria-hidden="true"></div><div class="fog f2" aria-hidden="true"></div><div class="in">
 <h1 data-i="h_title"></h1>
 <p data-i="h_sub"></p>
-<a class="btn p" href="#contact" data-i="h_cta"></a><a class="btn s" href="#services" data-i="h_cta2"></a>
+<a class="btn p" href="#contact" data-i="h_cta"></a><a class="btn s" href="#services" data-feature="offer" data-i="h_cta2"></a>
 <div class="facts"><div><b data-count="18" data-suffix="+">18+</b><span data-i="hf1"></span></div><div><b data-count="5">5</b><span data-i="hf2"></span></div><div><b data-count="2">2</b><span data-i="hf3"></span></div></div>
 </div>
 <div class="hero-fade" aria-hidden="true"></div></div>
@@ -200,7 +203,7 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 <div><img class="photo" src="photo.jpg" alt="Arnaud Gavanier" onerror="this.style.display='none'">
 <div class="sectors"><strong data-i="s_h"></strong><span data-i="s_1"></span><span data-i="s_2"></span><span data-i="s_3"></span><span data-i="s_4"></span><span data-i="s_5"></span></div></div></div></section>
 
-<section id="services"><h2 data-i="v_h"></h2>
+<section id="services" data-feature="offer"><h2 data-i="v_h"></h2>
 <p class="hint" data-i="v_hint"></p>
 <div class="svc">
 <div tabindex="0"><h3 data-i="v1t"></h3><p data-i="v1"></p>
@@ -248,7 +251,7 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 <div><h3 data-i="j2t"></h3><p class="jm" data-i="j2m"></p><p data-i="j2"></p></div>
 </div></details></section>
 
-<section id="tools"><h2 data-i="tl_h"></h2>
+<section id="tools" data-feature="tools"><h2 data-i="tl_h"></h2>
 <div class="tools">
 <div class="tool"><h3 data-i="tl_1t"></h3><p data-i="tl_1p"></p><a class="btn dk" href="transformation-readiness.html" data-i="tl_1b"></a></div>
 <div class="tool"><h3 data-i="tl_2t"></h3><p data-i="tl_2p"></p><a class="btn dk" href="rfp-checklist.html" data-i="tl_2b"></a></div>
@@ -299,7 +302,7 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 <a class="btn p" href="contact.html" data-i="c_btn"></a>
 <a class="btn s" href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a></div></section>
 <footer class="foot"><div class="fin"><div><strong>Arnaud Gavanier</strong><p data-i="f_tag"></p></div>
-<div class="links"><a href="#about" data-i="n_about"></a><a href="#services" data-i="n_svc"></a><a href="#experience" data-i="n_exp"></a><a href="transformation-readiness.html" data-i="n_assess"></a><a href="rfp-checklist.html" data-i="n_rfp"></a><a href="contact.html" data-i="c_btn"></a><a href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a><a href="https://www.deloitte.com/ch/en/about/people/profiles.agavanier+fea06dc5.html" target="_blank" rel="noopener noreferrer" data-i="f_dl"></a></div></div>
+<div class="links"><a href="#about" data-i="n_about"></a><a href="#services" data-feature="offer" data-i="n_svc"></a><a href="#experience" data-i="n_exp"></a><a href="transformation-readiness.html" data-feature="tools" data-i="n_assess"></a><a href="rfp-checklist.html" data-feature="tools" data-i="n_rfp"></a><a href="contact.html" data-i="c_btn"></a><a href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a><a href="https://www.deloitte.com/ch/en/about/people/profiles.agavanier+fea06dc5.html" target="_blank" rel="noopener noreferrer" data-i="f_dl"></a></div></div>
 <p class="cp">© Arnaud Gavanier</p></footer>
 
 <script>

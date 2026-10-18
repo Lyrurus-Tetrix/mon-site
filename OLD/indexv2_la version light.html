@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arnaud Gavanier | SAP S/4HANA Transformation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A1F44;--navy2:#13306B;--ridge:#1B4287;--ink:#14213D;--muted:#3B4760;--bg:#F4F6FA;--line:#D5DCE8;--sky:#8EB8FF}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Manrope,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+header{position:sticky;top:0;z-index:5;background:var(--navy);color:#fff}
+.bar{max-width:1040px;margin:auto;padding:14px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.brand{font-weight:800;text-decoration:none;margin-right:auto}
+nav a{text-decoration:none;margin-left:20px;font-size:.95rem;opacity:.85}
+nav a:hover{opacity:1}
+.lang button{background:none;border:1px solid #fff5;color:#fff;padding:4px 10px;border-radius:6px;cursor:pointer;font:inherit;font-size:.85rem;margin-left:6px}
+.lang button[aria-pressed="true"]{background:#fff;color:var(--navy)}
+.hero{background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;position:relative;overflow:hidden}
+.hero .in{max-width:1040px;margin:auto;padding:96px 24px 150px;position:relative;z-index:2}
+.hero h1{font-size:clamp(2.2rem,5.5vw,4.2rem);line-height:1.08;margin:0 0 20px;max-width:15em;font-weight:800;letter-spacing:-.02em}
+.hero p{font-size:1.2rem;max-width:34em;margin:0 0 32px;color:#D6E2FA}
+.btn{display:inline-block;padding:13px 26px;border-radius:8px;text-decoration:none;font-weight:700;margin-right:12px;margin-bottom:10px}
+.btn.p{background:var(--sky);color:var(--navy)}
+.btn.s{border:1px solid #fff8;color:#fff}
+.ridge{position:absolute;left:0;bottom:-1px;width:100%;height:170px}
+section{max-width:1040px;margin:auto;padding:72px 24px 8px}
+h2{font-size:1.9rem;margin:0 0 28px;color:var(--navy);letter-spacing:-.01em}
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:48px}
+.about p{margin:0 0 16px;max-width:38em}
+.photo{display:block;width:100%;max-width:260px;aspect-ratio:4/5;object-fit:cover;border-radius:14px;margin-bottom:28px}
+.sectors{border-left:3px solid var(--navy);padding-left:20px;color:var(--muted)}
+.sectors strong{display:block;color:var(--navy);margin-bottom:8px}
+.sectors span{display:block}
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0 40px}
+.svc>div{position:relative;border-top:2px solid var(--navy);padding:16px 0 28px;outline-offset:4px}
+.svc h3{margin:0 0 6px;font-size:1.1rem;color:var(--navy)}
+.svc p{margin:0;color:var(--muted)}
+.tip{display:none;position:absolute;left:0;right:0;top:calc(100% - 22px);z-index:6;background:#fff;border:1px solid var(--line);border-top:3px solid var(--ridge);border-radius:10px;padding:8px 18px 16px;box-shadow:0 14px 34px rgba(10,31,68,.2)}
+.svc>div:hover .tip,.svc>div:focus .tip,.svc>div:focus-within .tip{display:block}
+.svc>div:hover h3,.svc>div:focus h3{text-decoration:underline;text-decoration-color:var(--ridge);text-underline-offset:4px}
+.hint{margin:-14px 0 24px;color:var(--muted);font-size:.9rem}
+.st{display:flex;gap:14px;align-items:baseline;margin:10px 0 0}
+.st b{min-width:78px;font-size:1.4rem;color:var(--navy);letter-spacing:-.01em}
+.st span{color:var(--muted);font-size:.9rem;line-height:1.4}
+.sr{font-size:.78rem;color:var(--muted);margin-top:14px!important}
+.role.past{margin:36px 0 20px}
+.jm{margin:0 0 6px!important;font-size:.9rem}
+.exp ul{margin:8px 0 0;padding-left:18px;color:var(--muted);max-width:44em}
+.exp li{margin:5px 0}
+.role{font-weight:700;margin:-12px 0 28px;color:var(--muted)}
+.exp div{border-left:3px solid var(--ridge);padding:0 0 22px 22px;margin-left:4px}
+.exp h3{margin:0 0 4px;color:var(--navy)}
+.exp p{margin:0;max-width:44em;color:var(--muted)}
+.contact{background:var(--navy);color:#fff;border-radius:14px;padding:44px;margin-bottom:72px}
+.contact h2{color:#fff;margin-bottom:12px}
+.contact p{margin:0 0 24px;color:#D6E2FA}
+.diq .row{border-left:3px solid var(--ridge);padding:0 0 0 22px;margin-bottom:26px;max-width:46em}
+.diq .row p{margin:0}
+.diq .q{background:var(--navy);color:#fff;border-radius:14px;padding:28px 32px;font-size:1.25rem;font-weight:700;line-height:1.45;margin:8px 0 14px;max-width:46em}
+.diq .src{font-size:.85rem;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 24px 40px}
+@media(max-width:760px){.about{grid-template-columns:1fr;gap:28px}.hero .in{padding:64px 24px 150px}nav{display:none}.contact{padding:28px}}
+
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%201440%20900%27%20preserveAspectRatio%3D%27xMidYMid%20slice%27%3E%3Cdefs%3E%3Cpattern%20id%3D%27d%27%20width%3D%2714%27%20height%3D%2714%27%20patternUnits%3D%27userSpaceOnUse%27%3E%3Ccircle%20cx%3D%277%27%20cy%3D%277%27%20r%3D%271.3%27%20fill%3D%27%231B4287%27%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Cg%20fill%3D%27%232FA8CC%27%20opacity%3D%27.07%27%3E%3Ccircle%20cx%3D%2770%27%20cy%3D%27250%27%20r%3D%2734%27%2F%3E%3Ccircle%20cx%3D%27150%27%20cy%3D%27330%27%20r%3D%2718%27%2F%3E%3Ccircle%20cx%3D%2740%27%20cy%3D%27420%27%20r%3D%2726%27%2F%3E%3Ccircle%20cx%3D%27230%27%20cy%3D%27190%27%20r%3D%2714%27%2F%3E%3Ccircle%20cx%3D%27120%27%20cy%3D%27120%27%20r%3D%2722%27%2F%3E%3Ccircle%20cx%3D%271380%27%20cy%3D%27520%27%20r%3D%2728%27%2F%3E%3Ccircle%20cx%3D%271290%27%20cy%3D%27610%27%20r%3D%2716%27%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%27translate%28930%2060%29%20skewY%28-5%29%27%20fill%3D%27none%27%20stroke%3D%27%231B4287%27%20stroke-width%3D%271.4%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20opacity%3D%27.11%27%3E%3Crect%20width%3D%27420%27%20height%3D%27260%27%20rx%3D%2712%27%20fill%3D%27%232FA8CC%27%20fill-opacity%3D%27.05%27%2F%3E%3Crect%20x%3D%2724%27%20y%3D%2730%27%20width%3D%27150%27%20height%3D%2796%27%20fill%3D%27url%28%23d%29%27%20stroke%3D%27none%27%2F%3E%3Cpath%20d%3D%27M200%2090L214%2070L226%20100L240%2060L252%2096L266%2074L280%20104L294%2066L308%2098L322%2082%27%2F%3E%3Ccircle%20cx%3D%27356%27%20cy%3D%2762%27%20r%3D%277%27%2F%3E%3Cpath%20d%3D%27M356%2069V82%27%2F%3E%3Ccircle%20cx%3D%27120%27%20cy%3D%27176%27%20r%3D%277%27%2F%3E%3Cpath%20d%3D%27M120%20183V196%27%2F%3E%3Ccircle%20cx%3D%27300%27%20cy%3D%27186%27%20r%3D%2734%27%2F%3E%3Ccircle%20cx%3D%27300%27%20cy%3D%27186%27%20r%3D%2722%27%20stroke-dasharray%3D%274%205%27%2F%3E%3Cpath%20d%3D%27M30%20226H110M30%20206H70%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%232FA8CC%27%20stroke-width%3D%271.8%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20opacity%3D%27.14%27%3E%3Cpath%20d%3D%27M-40%20870C300%20850%20620%20720%20900%20540S1250%20210%201400%20100%27%20stroke-dasharray%3D%276%209%27%2F%3E%3Cpath%20d%3D%27M-40%20900C300%20880%20650%20760%20940%20590S1290%20270%201410%20150%27%20opacity%3D%27.6%27%2F%3E%3Cpath%20d%3D%27M1366%20112L1412%2090L1404%20140%27%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%27translate%2840%20520%29%20skewY%284%29%27%20fill%3D%27none%27%20stroke%3D%27%231B4287%27%20stroke-width%3D%271.4%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20opacity%3D%27.10%27%3E%3Crect%20width%3D%27330%27%20height%3D%27210%27%20rx%3D%2712%27%20fill%3D%27%232FA8CC%27%20fill-opacity%3D%27.05%27%2F%3E%3Cpath%20d%3D%27M36%20180V120M72%20180V90M108%20180V140M144%20180V70M180%20180V110M216%20180V60M252%20180V100M288%20180V76%27%2F%3E%3Cpath%20d%3D%27M36%20110L108%2078L180%2098L252%2050L296%2064%27%20stroke-dasharray%3D%275%206%27%2F%3E%3Crect%20x%3D%2736%27%20y%3D%2724%27%20width%3D%27120%27%20height%3D%2734%27%20fill%3D%27url%28%23d%29%27%20stroke%3D%27none%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%231B4287%27%20stroke-width%3D%271.3%27%20opacity%3D%27.08%27%3E%3Ccircle%20cx%3D%27250%27%20cy%3D%27470%27%20r%3D%27120%27%20stroke-dasharray%3D%273%209%27%2F%3E%3Ccircle%20cx%3D%27250%27%20cy%3D%27470%27%20r%3D%2786%27%20stroke-dasharray%3D%2710%207%27%2F%3E%3Ccircle%20cx%3D%271180%27%20cy%3D%27700%27%20r%3D%27110%27%20stroke-dasharray%3D%273%209%27%2F%3E%3Ccircle%20cx%3D%271180%27%20cy%3D%27700%27%20r%3D%2770%27%20stroke-dasharray%3D%2712%208%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") center/cover no-repeat}
+
+.facts{display:flex;gap:44px;flex-wrap:wrap;margin-top:40px;padding-top:26px;border-top:1px solid #ffffff40;max-width:780px}
+.facts b{display:block;font-size:2.4rem;line-height:1.1;font-weight:800}
+.facts span{display:block;color:#D6E2FA;font-size:.95rem;max-width:14em}
+.dstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px}
+.dstats>div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px}
+.dstats b{display:block;font-size:2.5rem;line-height:1.1;color:var(--navy);margin-bottom:6px}
+.dstats span{color:var(--muted)}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:24px}
+.dgrid .row{max-width:none;margin:0;background:#fff;border:1px solid var(--line);border-left:3px solid var(--ridge);border-radius:12px;padding:18px 20px}
+.svc{gap:24px}
+.svc>div{background:#fff;border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:12px;padding:22px 22px 26px}
+.tip{top:calc(100% - 12px)}
+.exp.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.exp.cards>div{background:#fff;border:1px solid var(--line);border-left:3px solid var(--ridge);border-radius:12px;padding:20px;margin:0}
+.earlier{margin-top:32px}
+.earlier summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:1.05rem;margin-bottom:18px}
+.earlier summary:hover{text-decoration:underline}
+.contact{text-align:center;padding:64px 32px;background:linear-gradient(135deg,var(--navy),var(--ridge));margin-bottom:56px}
+.contact h2{font-size:2.2rem}
+.contact p{max-width:34em;margin:0 auto 28px;font-size:1.1rem}
+.contact .btn.p{font-size:1.05rem;padding:15px 34px}
+footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);padding:36px 24px 24px;font-size:.95rem;color:var(--ink)}
+.fin{max-width:1040px;margin:auto;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.foot p{margin:4px 0 0;color:var(--muted)}
+.foot .links a{margin-right:22px;text-decoration:none;font-weight:600}
+.foot .links a:hover{text-decoration:underline}
+.foot .cp{max-width:1040px;margin:24px auto 0;font-size:.85rem}
+.sr{font-size:.82rem}
+.role .ext{margin-left:12px;color:var(--ridge);font-weight:700}
+.role .ext:hover{text-decoration:underline}
+
+.hero-bg{position:absolute;inset:0;overflow:hidden;will-change:transform}
+.hero-bg::before{content:"";position:absolute;inset:-6%;background:url(hero.webp) center 42%/cover no-repeat;animation:drift 50s ease-in-out infinite alternate}
+.hero-bg{--px:68%}
+.hero-bg::after{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27160%27%20height%3D%27160%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.9%27%20numOctaves%3D%272%27%20stitchTiles%3D%27stitch%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27%20opacity%3D%27.55%27%2F%3E%3C%2Fsvg%3E"),radial-gradient(ellipse 36% 52% at var(--px) 46%,rgba(10,31,68,0) 0%,rgba(10,31,68,.34) 100%),linear-gradient(90deg,rgba(10,31,68,.34),rgba(10,31,68,0) 65%),linear-gradient(180deg,rgba(10,31,68,.62) 0%,rgba(10,31,68,.48) 40%,rgba(10,31,68,.38) 70%,rgba(10,31,68,.85) 100%);background-blend-mode:soft-light,normal,normal,normal}
+.fog{position:absolute;left:-25%;width:150%;height:38%;pointer-events:none;z-index:1;background:radial-gradient(ellipse at center,rgba(255,255,255,.13),rgba(255,255,255,0) 66%);filter:blur(18px);animation:fog 40s ease-in-out infinite alternate}
+.fog.f1{bottom:6%}
+.fog.f2{bottom:30%;opacity:.7;animation-duration:62s;animation-direction:alternate-reverse}
+.hero-fade{position:absolute;left:0;right:0;bottom:-1px;height:120px;z-index:1;background:linear-gradient(180deg,rgba(244,246,250,0),var(--bg))}
+@keyframes drift{from{transform:scale(1.03) translateX(-1.8%)}to{transform:scale(1.11) translateX(1.8%)}}
+@keyframes fog{from{transform:translateX(-9%)}to{transform:translateX(9%)}}
+@media (prefers-reduced-motion:reduce){.hero-bg::before,.fog{animation:none}}
+.hero h1,.hero p,.facts{text-shadow:0 1px 14px rgba(10,31,68,.65)}
+.hero p,.facts span{color:#EAF1FF}
+@media (min-width:901px){
+.hero-bg::before{inset:-6% -6% -6% 34%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%);mask-image:linear-gradient(90deg,transparent 0,#000 30%)}
+.hero h1{max-width:12em}
+}
+@media (max-width:900px){.hero-bg{--px:50%}}
+
+@keyframes reveal{from{opacity:0}}
+.hero:not(.ready) .hero-bg::before,.hero:not(.ready) .fog{opacity:0}
+.hero.ready .hero-bg::before{animation:drift 50s ease-in-out infinite alternate,reveal 2s ease-in-out both}
+.hero.ready .fog.f1{animation:fog 40s ease-in-out infinite alternate,reveal 2s ease-in-out both}
+.hero.ready .fog.f2{animation:fog 62s ease-in-out infinite alternate-reverse,reveal 2s ease-in-out both}
+@media (prefers-reduced-motion:reduce){.hero .hero-bg::before,.hero .fog{opacity:1!important;animation:none!important}}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.cert{background:#fff;border:1px solid var(--line);border-left:3px solid var(--ridge);border-radius:12px;padding:18px 20px}
+.cert h3{margin:0 0 8px;font-size:1.05rem;line-height:1.35;color:var(--navy)}
+.cert.s h3{font-size:.95rem}
+.cert p{margin:3px 0;color:var(--muted);font-size:.9rem}
+.cert a{display:inline-block;margin-top:8px;color:var(--ridge);font-weight:700;font-size:.9rem}
+.sub{margin:40px 0 16px;font-weight:700;color:var(--navy);font-size:1.05rem}
+.enable{background:linear-gradient(135deg,var(--navy),var(--ridge));color:#fff;border-radius:14px;padding:36px 40px}
+.enable h2{color:#fff;margin-bottom:12px}
+.enable p{margin:0 0 22px;max-width:40em;color:#EAF1FF;font-size:1.05rem}
+.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.chips li{border:1px solid #ffffff70;border-radius:999px;padding:7px 16px;font-size:.92rem;background:#ffffff14}
+@media(max-width:760px){.enable{padding:28px 24px}}
+.enable{margin-bottom:8px}
+.enable h3{color:#fff;font-size:1.4rem;margin:0 0 12px}
+.sub.first{margin-top:36px}
+.diq .src{margin:0 0 18px}
+.svc{align-items:start}
+.svc>div .tip{display:grid;position:static;top:auto;left:auto;right:auto;z-index:auto;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;
+  grid-template-rows:0fr;opacity:0;visibility:hidden;margin-top:0;
+  transition:grid-template-rows .4s ease,opacity .3s ease,margin-top .4s ease,visibility 0s linear .4s}
+.svc>div:hover .tip,.svc>div:focus .tip,.svc>div:focus-within .tip{display:grid;grid-template-rows:1fr;opacity:1;visibility:visible;margin-top:12px;
+  transition:grid-template-rows .4s ease,opacity .35s ease .05s,margin-top .4s ease,visibility 0s}
+.tipin{overflow:hidden;min-height:0}
+@media (prefers-reduced-motion:reduce){.svc>div .tip,.svc>div:hover .tip,.svc>div:focus .tip,.svc>div:focus-within .tip{transition:none}}
+.dcap{margin:8px 0 10px;font-weight:700;color:var(--navy)}
+.dstats{grid-template-columns:repeat(3,1fr);gap:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.dstats>div{border:0;border-radius:0;border-left:1px solid var(--line);padding:24px 28px;background:transparent}
+.dstats>div:first-child{border-left:0}
+.dstats b{font-size:2.8rem}
+@media(max-width:760px){.dstats{grid-template-columns:1fr}.dstats>div{border-left:0;border-top:1px solid var(--line)}.dstats>div:first-child{border-top:0}}
+.dgrid{margin-top:22px}
+.dgrid{grid-template-columns:1fr;gap:14px;max-width:46em}
+.dgrid{max-width:none}
+.diq .q{max-width:none}
+.dgrid .row{width:100%}
+.facts b{font-variant-numeric:tabular-nums}
+.btn.dk{background:var(--navy);color:#fff}
+.btn.dk:hover{background:var(--ridge)}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.tool{background:#fff;border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:12px;padding:26px 28px}
+.tool h3{margin:0 0 8px;color:var(--navy);font-size:1.25rem}
+.tool p{margin:0 0 20px;color:var(--muted)}
+</style>
+<noscript><style>.hero:not(.ready) .hero-bg::before,.hero:not(.ready) .fog{opacity:1}</style></noscript>
+</head>
+<body>
+<header><div class="bar">
+<a class="brand" href="#top">Arnaud Gavanier</a>
+<nav><a href="#about" data-i="n_about"></a><a href="#experience" data-i="n_exp"></a><a href="#certifications" data-i="n_cert"></a><a href="#contact" data-i="n_con"></a></nav>
+<div class="lang" role="group" aria-label="Language"><button data-l="en">EN</button><button data-l="fr">FR</button><button data-l="de">DE</button></div>
+</div></header>
+
+<div class="hero" id="top"><div class="hero-bg" aria-hidden="true"></div><div class="fog f1" aria-hidden="true"></div><div class="fog f2" aria-hidden="true"></div><div class="in">
+<h1 data-i="h_title"></h1>
+<p data-i="h_sub"></p>
+<a class="btn p" href="#contact" data-i="h_cta"></a>
+<div class="facts"><div><b data-count="18" data-suffix="+">18+</b><span data-i="hf1"></span></div><div><b data-count="5">5</b><span data-i="hf2"></span></div><div><b data-count="2">2</b><span data-i="hf3"></span></div></div>
+</div>
+<div class="hero-fade" aria-hidden="true"></div></div>
+
+<section id="diq" class="diq"><h2 data-i="d_h"></h2>
+<p class="dcap" data-i="dq_h"></p>
+<div class="dstats"><div><b>&lt;20%</b><span data-i="dq1"></span></div><div><b>49%</b><span data-i="dq2"></span></div><div><b>~60%</b><span data-i="dq3"></span></div></div>
+<div class="dgrid"><div class="row"><p data-i="d_2"></p></div>
+<div class="row"><p data-i="d_2b"></p></div>
+<div class="row"><p data-i="d_2c"></p></div></div>
+<p class="src"><span data-i="d_src"></span> <a href="https://www.businesswire.com/news/home/20260202883729/en" data-i="d_link"></a></p>
+<p class="q" data-i="d_3"></p>
+</section>
+
+<section id="about"><h2 data-i="a_h"></h2>
+<div class="about"><div><p data-i="a_1"></p><p data-i="a_2"></p><p data-i="a_3"></p></div>
+<div><img class="photo" src="photo.jpg" alt="Arnaud Gavanier" onerror="this.style.display='none'">
+<div class="sectors"><strong data-i="s_h"></strong><span data-i="s_1"></span><span data-i="s_2"></span><span data-i="s_3"></span><span data-i="s_4"></span><span data-i="s_5"></span></div></div></div></section>
+
+<section id="experience"><h2 data-i="e_h"></h2><p class="role"><span data-i="e_role"></span> <a class="ext" href="https://www.deloitte.com/ch/en/about/people/profiles.agavanier+fea06dc5.html" target="_blank" rel="noopener noreferrer" data-i="e_link"></a></p>
+<div class="exp cards">
+<div><h3 data-i="e1t"></h3><p data-i="e1"></p></div>
+<div><h3 data-i="e2t"></h3><p data-i="e2"></p></div>
+<div><h3 data-i="e3t"></h3><p data-i="e3"></p></div>
+</div>
+<details class="earlier"><summary data-i="j_h"></summary>
+<div class="exp">
+<div><h3 data-i="j1t"></h3><p class="jm" data-i="j1m"></p><p data-i="j1"></p>
+<ul><li data-i="j1a"></li><li data-i="j1b"></li><li data-i="j1c"></li><li data-i="j1d"></li></ul></div>
+<div><h3 data-i="j2t"></h3><p class="jm" data-i="j2m"></p><p data-i="j2"></p></div>
+</div></details></section>
+
+<section id="certifications"><h2 data-i="ct_h"></h2>
+<div class="enable"><h3 data-i="ai_h"></h3><p data-i="ai_p"></p>
+<ul class="chips"><li data-i="ai_t1"></li><li data-i="ai_t2"></li><li data-i="ai_t3"></li><li data-i="ai_t4"></li></ul></div>
+<p class="sub first" data-i="ct_main"></p>
+<div class="cert-grid">
+<div class="cert"><h3>SAP Certified - Positioning Business Transformation Management Solutions</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2026-10"></time>, <span data-i="ct_exp"></span> <time data-date="2027-10"></time></p>
+<p><span data-i="ct_id"></span> C_BCBTM</p>
+<a href="https://www.credly.com/badges/22ba7486-f477-4b2e-8b77-d698119c1746/public_url" target="_blank" rel="noopener noreferrer" data-i="ct_ver"></a></div>
+<div class="cert"><h3>SAP Certified - Validating Business Transformation</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2026-07"></time>, <span data-i="ct_exp"></span> <time data-date="2027-07"></time></p>
+<p><span data-i="ct_id"></span> C_SIGVT_2601</p>
+<a href="https://www.credly.com/badges/72336142-a81d-4b26-be7c-5732eeb77250/public_url" target="_blank" rel="noopener noreferrer" data-i="ct_ver"></a></div>
+<div class="cert"><h3>SAP Certified - Positioning SAP Business Suite</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2026-02"></time>, <span data-i="ct_exp"></span> <time data-date="2027-02"></time></p>
+<p><span data-i="ct_id"></span> C_BCSBS</p>
+<a href="https://www.credly.com/badges/edc60ab8-e6fb-4644-9802-caaac4865541" target="_blank" rel="noopener noreferrer" data-i="ct_ver"></a></div>
+<div class="cert"><h3>SAP Certified Associate - Positioning SAP Business AI Solutions as part of SAP Business Suite</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2025-11"></time>, <span data-i="ct_exp"></span> <time data-date="2026-11"></time></p>
+<p><span data-i="ct_id"></span> C_BCBAI_2509</p>
+<a href="https://www.credly.com/badges/684ebb82-faf8-4f26-8243-9119b9b3ac9e/public_url" target="_blank" rel="noopener noreferrer" data-i="ct_ver"></a></div>
+</div>
+<p class="sub" data-i="ct_sub"></p>
+<div class="cert-grid">
+<div class="cert s"><h3>SAP Certified Associate - Implementation Consultant - SAP S/4HANA Cloud Public Edition</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2025-05"></time>, <span data-i="ct_exp"></span> <time data-date="2027-05"></time></p>
+<p><span data-i="ct_id"></span> C_S4CPB</p>
+<a href="https://www.credly.com/badges/e1d8f356-7b97-40e6-a6e6-3dfd7d0a1b4d/public_url" target="_blank" rel="noopener noreferrer" data-i="ct_ver"></a></div>
+<div class="cert s"><h3>SAP Certified Associate - Implementation Consultant - SAP S/4HANA Cloud Public Edition - Sales</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2025-04"></time>, <span data-i="ct_exp"></span> <time data-date="2027-04"></time></p>
+<p><span data-i="ct_id"></span> C_S4CS</p>
+<a href="https://www.credly.com/badges/b314be1d-6454-4af3-87e2-bebbb095f0c1/public_url" target="_blank" rel="noopener noreferrer" data-i="ct_ver"></a></div>
+<div class="cert s"><h3>SAP Certified Associate - Project Manager - SAP Activate</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2025-04"></time>, <span data-i="ct_exp"></span> <time data-date="2027-04"></time></p>
+<p><span data-i="ct_id"></span> C_ACT</p>
+<a href="https://www.credly.com/badges/94d15283-13be-47e7-963a-fbc2330e3928/public_url" target="_blank" rel="noopener noreferrer" data-i="ct_ver"></a></div>
+<div class="cert s"><h3>SAP Certified Associate - SAP S/4HANA Cloud Private Edition, Sales</h3>
+<p><span data-i="ct_iss"></span> <time data-date="2025-03"></time>, <span data-i="ct_exp"></span> <time data-date="2027-03"></time></p>
+<p><span data-i="ct_id"></span> C_TS462</p></div>
+</div></section>
+
+<section id="contact"><div class="contact"><h2 data-i="c_h"></h2><p data-i="c_p"></p>
+<a class="btn p" href="contact.html" data-i="c_btn"></a>
+<a class="btn s" href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a></div></section>
+<footer class="foot"><div class="fin"><div><strong>Arnaud Gavanier</strong><p data-i="f_tag"></p></div>
+<div class="links"><a href="#about" data-i="n_about"></a><a href="#experience" data-i="n_exp"></a><a href="contact.html" data-i="c_btn"></a><a href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a><a href="https://www.deloitte.com/ch/en/about/people/profiles.agavanier+fea06dc5.html" target="_blank" rel="noopener noreferrer" data-i="f_dl"></a></div></div>
+<p class="cp">© Arnaud Gavanier</p></footer>
+
+<script>
+const T={
+en:{n_about:"About",n_svc:"Services",n_exp:"Experience",n_con:"Contact",
+h_title:"Business transformation leader for SAP S/4HANA programs",
+h_sub:"I help enterprises simplify operating models and scale global templates, with Business AI and AI-assisted delivery that drive measurable results.",
+h_cta:"Get in touch",h_cta2:"What I offer",
+d_h:"Before you migrate",
+d_1:"Fewer than one in five organizations redesign their processes when they move to S/4HANA, while 49% do little or no re-engineering. Yet nearly 60% of these programs still finish behind schedule and over budget.",
+d_2:"Choosing the conservative path to protect schedule and budget does not appear to protect either: most programs overrun anyway, driven by underestimated complexity, growing scope and limited internal capacity, none of which a like-for-like move removes.",
+d_2b:"The bigger cost arrives later, because the processes and data you carry over set the ceiling for the automation and AI use cases you can deploy after go-live.",
+d_2c:"For every organization that redesigns, far more preserve (49% versus fewer than 20%), so the \"safe\" choice is also the crowded one.",
+d_3:"When you look at the processes you plan to carry over, which ones would you still want to be running unchanged once automation and AI are part of daily operations?",
+d_src:"Source: ISG, State of SAP Migrations, February 2026 (survey of 200+ senior decision-makers).",d_link:"ISG press release",
+a_h:"About",
+a_1:"Business transformation leader with extensive experience delivering large-scale SAP S/4HANA programs. My core expertise is enterprise transformation, operating model simplification and global template deployment, across Quote-to-Cash, Supply Chain and intercompany models.",
+a_2:"I focus on the practical application of Business AI to reshape enterprise operations, automate complex processes and accelerate value realization.",
+a_3:"Outside of work, I am a mountain enthusiast: climbing and ski touring across the Mont-Blanc massif, the Valais, the Bernese Oberland and the Vanoise.",
+s_h:"Sectors",s_1:"Life Sciences",s_2:"Consumer Goods",s_3:"Industrial Products",s_4:"Energy",s_5:"Public Sector",
+v_h:"What I offer",
+v1t:"ERP selection",v1:"Independent vendor and solution selection, aligned with your business case.",
+v2t:"Program lead",v2:"Leading large transformations from roadmap to global rollout.",
+v3t:"Lead-to-Cash expertise",v3:"Subject-matter expert in Quote-to-Cash, Supply Chain and intercompany processes.",
+v4t:"RFP shaping and management",v4:"I help companies prepare their RFP and support them end to end through the process: document preparation, Q&A, selection criteria, vendor orals and more.",
+v7t:"RFP response",v7:"Writing and presenting winning responses, from solution to executive pitch. Like poker, the best hand rarely wins the deal: the strategy behind your response does.",
+v5t:"Quality assurance",v5:"Independent review of programs in flight, with clear recommendations.",
+v6t:"AI enablement",v6:"Business AI use cases and adoption, plus AI-driven practices for efficient, rapid and high-quality delivery.",
+st_a1:"of over-budget ERP projects needed extra technology nobody planned for",st_a2:"were pushed over budget by scope expansion",st_a3:"of ERP projects finish over budget",st_b1:"of organizations have deployed S/4HANA in some form",st_b2:"have fully completed the transition",st_b3:"of SAP migrations run late and over budget",st_c1:"of excess working capital sits in the 1,000 largest US listed companies",st_c2:"of it is locked in receivables, the largest share",st_c3:"days of DSO separate top performers from the median",st_d1:"of a buyer's journey is spent meeting suppliers",st_d2:"of buyer time goes to each supplier when three compete",st_d3:"of buyers loop back to an earlier step in the process",st_e1:"of 103M online poker hands ended before showdown: decisions, not cards, settled them",st_e2:"were won at showdown by the best hand",st_e3:"average RFP win rate across industries",st_f1:"of IT projects becomes a \"black swan\"",st_f2:"average cost overrun on those projects",st_f3:"average schedule overrun on the same projects",st_g1:"of organizations report any enterprise-level profit impact from AI",st_g2:"are AI high performers, with 5%+ of EBIT from AI",st_g3:"scale AI agents in any single function",v_src:"Source:",v_hint:"Hover over (or tap) a service to see the numbers behind it.",
+e_h:"Experience",e_role:"Senior Manager, Deloitte Switzerland, SAP practice",
+e1t:"Global transformation leadership",e1:"End-to-end programs across Life Sciences, Consumer Goods, Industrial Products, Energy and Public Sector, with emphasis on global template design, scalability and value realization.",
+e2t:"End-to-end lifecycle support",e2:"Roadmap, target operating model, solution architecture, deployment, global rollout and Business AI adoption, as the link between business leadership and SAP delivery teams.",
+e3t:"Deal shaping and presales",e3:"Led large S/4HANA and digital transformation RFPs and steered C-level discussions to align scope with business outcomes.",
+j_h:"Earlier experience",j1t:"Project Manager, Swatch Group",j1m:"Biel/Bienne, Oct 2014 – May 2019",j1:"Delivered international SAP programs and business transformations with stakeholders across Finance, Logistics, Sales and Corporate Services, with end-to-end ownership of governance, risk, resources and budget across a multi-project portfolio.",j1a:"European principal company model rollout: Europe-wide intercompany operating model, standardized financial and logistics processes, stronger transfer pricing compliance.",j1b:"Sales and supply chain transformation: SAP-enabled process improvements supporting sales operations, product launches and supply chain efficiency across multiple brands.",j1c:"M&A integration: SAP integration and data harmonization for acquisitions, with rapid alignment to the Group’s global ERP landscape.",j1d:"Global SAP core model deployment: standardized rollout across international subsidiaries, with process harmonization, local adoption and structured end-user enablement.",j2t:"Consultant, Accenture",j2m:"Paris region, Jan 2008 – Oct 2014",j2:"SAP consultant and project lead, building a best-in-class project management capability and delivering business value on time, in scope and within budget.",
+hf1:"years delivering SAP programs",hf2:"industries served",hf3:"sides of the table: consulting and client-side",dq1:"of organizations redesign their processes when moving to S/4HANA",dq2:"do little or no re-engineering",dq3:"of these projects run late and over budget",f_tag:"SAP S/4HANA transformation, operating models and Business AI.",
+e_link:"View my Deloitte profile",f_dl:"Deloitte profile",
+n_cert:"Skills",ct_h:"Skills & Certifications",ct_main:"SAP certifications",ct_sub:"Also certified",ct_iss:"Issued",ct_exp:"expires",ct_id:"Credential ID",ct_ver:"Verify credential",
+ai_h:"AI & Digital Enablement",ai_p:"Applying AI tools to accelerate analysis, prototyping and delivery across business transformation initiatives.",ai_t1:"Claude Code",ai_t2:"AI-assisted development",ai_t3:"Git / GitHub",ai_t4:"LLM workflow design",
+dq_h:"What the study found",
+n_assess:"Readiness assessment",n_rfp:"RFP checklist",
+tl_h:"Interactive tools",tl_1t:"Transformation readiness assessment",tl_1p:"25 questions across 8 dimensions to see how ready your organization is for a transformation, with a radar view and a gap matrix.",tl_1b:"Start the assessment",tl_2t:"RFP checklist generator",tl_2p:"Choose your project type, scope, phase and priority to get a tailored SAP ERP RFP checklist and milestone plan.",tl_2b:"Generate my checklist",
+c_h:"Let's talk",c_btn:"Send a message",c_p:"Planning a transformation or preparing an RFP? Send me a message."},
+fr:{n_about:"À propos",n_svc:"Services",n_exp:"Expérience",n_con:"Contact",
+h_title:"Leader de transformation d'entreprise sur les programmes SAP S/4HANA",
+h_sub:"J'aide les entreprises à simplifier leurs modèles opérationnels et à déployer des templates globaux à grande échelle, grâce à la Business AI et à une delivery assistée par l'IA qui produisent des résultats mesurables.",
+h_cta:"Me contacter",h_cta2:"Mon offre",
+d_h:"Avant de migrer",
+d_1:"Moins d’une organisation sur cinq redéfinit ses processus lors du passage à S/4HANA, tandis que 49 % n’effectuent que peu ou pas de réingénierie. Pourtant, près de 60 % de ces projets sont en retard et dépassent leur budget.",
+d_2:"Choisir la voie de la prudence pour sécuriser le planning et le budget ne semble donc protéger ni l’un ni l’autre : la plupart des programmes dérapent malgré tout, à cause d’une complexité sous-estimée, d’une dérive du périmètre et de ressources internes limitées, trois risques qu’une migration à l’identique ne supprime pas.",
+d_2b:"Le coût le plus lourd se paie souvent après le go-live. Les processus fragmentés, les développements spécifiques et les données héritées que vous reprenez limitent les cas d’usage d’automatisation et d’IA que vous pourrez déployer.",
+d_2c:"Pourtant, ce choix « sûr » reste le plus populaire : les organisations sont deux fois plus nombreuses à préférer le statu quo (49 %) plutôt qu’à oser réinventer leurs processus (moins de 20 %). C’est le triomphe de la fausse sécurité.",
+d_3:"Parmi les processus que vous prévoyez de reprendre, lesquels voudriez-vous encore faire tourner à l'identique quand l'automatisation et l'IA feront partie du quotidien ?",
+d_src:"Source : ISG, State of SAP Migrations, février 2026 (enquête auprès de plus de 200 décideurs seniors).",d_link:"Communiqué ISG",
+a_h:"À propos",
+a_1:"Leader de transformation d'entreprise, avec une vaste expérience de programmes SAP S/4HANA à grande échelle. Mon expertise : transformation d'entreprise, simplification du modèle opérationnel et déploiement de templates globaux, sur les modèles Quote-to-Cash, Supply Chain et intercompany.",
+a_2:"Je me concentre sur l'application concrète de la Business AI pour transformer les opérations, automatiser les processus complexes et accélérer la création de valeur.",
+a_3:"En dehors du travail, je suis passionné de montagne : alpinisme et ski de randonnée dans le massif du Mont-Blanc, le Valais, l'Oberland bernois et la Vanoise.",
+s_h:"Secteurs",s_1:"Sciences de la vie",s_2:"Biens de consommation",s_3:"Produits industriels",s_4:"Énergie",s_5:"Secteur public",
+v_h:"Mon offre",
+v1t:"Sélection d'ERP",v1:"Sélection indépendante d'éditeur et de solution, alignée sur votre business case.",
+v2t:"Direction de programme",v2:"Pilotage de grandes transformations, de la feuille de route au déploiement mondial.",
+v3t:"Expertise Lead-to-Cash",v3:"Expert Quote-to-Cash, Supply Chain et processus intercompany.",
+v4t:"Cadrage et pilotage de RFP",v4:"J’aide les entreprises à préparer leur RFP et les accompagne de bout en bout dans sa gestion : préparation des documents, questions-réponses, critères de sélection, soutenances orales, etc.",
+v7t:"Réponse aux RFP",v7:"Rédaction et présentation de réponses gagnantes, de la solution à la soutenance exécutive. Comme au poker, la meilleure main gagne rarement : c'est la stratégie de votre réponse qui fait la différence.",
+v5t:"Assurance qualité",v5:"Revue indépendante des programmes en cours, avec des recommandations claires.",
+v6t:"Accompagnement IA",v6:"Cas d'usage et adoption de la Business AI, et pratiques appuyées sur l'IA pour une delivery efficace, rapide et de haute qualité.",
+st_a1:"des projets ERP en dépassement ont nécessité une technologie non prévue",st_a2:"ont dérapé à cause d'un périmètre qui s'étend",st_a3:"des projets ERP finissent au-dessus du budget",st_b1:"des organisations ont déployé S/4HANA sous une forme ou une autre",st_b2:"ont terminé la transition",st_b3:"des migrations SAP sont en retard et au-dessus du budget",st_c1:"de fonds de roulement excédentaire dans les 1 000 premières sociétés cotées américaines",st_c2:"sont immobilisés dans les créances clients, la plus grande part",st_c3:"jours de DSO séparent les meilleurs de la médiane",st_d1:"du parcours d'achat est passé avec les fournisseurs",st_d2:"du temps de l'acheteur pour chaque fournisseur quand trois sont en lice",st_d3:"des acheteurs reviennent à une étape précédente du processus",st_e1:"des 103 M de mains de poker en ligne se sont terminées avant l'abattage : les décisions, pas les cartes, ont tranché",st_e2:"ont été gagnées à l'abattage par la meilleure main",st_e3:"taux de réussite moyen aux RFP, tous secteurs confondus",st_f1:"des projets IT devient un « cygne noir »",st_f2:"de dépassement de coût moyen sur ces projets",st_f3:"de retard moyen sur ces mêmes projets",st_g1:"des organisations constatent un impact de l'IA sur leur résultat d'entreprise",st_g2:"sont des « high performers » de l'IA, avec 5 % ou plus de l'EBIT issu de l'IA",st_g3:"déploient des agents IA à grande échelle dans une fonction donnée",v_src:"Source :",v_hint:"Survolez (ou touchez) un service pour voir les chiffres qui le sous-tendent.",
+e_h:"Expérience",e_role:"Senior Manager, Deloitte Suisse, practice SAP",
+e1t:"Direction de transformations globales",e1:"Programmes de bout en bout en Sciences de la vie, Biens de consommation, Produits industriels, Énergie et Secteur public, avec un accent sur la conception de templates globaux, la scalabilité et la création de valeur.",
+e2t:"Accompagnement sur tout le cycle de vie",e2:"Feuille de route, modèle opérationnel cible, architecture de solution, déploiement, rollout global et adoption de la Business AI, en lien entre la direction métier et les équipes SAP.",
+e3t:"Cadrage d'offres et avant-vente",e3:"Pilotage de grands RFP S/4HANA et de transformation digitale, et échanges au niveau C-level pour aligner le périmètre sur les résultats attendus.",
+j_h:"Expériences précédentes",j1t:"Chef de projet, Swatch Group",j1m:"Bienne, oct. 2014 – mai 2019",j1:"Pilotage de programmes SAP internationaux et de transformations métier avec les équipes Finance, Logistique, Ventes et Services corporate, en responsabilité de bout en bout de la gouvernance, des risques, des ressources et du budget d’un portefeuille multi-projets.",j1a:"Déploiement du modèle de société principale européenne : modèle opérationnel intercompany à l’échelle de l’Europe, processus financiers et logistiques standardisés, conformité des prix de transfert renforcée.",j1b:"Transformation ventes et supply chain : améliorations de processus portées par SAP pour les opérations commerciales, les lancements de produits et l’efficacité de la supply chain, sur plusieurs marques.",j1c:"Intégration d’acquisitions : intégration SAP et harmonisation des données, pour un alignement rapide sur le paysage ERP global du Groupe.",j1d:"Déploiement du modèle SAP global : déploiement standardisé dans les filiales internationales, avec harmonisation des processus, adoption locale et accompagnement structuré des utilisateurs.",j2t:"Consultant, Accenture",j2m:"Région parisienne, janv. 2008 – oct. 2014",j2:"Consultant SAP et chef de projet, au sein d’une équipe qui a construit une capacité de gestion de projet de premier plan, avec pour objectif de créer de la valeur métier dans les délais, le périmètre et le budget.",
+hf1:"ans à piloter des programmes SAP",hf2:"secteurs accompagnés",hf3:"côtés de la table : cabinet de conseil et entreprise cliente",dq1:"des organisations redéfinissent leurs processus lors du passage à S/4HANA",dq2:"n’effectuent que peu ou pas de réingénierie",dq3:"de ces projets sont en retard et dépassent leur budget",f_tag:"Transformation SAP S/4HANA, modèles opérationnels et Business AI.",
+e_link:"Voir mon profil Deloitte",f_dl:"Profil Deloitte",
+n_cert:"Compétences",ct_h:"Compétences & certifications",ct_main:"Certifications SAP",ct_sub:"Autres certifications",ct_iss:"Délivrée",ct_exp:"expire",ct_id:"Identifiant",ct_ver:"Vérifier l’accréditation",
+ai_h:"IA & Digital Enablement",ai_p:"Mise en œuvre d’outils d’IA pour accélérer l’analyse, le prototypage et la livraison dans les initiatives de transformation métier.",ai_t1:"Claude Code",ai_t2:"Développement assisté par l’IA",ai_t3:"Git / GitHub",ai_t4:"Conception de workflows LLM",
+dq_h:"Ce que montre l’étude",
+n_assess:"Évaluation de maturité",n_rfp:"Checklist RFP",
+tl_h:"Outils interactifs",tl_1t:"Évaluation de la maturité et de la préparation",tl_1p:"25 questions réparties en 8 dimensions pour mesurer la préparation de votre organisation à une transformation, avec un radar et une matrice des écarts.",tl_1b:"Démarrer l’évaluation",tl_2t:"Générateur de checklist RFP",tl_2p:"Choisissez le type de projet, le périmètre, la phase et la priorité pour obtenir une checklist RFP SAP ERP adaptée et un plan de jalons (en anglais).",tl_2b:"Générer ma checklist",
+c_h:"Parlons-en",c_btn:"Envoyer un message",c_p:"Un projet de transformation ou un appel d'offres en préparation ? Écrivez-moi."},
+de:{n_about:"Über mich",n_svc:"Leistungen",n_exp:"Erfahrung",n_con:"Kontakt",
+h_title:"Business-Transformation-Leader für SAP-S/4HANA-Programme",
+h_sub:"Ich unterstütze Unternehmen dabei, Operating Models zu vereinfachen und globale Templates zu skalieren, mit Business AI und KI-gestützter Delivery für messbare Ergebnisse.",
+h_cta:"Kontakt aufnehmen",h_cta2:"Mein Angebot",
+d_h:"Bevor Sie migrieren",
+d_1:"Weniger als jedes fünfte Unternehmen gestaltet seine Prozesse beim Wechsel auf S/4HANA neu, während 49 % kaum oder gar nicht umgestalten. Dennoch enden fast 60 % dieser Programme mit Verzug und Budgetüberschreitung.",
+d_2:"Wer den vorsichtigen Weg wählt, um Termin und Budget zu schützen, schützt offenbar keines von beiden: Die meisten Programme laufen trotzdem aus dem Ruder, getrieben von unterschätzter Komplexität, wachsendem Umfang und knappen internen Kapazitäten, die ein 1:1-Umzug nicht beseitigt.",
+d_2b:"Der grössere Preis kommt später: Die übernommenen Prozesse und Daten setzen die Obergrenze für Automatisierungs- und KI-Anwendungsfälle nach dem Go-live.",
+d_2c:"Auf jedes Unternehmen, das neu gestaltet, kommen deutlich mehr, die bewahren (49 % gegenüber unter 20 %). Die «sichere» Wahl ist also auch die verbreitetste.",
+d_3:"Welche der Prozesse, die Sie übernehmen wollen, möchten Sie noch unverändert betreiben, wenn Automatisierung und KI zum Alltag gehören?",
+d_src:"Quelle: ISG, State of SAP Migrations, Februar 2026 (Befragung von über 200 Entscheidungsträgern).",d_link:"ISG-Pressemitteilung",
+a_h:"Über mich",
+a_1:"Business-Transformation-Leader mit langjähriger Erfahrung in der Umsetzung grosser SAP-S/4HANA-Programme. Mein Schwerpunkt: Unternehmenstransformation, Vereinfachung des Operating Models und globaler Template-Rollout, mit Fokus auf Quote-to-Cash, Supply Chain und Intercompany-Modelle.",
+a_2:"Ich konzentriere mich auf den praktischen Einsatz von Business AI, um Abläufe neu zu gestalten, komplexe Prozesse zu automatisieren und den Nutzen schneller zu realisieren.",
+a_3:"Privat bin ich begeisterter Bergsportler: Klettern und Skitouren im Mont-Blanc-Massiv, im Wallis, im Berner Oberland und in der Vanoise.",
+s_h:"Branchen",s_1:"Life Sciences",s_2:"Konsumgüter",s_3:"Industrieprodukte",s_4:"Energie",s_5:"Öffentlicher Sektor",
+v_h:"Mein Angebot",
+v1t:"ERP-Auswahl",v1:"Unabhängige Anbieter- und Lösungsauswahl, ausgerichtet auf Ihren Business Case.",
+v2t:"Programmleitung",v2:"Leitung grosser Transformationen von der Roadmap bis zum globalen Rollout.",
+v3t:"Lead-to-Cash-Expertise",v3:"Fachexperte für Quote-to-Cash, Supply Chain und Intercompany-Prozesse.",
+v4t:"RFP-Gestaltung und -Steuerung",v4:"Ich unterstütze Unternehmen bei der Vorbereitung ihrer Ausschreibung und begleite sie durchgängig im Prozess: Unterlagen, Q&A, Auswahlkriterien, mündliche Präsentationen und mehr.",
+v7t:"RFP-Antwort",v7:"Erstellung und Präsentation überzeugender Angebote, von der Lösung bis zum Executive Pitch. Wie beim Poker gewinnt selten die beste Hand: Die Strategie hinter Ihrer Antwort entscheidet.",
+v5t:"Qualitätssicherung",v5:"Unabhängige Prüfung laufender Programme mit klaren Empfehlungen.",
+v6t:"AI Enablement",v6:"Business-AI-Use-Cases und Adoption sowie KI-gestützte Arbeitsweisen für eine effiziente, schnelle und qualitativ hochwertige Delivery.",
+st_a1:"der ERP-Projekte mit Budgetüberschreitung brauchten ungeplante Zusatztechnologie",st_a2:"gerieten durch Umfangserweiterung über das Budget",st_a3:"der ERP-Projekte überschreiten das Budget",st_b1:"der Unternehmen haben S/4HANA in irgendeiner Form eingeführt",st_b2:"haben den Wechsel vollständig abgeschlossen",st_b3:"der SAP-Migrationen verzögern sich und überschreiten das Budget",st_c1:"überschüssiges Working Capital bei den 1.000 grössten börsenkotierten US-Unternehmen",st_c2:"davon stecken in Forderungen, dem grössten Anteil",st_c3:"Tage DSO trennen die Besten vom Median",st_d1:"der Kaufreise verbringen Käufer im Gespräch mit Anbietern",st_d2:"der Käuferzeit entfallen auf jeden Anbieter, wenn drei konkurrieren",st_d3:"der Käufer kehren zu einem früheren Schritt zurück",st_e1:"von 103 Mio. Online-Pokerhänden endeten vor dem Showdown: Entscheidungen, nicht Karten, gaben den Ausschlag",st_e2:"wurden im Showdown mit der besten Hand gewonnen",st_e3:"durchschnittliche RFP-Gewinnquote über alle Branchen",st_f1:"der IT-Projekte wird zum «Schwarzen Schwan»",st_f2:"durchschnittliche Kostenüberschreitung bei diesen Projekten",st_f3:"durchschnittliche Terminüberschreitung bei denselben Projekten",st_g1:"der Unternehmen sehen überhaupt einen Gewinneffekt durch KI auf Unternehmensebene",st_g2:"sind KI-High-Performer mit mindestens 5 % des EBIT aus KI",st_g3:"skalieren KI-Agenten in einer einzelnen Funktion",v_src:"Quelle:",v_hint:"Fahren Sie über einen Service (oder tippen Sie darauf), um die Zahlen dahinter zu sehen.",
+e_h:"Erfahrung",e_role:"Senior Manager, Deloitte Schweiz, SAP Practice",
+e1t:"Globale Transformationsleitung",e1:"End-to-End-Programme in Life Sciences, Konsumgütern, Industrieprodukten, Energie und öffentlichem Sektor, mit Schwerpunkt auf globalem Template-Design, Skalierbarkeit und Wertrealisierung.",
+e2t:"Begleitung über den gesamten Lebenszyklus",e2:"Roadmap, Ziel-Operating-Model, Lösungsarchitektur, Deployment, globaler Rollout und Business-AI-Adoption, als Bindeglied zwischen Geschäftsleitung und SAP-Delivery-Teams.",
+e3t:"Deal Shaping und Presales",e3:"Leitung grosser S/4HANA- und Digitalisierungs-RFPs und Steuerung von C-Level-Gesprächen, um den Umfang auf die Geschäftsziele abzustimmen.",
+j_h:"Frühere Stationen",j1t:"Projektleiter, Swatch Group",j1m:"Biel/Bienne, Okt. 2014 – Mai 2019",j1:"Verantwortung für internationale SAP-Programme und Business-Transformationen mit Stakeholdern aus Finanzen, Logistik, Vertrieb und Corporate Services, inklusive Governance, Risiko-, Ressourcen- und Budgetsteuerung über ein Multiprojekt-Portfolio.",j1a:"Rollout des europäischen Principal-Company-Modells: europaweites Intercompany-Operating-Model, standardisierte Finanz- und Logistikprozesse, gestärkte Verrechnungspreis-Compliance.",j1b:"Transformation von Vertrieb und Supply Chain: SAP-gestützte Prozessverbesserungen für Vertriebsabläufe, Produktlancierungen und Supply-Chain-Effizienz über mehrere Marken.",j1c:"M&A-Integration: SAP-Integration und Datenharmonisierung bei Übernahmen, mit rascher Anbindung an die globale ERP-Landschaft des Konzerns.",j1d:"Rollout des globalen SAP-Kernmodells: standardisierter Rollout in internationalen Tochtergesellschaften mit Prozessharmonisierung, lokaler Akzeptanz und strukturierter Anwenderbefähigung.",j2t:"Consultant, Accenture",j2m:"Raum Paris, Jan. 2008 – Okt. 2014",j2:"SAP-Berater und Projektleiter; Aufbau einer erstklassigen Projektmanagement-Kompetenz im Team und Lieferung von Geschäftsnutzen termin-, umfangs- und budgetgerecht.",
+hf1:"Jahre SAP-Programme geleitet",hf2:"Branchen betreut",hf3:"Seiten des Tisches: Beratung und Kundenseite",dq1:"der Unternehmen gestalten ihre Prozesse beim Wechsel auf S/4HANA neu",dq2:"gestalten kaum oder gar nicht um",dq3:"dieser Projekte verzögern sich und überschreiten das Budget",f_tag:"SAP-S/4HANA-Transformation, Operating Models und Business AI.",
+e_link:"Mein Deloitte-Profil ansehen",f_dl:"Deloitte-Profil",
+n_cert:"Kompetenzen",ct_h:"Kompetenzen & Zertifizierungen",ct_main:"SAP-Zertifizierungen",ct_sub:"Weitere Zertifizierungen",ct_iss:"Ausgestellt",ct_exp:"läuft ab",ct_id:"Zertifikats-ID",ct_ver:"Zertifikat prüfen",
+ai_h:"KI & Digital Enablement",ai_p:"Einsatz von KI-Werkzeugen, um Analyse, Prototyping und Delivery in Business-Transformationsinitiativen zu beschleunigen.",ai_t1:"Claude Code",ai_t2:"KI-gestützte Entwicklung",ai_t3:"Git / GitHub",ai_t4:"Design von LLM-Workflows",
+dq_h:"Was die Studie zeigt",
+n_assess:"Readiness-Assessment",n_rfp:"RFP-Checkliste",
+tl_h:"Interaktive Tools",tl_1t:"Reifegrad-Assessment für Transformationen",tl_1p:"25 Fragen in 8 Dimensionen, um zu sehen, wie bereit Ihr Unternehmen für eine Transformation ist, mit Radar-Ansicht und Gap-Matrix (auf Englisch oder Französisch).",tl_1b:"Assessment starten",tl_2t:"RFP-Checklisten-Generator",tl_2p:"Wählen Sie Projekttyp, Umfang, Phase und Priorität und erhalten Sie eine massgeschneiderte SAP-ERP-RFP-Checkliste samt Meilensteinplan (auf Englisch).",tl_2b:"Checkliste erstellen",
+c_h:"Sprechen wir",c_btn:"Nachricht senden",c_p:"Eine Transformation geplant oder eine Ausschreibung in Vorbereitung? Schreiben Sie mir."}
+};
+function setLang(l){
+  document.documentElement.lang=l;
+  document.querySelectorAll("[data-date]").forEach(e=>{e.textContent=new Date(e.dataset.date+"-01T00:00:00").toLocaleDateString(l,{month:"short",year:"numeric"})});
+  document.querySelectorAll("[data-i]").forEach(e=>{e.textContent=T[l][e.dataset.i]});
+  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===l));
+  try{localStorage.setItem("lang",l)}catch(e){}
+}
+document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+let start="en";try{start=localStorage.getItem("lang")||"en"}catch(e){}
+setLang(T[start]?start:"en");
+
+(function(){
+  var bg=document.querySelector(".hero-bg");
+  if(!bg||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  addEventListener("scroll",function(){bg.style.transform="translate3d(0,"+Math.min(scrollY,700)*0.25+"px,0)"},{passive:true});
+})();
+
+(function(){
+  var hero=document.querySelector(".hero"),done=false;
+  var nums=[].slice.call(document.querySelectorAll("[data-count]")),raf=0,
+      rm=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function show(el,v,fin){el.textContent=v+(fin&&el.dataset.suffix?el.dataset.suffix:"")}
+  function zero(){if(!rm)nums.forEach(function(el){show(el,0,false)})}
+  function count(){
+    if(rm){nums.forEach(function(el){show(el,+el.dataset.count,true)});return}
+    cancelAnimationFrame(raf);
+    var max=Math.max.apply(null,nums.map(function(el){return +el.dataset.count})),
+        rate=max/2000,t0=performance.now();   // same speed for every figure: the largest takes 2 s
+    function tick(now){
+      var dt=now-t0,all=true;
+      nums.forEach(function(el){var tg=+el.dataset.count,v=Math.min(tg,Math.floor(dt*rate));show(el,v,v>=tg);if(v<tg)all=false});
+      if(!all)raf=requestAnimationFrame(tick);
+    }
+    raf=requestAnimationFrame(tick);
+  }
+  zero();
+  function go(){if(done)return;done=true;hero.classList.add("ready");count()}
+  var im=new Image();im.onload=go;im.onerror=go;im.src="hero.webp";
+  setTimeout(go,2500);
+  // replay the reveal each time the banner comes back into view
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(function(e){
+      if(!done)return;
+      var x=e[0];
+      if(!x.isIntersecting){hero.classList.remove("ready");cancelAnimationFrame(raf);zero()}
+      else if(x.intersectionRatio>=0.15&&!hero.classList.contains("ready")){hero.classList.add("ready");count()}
+    },{threshold:[0,0.15]}).observe(hero);
+  }
+})();
+</script>
+</body>
+</html>
