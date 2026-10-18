@@ -149,6 +149,14 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
   transition:grid-template-rows .4s ease,opacity .35s ease .05s,margin-top .4s ease,visibility 0s}
 .tipin{overflow:hidden;min-height:0}
 @media (prefers-reduced-motion:reduce){.svc>div .tip,.svc>div:hover .tip,.svc>div:focus .tip,.svc>div:focus-within .tip{transition:none}}
+.dcap{margin:8px 0 10px;font-weight:700;color:var(--navy)}
+.dstats{grid-template-columns:repeat(3,1fr);gap:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.dstats>div{border:0;border-radius:0;border-left:1px solid var(--line);padding:24px 28px;background:transparent}
+.dstats>div:first-child{border-left:0}
+.dstats b{font-size:2.8rem}
+@media(max-width:760px){.dstats{grid-template-columns:1fr}.dstats>div{border-left:0;border-top:1px solid var(--line)}.dstats>div:first-child{border-top:0}}
+.dgrid{margin-top:22px}
+.dgrid{grid-template-columns:1fr;gap:14px;max-width:46em}
 </style>
 <noscript><style>.hero:not(.ready) .hero-bg::before,.hero:not(.ready) .fog{opacity:1}</style></noscript>
 </head>
@@ -168,6 +176,7 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 <div class="hero-fade" aria-hidden="true"></div></div>
 
 <section id="diq" class="diq"><h2 data-i="d_h"></h2>
+<p class="dcap" data-i="dq_h"></p>
 <div class="dstats"><div><b>&lt;20%</b><span data-i="dq1"></span></div><div><b>49%</b><span data-i="dq2"></span></div><div><b>~60%</b><span data-i="dq3"></span></div></div>
 <div class="dgrid"><div class="row"><p data-i="d_2"></p></div>
 <div class="row"><p data-i="d_2b"></p></div>
@@ -194,11 +203,6 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 <div class="st"><b>34%</b><span data-i="st_b2"></span></div>
 <div class="st"><b>~60%</b><span data-i="st_b3"></span></div>
 <p class="sr"><span data-i="v_src"></span> <a href="https://sapinsider.org/research-reports/sapinsider-benchmark-research-erp-migration-and-transformation-2026/">SAPinsider 2026</a>, <a href="https://www.businesswire.com/news/home/20260202883729/en">ISG 2026</a></p></div></div></div>
-<div tabindex="0"><h3 data-i="v3t"></h3><p data-i="v3"></p>
-<div class="tip"><div class="tipin"><div class="st"><b>$1.7T</b><span data-i="st_c1"></span></div>
-<div class="st"><b>$600B</b><span data-i="st_c2"></span></div>
-<div class="st"><b>18</b><span data-i="st_c3"></span></div>
-<p class="sr"><span data-i="v_src"></span> <a href="https://www.businesswire.com/news/home/20250818205819/en/The-Hackett-Group-2025-Working-Capital-Survey-Payables-Rebound-but-Receivables-and-Inventory-Lag">Hackett Group 2025</a></p></div></div></div>
 <div tabindex="0"><h3 data-i="v4t"></h3><p data-i="v4"></p>
 <div class="tip"><div class="tipin"><div class="st"><b>17%</b><span data-i="st_d1"></span></div>
 <div class="st"><b>5%</b><span data-i="st_d2"></span></div>
@@ -304,7 +308,7 @@ v_h:"What I offer",
 v1t:"ERP selection",v1:"Independent vendor and solution selection, aligned with your business case.",
 v2t:"Program lead",v2:"Leading large transformations from roadmap to global rollout.",
 v3t:"Lead-to-Cash expertise",v3:"Subject-matter expert in Quote-to-Cash, Supply Chain and intercompany processes.",
-v4t:"RFP shaping and management",v4:"Solution strategy, delivery model and commercial approach for large RFPs.",
+v4t:"RFP shaping and management",v4:"I help companies prepare their RFP and support them end to end through the process: document preparation, Q&A, selection criteria, vendor orals and more.",
 v7t:"RFP response",v7:"Writing and presenting winning responses, from solution to executive pitch. Like poker, the best hand rarely wins the deal: the strategy behind your response does.",
 v5t:"Quality assurance",v5:"Independent review of programs in flight, with clear recommendations.",
 v6t:"AI enablement",v6:"Business AI use cases and adoption, plus AI-driven practices for efficient, rapid and high-quality delivery.",
@@ -318,6 +322,7 @@ hf1:"years delivering SAP programs",hf2:"industries served",hf3:"sides of the ta
 e_link:"View my Deloitte profile",f_dl:"Deloitte profile",
 n_cert:"Skills",ct_h:"Skills & Certifications",ct_main:"SAP certifications",ct_sub:"Also certified",ct_iss:"Issued",ct_exp:"expires",ct_id:"Credential ID",ct_ver:"Verify credential",
 ai_h:"AI & Digital Enablement",ai_p:"Applying AI tools to accelerate analysis, prototyping and delivery across business transformation initiatives.",ai_t1:"Claude Code",ai_t2:"AI-assisted development",ai_t3:"Git / GitHub",ai_t4:"LLM workflow design",
+dq_h:"What the study found",
 c_h:"Let's talk",c_btn:"Send a message",c_p:"Planning a transformation or preparing an RFP? Send me a message."},
 fr:{n_about:"À propos",n_svc:"Services",n_exp:"Expérience",n_con:"Contact",
 h_title:"Leader de transformation d'entreprise sur les programmes SAP S/4HANA",
@@ -339,7 +344,7 @@ v_h:"Mon offre",
 v1t:"Sélection d'ERP",v1:"Sélection indépendante d'éditeur et de solution, alignée sur votre business case.",
 v2t:"Direction de programme",v2:"Pilotage de grandes transformations, de la feuille de route au déploiement mondial.",
 v3t:"Expertise Lead-to-Cash",v3:"Expert Quote-to-Cash, Supply Chain et processus intercompany.",
-v4t:"Cadrage et pilotage de RFP",v4:"Stratégie de solution, modèle de delivery et approche commerciale pour les grands appels d'offres.",
+v4t:"Cadrage et pilotage de RFP",v4:"J’aide les entreprises à préparer leur RFP et les accompagne de bout en bout dans sa gestion : préparation des documents, questions-réponses, critères de sélection, soutenances orales, etc.",
 v7t:"Réponse aux RFP",v7:"Rédaction et présentation de réponses gagnantes, de la solution à la soutenance exécutive. Comme au poker, la meilleure main gagne rarement : c'est la stratégie de votre réponse qui fait la différence.",
 v5t:"Assurance qualité",v5:"Revue indépendante des programmes en cours, avec des recommandations claires.",
 v6t:"Accompagnement IA",v6:"Cas d'usage et adoption de la Business AI, et pratiques appuyées sur l'IA pour une delivery efficace, rapide et de haute qualité.",
@@ -353,6 +358,7 @@ hf1:"ans à piloter des programmes SAP",hf2:"secteurs accompagnés",hf3:"côtés
 e_link:"Voir mon profil Deloitte",f_dl:"Profil Deloitte",
 n_cert:"Compétences",ct_h:"Compétences & certifications",ct_main:"Certifications SAP",ct_sub:"Autres certifications",ct_iss:"Délivrée",ct_exp:"expire",ct_id:"Identifiant",ct_ver:"Vérifier l’accréditation",
 ai_h:"IA & Digital Enablement",ai_p:"Mise en œuvre d’outils d’IA pour accélérer l’analyse, le prototypage et la livraison dans les initiatives de transformation métier.",ai_t1:"Claude Code",ai_t2:"Développement assisté par l’IA",ai_t3:"Git / GitHub",ai_t4:"Conception de workflows LLM",
+dq_h:"Ce que montre l’étude",
 c_h:"Parlons-en",c_btn:"Envoyer un message",c_p:"Un projet de transformation ou un appel d'offres en préparation ? Écrivez-moi."},
 de:{n_about:"Über mich",n_svc:"Leistungen",n_exp:"Erfahrung",n_con:"Kontakt",
 h_title:"Business-Transformation-Leader für SAP-S/4HANA-Programme",
@@ -374,7 +380,7 @@ v_h:"Mein Angebot",
 v1t:"ERP-Auswahl",v1:"Unabhängige Anbieter- und Lösungsauswahl, ausgerichtet auf Ihren Business Case.",
 v2t:"Programmleitung",v2:"Leitung grosser Transformationen von der Roadmap bis zum globalen Rollout.",
 v3t:"Lead-to-Cash-Expertise",v3:"Fachexperte für Quote-to-Cash, Supply Chain und Intercompany-Prozesse.",
-v4t:"RFP-Gestaltung und -Steuerung",v4:"Lösungsstrategie, Delivery-Modell und kommerzieller Ansatz für grosse Ausschreibungen.",
+v4t:"RFP-Gestaltung und -Steuerung",v4:"Ich unterstütze Unternehmen bei der Vorbereitung ihrer Ausschreibung und begleite sie durchgängig im Prozess: Unterlagen, Q&A, Auswahlkriterien, mündliche Präsentationen und mehr.",
 v7t:"RFP-Antwort",v7:"Erstellung und Präsentation überzeugender Angebote, von der Lösung bis zum Executive Pitch. Wie beim Poker gewinnt selten die beste Hand: Die Strategie hinter Ihrer Antwort entscheidet.",
 v5t:"Qualitätssicherung",v5:"Unabhängige Prüfung laufender Programme mit klaren Empfehlungen.",
 v6t:"AI Enablement",v6:"Business-AI-Use-Cases und Adoption sowie KI-gestützte Arbeitsweisen für eine effiziente, schnelle und qualitativ hochwertige Delivery.",
@@ -388,6 +394,7 @@ hf1:"Jahre SAP-Programme geleitet",hf2:"Branchen betreut",hf3:"Seiten des Tische
 e_link:"Mein Deloitte-Profil ansehen",f_dl:"Deloitte-Profil",
 n_cert:"Kompetenzen",ct_h:"Kompetenzen & Zertifizierungen",ct_main:"SAP-Zertifizierungen",ct_sub:"Weitere Zertifizierungen",ct_iss:"Ausgestellt",ct_exp:"läuft ab",ct_id:"Zertifikats-ID",ct_ver:"Zertifikat prüfen",
 ai_h:"KI & Digital Enablement",ai_p:"Einsatz von KI-Werkzeugen, um Analyse, Prototyping und Delivery in Business-Transformationsinitiativen zu beschleunigen.",ai_t1:"Claude Code",ai_t2:"KI-gestützte Entwicklung",ai_t3:"Git / GitHub",ai_t4:"Design von LLM-Workflows",
+dq_h:"Was die Studie zeigt",
 c_h:"Sprechen wir",c_btn:"Nachricht senden",c_p:"Eine Transformation geplant oder eine Ausschreibung in Vorbereitung? Schreiben Sie mir."}
 };
 function setLang(l){
