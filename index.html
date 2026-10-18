@@ -157,6 +157,10 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 @media(max-width:760px){.dstats{grid-template-columns:1fr}.dstats>div{border-left:0;border-top:1px solid var(--line)}.dstats>div:first-child{border-top:0}}
 .dgrid{margin-top:22px}
 .dgrid{grid-template-columns:1fr;gap:14px;max-width:46em}
+.dgrid{max-width:none}
+.diq .q{max-width:none}
+.dgrid .row{width:100%}
+.facts b{font-variant-numeric:tabular-nums}
 </style>
 <noscript><style>.hero:not(.ready) .hero-bg::before,.hero:not(.ready) .fog{opacity:1}</style></noscript>
 </head>
@@ -171,7 +175,7 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 <h1 data-i="h_title"></h1>
 <p data-i="h_sub"></p>
 <a class="btn p" href="#contact" data-i="h_cta"></a><a class="btn s" href="#services" data-i="h_cta2"></a>
-<div class="facts"><div><b>18+</b><span data-i="hf1"></span></div><div><b>5</b><span data-i="hf2"></span></div><div><b>2</b><span data-i="hf3"></span></div></div>
+<div class="facts"><div><b data-count="18" data-suffix="+">18+</b><span data-i="hf1"></span></div><div><b data-count="5">5</b><span data-i="hf2"></span></div><div><b data-count="2">2</b><span data-i="hf3"></span></div></div>
 </div>
 <div class="hero-fade" aria-hidden="true"></div></div>
 
@@ -416,7 +420,24 @@ setLang(T[start]?start:"en");
 
 (function(){
   var hero=document.querySelector(".hero"),done=false;
-  function go(){if(done)return;done=true;hero.classList.add("ready")}
+  var nums=[].slice.call(document.querySelectorAll("[data-count]")),raf=0,
+      rm=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function show(el,v,fin){el.textContent=v+(fin&&el.dataset.suffix?el.dataset.suffix:"")}
+  function zero(){if(!rm)nums.forEach(function(el){show(el,0,false)})}
+  function count(){
+    if(rm){nums.forEach(function(el){show(el,+el.dataset.count,true)});return}
+    cancelAnimationFrame(raf);
+    var max=Math.max.apply(null,nums.map(function(el){return +el.dataset.count})),
+        rate=max/2000,t0=performance.now();   // same speed for every figure: the largest takes 2 s
+    function tick(now){
+      var dt=now-t0,all=true;
+      nums.forEach(function(el){var tg=+el.dataset.count,v=Math.min(tg,Math.floor(dt*rate));show(el,v,v>=tg);if(v<tg)all=false});
+      if(!all)raf=requestAnimationFrame(tick);
+    }
+    raf=requestAnimationFrame(tick);
+  }
+  zero();
+  function go(){if(done)return;done=true;hero.classList.add("ready");count()}
   var im=new Image();im.onload=go;im.onerror=go;im.src="hero.webp";
   setTimeout(go,2500);
   // replay the reveal each time the banner comes back into view
@@ -424,8 +445,8 @@ setLang(T[start]?start:"en");
     new IntersectionObserver(function(e){
       if(!done)return;
       var x=e[0];
-      if(!x.isIntersecting){hero.classList.remove("ready")}
-      else if(x.intersectionRatio>=0.15){hero.classList.add("ready")}
+      if(!x.isIntersecting){hero.classList.remove("ready");cancelAnimationFrame(raf);zero()}
+      else if(x.intersectionRatio>=0.15&&!hero.classList.contains("ready")){hero.classList.add("ready");count()}
     },{threshold:[0,0.15]}).observe(hero);
   }
 })();
