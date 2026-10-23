@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAP ERP RFP Readiness Checklist Generator | Arnaud Gavanier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A1F44;--navy2:#13306B;--ridge:#1B4287;--ink:#14213D;--muted:#3B4760;--bg:#F4F6FA;--line:#C5CEDD;--sky:#8EB8FF}
+*{box-sizing:border-box}
+body{margin:0;font-family:Manrope,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+header{background:var(--navy);color:#fff}
+.bar{max-width:1040px;margin:auto;padding:14px 24px;display:flex;align-items:center;gap:24px}
+.brand{font-weight:800;text-decoration:none;margin-right:auto}
+.top{background:linear-gradient(180deg,var(--navy),var(--navy2));color:#fff}
+.top .in{max-width:1040px;margin:auto;padding:60px 24px 52px}
+.top h1{font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.12;margin:0 0 16px;letter-spacing:-.02em;max-width:18em}
+.top p{margin:0;max-width:42em;font-size:1.1rem;color:#EAF1FF}
+main{max-width:1040px;margin:auto;padding:36px 24px 72px}
+h2{font-size:1.5rem;margin:0 0 14px;color:var(--navy)}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px 28px;margin-bottom:22px}
+fieldset{border:0;padding:0;margin:0 0 22px}
+legend{font-weight:800;color:var(--navy);margin-bottom:10px;padding:0}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.opt span{display:block;padding:10px 16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-weight:600;color:var(--navy)}
+.opt input:hover+span{border-color:var(--ridge)}
+.opt input:checked+span{background:var(--navy);border-color:var(--navy);color:#fff}
+.opt input:focus-visible+span{outline:3px solid var(--sky);outline-offset:2px}
+.hint{font-weight:400;color:var(--muted);font-size:.9rem}
+.btn{background:var(--navy);color:#fff;border:0;border-radius:8px;padding:14px 30px;font:inherit;font-weight:700;cursor:pointer}
+.btn:disabled{background:#8A94A8;cursor:not-allowed}
+.btn.alt{background:#fff;color:var(--navy);border:1px solid var(--navy);margin-left:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;padding:0;list-style:none}
+.chips li{background:var(--navy);color:#fff;border-radius:99px;padding:5px 14px;font-size:.88rem;font-weight:600}
+.note{border-left:4px solid var(--ridge);background:#fff;border-radius:8px;padding:14px 18px;margin:0 0 14px;color:var(--ink)}
+.sec{background:#fff;border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:12px;padding:22px 26px;margin-bottom:18px}
+.sec.focus{border-top-color:#2FA8CC;box-shadow:0 0 0 2px #2FA8CC33}
+.sec h3{margin:0 0 12px;font-size:1.2rem;color:var(--navy)}
+.badge{font-size:.72rem;font-weight:800;background:#E3F4FA;color:#0B5E78;border-radius:99px;padding:3px 10px;margin-left:10px;vertical-align:middle}
+.items{list-style:none;margin:0;padding:0}
+.items li{padding:10px 0;border-top:1px solid var(--line)}
+.items label{display:flex;gap:12px;cursor:pointer}
+.items input{margin-top:6px;accent-color:var(--navy);width:18px;height:18px;flex:none}
+.items b{color:var(--navy)}
+.items small{display:block;color:var(--muted);margin-top:2px}
+.prog{font-weight:700;color:var(--navy);margin:0 0 14px}
+.tw{overflow-x:auto;margin-top:14px}
+table{border-collapse:collapse;width:100%;min-width:720px}
+th,td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.92rem}
+th{background:var(--bg);color:var(--navy)}
+td input[type=date]{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:6px}
+.fine{font-size:.85rem;color:var(--muted)}
+@media print{header,.top,#params,.noprint{display:none!important}body{background:#fff}main{padding:0}.sec,.card{break-inside:avoid;box-shadow:none}}
+.home{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--navy);text-decoration:none;font-weight:700;padding:8px 16px;border-radius:8px;margin-right:auto}
+.home:hover{background:var(--sky)}
+
+/* buttons: slight lift, soft shadow and a small colour change on hover */
+.btn,.home{transition:transform .2s cubic-bezier(.2,.7,.2,1),box-shadow .2s ease,background-color .2s ease,border-color .2s ease,color .2s ease}
+@media (hover:hover){
+  .btn:not(:disabled):hover{background:var(--ridge)}
+  .btn.alt:not(:disabled):hover{background:#EAF0FA;border-color:var(--ridge)}
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .btn:not(:disabled):hover,.home:hover{transform:translateY(-2px);box-shadow:0 10px 18px -10px rgba(10,31,68,.55)}
+  .btn:not(:disabled):active,.home:active{transform:translateY(0);box-shadow:none}
+}
+</style>
+<script src="config.js"></script>
+<script src="features.js"></script>
+</head>
+<body>
+<header><div class="bar"><a class="home" href="index.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span>Home</span></a></div></header>
+<section class="top"><div class="in"><h1>SAP ERP RFP Readiness Checklist Generator</h1>
+<p>Select your parameters below to generate your tailored Request for Proposal (RFP) roadmap.</p></div></section>
+
+<main>
+<form id="params" class="card" novalidate>
+<h2>Step 1: Define your project parameters</h2>
+<fieldset><legend>Project type</legend><div class="opts">
+<label class="opt"><input type="radio" name="type" value="pub"><span>S/4HANA Cloud Public Edition</span></label>
+<label class="opt"><input type="radio" name="type" value="pri"><span>S/4HANA Cloud Private Edition</span></label>
+<label class="opt"><input type="radio" name="type" value="onp"><span>On-Premises / Other</span></label></div></fieldset>
+<fieldset><legend>Scope <span class="hint">(select one or more)</span></legend><div class="opts">
+<label class="opt"><input type="checkbox" name="scope" value="fin"><span>Finance</span></label>
+<label class="opt"><input type="checkbox" name="scope" value="sal"><span>Sales</span></label>
+<label class="opt"><input type="checkbox" name="scope" value="sc"><span>Supply Chain</span></label>
+<label class="opt"><input type="checkbox" name="scope" value="mfg"><span>Manufacturing</span></label>
+<label class="opt"><input type="checkbox" name="scope" value="pro"><span>Procurement</span></label></div></fieldset>
+<fieldset><legend>Project phase</legend><div class="opts">
+<label class="opt"><input type="radio" name="phase" value="str"><span>Strategy &amp; Business Case</span></label>
+<label class="opt"><input type="radio" name="phase" value="rfp"><span>Vendor Selection &amp; RFP</span></label>
+<label class="opt"><input type="radio" name="phase" value="imp"><span>Implementation</span></label>
+<label class="opt"><input type="radio" name="phase" value="tra"><span>Active Transformation</span></label></div></fieldset>
+<fieldset><legend>Core priority</legend><div class="opts">
+<label class="opt"><input type="radio" name="prio" value="cost"><span>Cost Optimization</span></label>
+<label class="opt"><input type="radio" name="prio" value="speed"><span>Speed to Market (Timeline)</span></label>
+<label class="opt"><input type="radio" name="prio" value="std"><span>Standardisation (Fit-to-Standard)</span></label>
+<label class="opt"><input type="radio" name="prio" value="ai"><span>Innovation &amp; AI</span></label></div></fieldset>
+<button class="btn" type="submit" id="go" disabled>Generate my checklist</button>
+</form>
+<div id="out" hidden></div>
+<p class="fine noprint"><a href="index.html">Back to the site</a></p>
+</main>
+
+<script>
+const SC={fin:"Finance",sal:"Sales",sc:"Supply Chain",mfg:"Manufacturing",pro:"Procurement"};
+const TY={pub:"S/4HANA Cloud Public Edition",pri:"S/4HANA Cloud Private Edition",onp:"On-Premises / Other"};
+const PH={str:"Strategy & Business Case",rfp:"Vendor Selection & RFP",imp:"Implementation",tra:"Active Transformation"};
+const PR={cost:"Cost Optimization",speed:"Speed to Market (Timeline)",std:"Standardisation (Fit-to-Standard)",ai:"Innovation & AI"};
+// examples tailored to the selected scope
+const PROC={fin:"Record-to-Report",sal:"Order-to-Cash",pro:"Procure-to-Pay",mfg:"Plan-to-Produce",sc:"Plan-to-Fulfil"};
+const SYS={fin:"banks, tax engines, consolidation tools",sal:"CRM, CPQ, e-commerce platforms",pro:"supplier portals, e-procurement tools",mfg:"MES, PLM, quality systems",sc:"3PL / TMS and warehouse systems"};
+const DEMO={fin:"run a multi-entity period-end close with intercompany eliminations",sal:"process a complex intercompany dropshipment sales order",pro:"execute a requisition-to-payment cycle with a three-way match exception",mfg:"run a make-to-order production order with a late material shortage",sc:"re-plan a delayed inbound shipment and reallocate stock across sites"};
+const AIX={fin:"automated invoice matching",sal:"AI-assisted order entry and pricing suggestions",pro:"guided buying and supplier-risk insights",mfg:"production schedule optimisation",sc:"delay prediction and stock-rebalancing proposals"};
+// sections each phase / priority puts the spotlight on
+const PF={str:["1","2","5"],rfp:[],imp:["4","7"],tra:["3","4","7"]};
+const RF={cost:["4","5","7"],speed:["3","4","8"],std:["3","4","7"],ai:["6","7"]};
+const PBAN={
+ str:"You are at Strategy & Business Case: finalize sections 1, 2 and the evaluation model (5) before releasing any RFP. Sections 6 and 8 can wait.",
+ rfp:"You are at Vendor Selection & RFP: work through all sections in order and complete the milestone dates in section 8 before releasing the package.",
+ imp:"You are in Implementation: use this list to audit your integrator's contract and governance. Spotlight on sections 4 and 7, including the de-risking strategy.",
+ tra:"You are in Active Transformation: spotlight on governance (4), clean core, upgrade cycles and AI (7), and re-baseline sections 3 and 3b if scope grows."};
+const RBAN={
+ cost:"Priority: Cost Optimization. Insist on the standardized pricing templates (5), compare internal effort with integrator effort (4) and demand AI-driven delivery to reduce cost (7).",
+ speed:"Priority: Speed to Market. Hold the timeline hard (8), agree the de-risking strategy early (4) and cap local variation, which is the usual source of delay (3).",
+ std:"Priority: Standardisation. Fix the global core policy up front (3), enforce Fit-to-Standard (4) and require clean-core proof (7).",
+ ai:"Priority: Innovation & AI. Make section 7 a scoring criterion and script demos that show AI on your own scope (6)."};
+const MILES=[
+["RFP Launch","09:00 AM CET","Distribution of all RFP assets & templates"],
+["Vendor Questions Deadline","05:00 PM CET","Max 30 questions per vendor via portal"],
+["Official Q&A Responses","06:00 PM CET","Consolidated anonymized PDF sent to all"],
+["RFP Response Deadline","06:00 PM CET","Hard cut-off. No exceptions"],
+["Preselection Confirmed","05:00 PM CET","Shortlist of top 2–3 vendors notified"],
+["Oral Presentations / Orals","4-hour blocks","Standardized agenda enforced"],
+["SoW & Commercial Finalization","2-week window","Parallel negotiations with top 2 finalists"],
+["Final Project Award","Immediate","Contract signing and execution"]];
+
+function sections(S){
+  const sel=S.scope,has=k=>sel.includes(k),by=m=>sel.map(k=>m[k]).join("; "),list=m=>sel.map(k=>m[k]).join(", ");
+  const meth=S.type==="pub"?"Enforce SAP Activate (Fit-to-Standard) as the mandatory methodology for the Public Edition."
+    :S.type==="pri"?"Clarify whether Greenfield (new implementation) or Brownfield (system conversion) is required for the Private Edition."
+    :"State the required methodology and path (Greenfield, Brownfield or selective data transition) and whether SAP Activate is mandatory.";
+  return [
+  {id:"1",t:"Business Objectives & Scope",i:[
+   ["Define the “Why”","Document explicit business drivers (e.g., merging legal entities, replacing a legacy ERP, scaling globally)."],
+   ["Map the deployment scope","Clearly list which entities, countries and facilities are in Phase 1 versus subsequent rollouts."],
+   ["Identify transaction volumes","Document current and projected volumes (e.g., sales orders, invoices or journal entries per year) so vendors can size environments accurately."]]},
+  {id:"2",t:"Functional & Technical Requirements",i:[
+   ["Build the master process list (L2/L3)","Outline core processes tailored to your scope: "+list(PROC)+"."],
+   ["Identify regulatory hardlines","Isolate specific compliance needs (e.g., IFRS 16, local tax regulations, GDPR or industry-specific validations)."],
+   ["Define the integration landscape","Inventory all non-SAP applications that must connect to the new ERP. Typical for your scope: "+by(SYS)+"."]]},
+  {id:"3",t:"Global Template, Geographic Presence & Localization",i:[
+   ["Establish a global core policy","Decide upfront how much local variation is permitted versus strict adherence to a single global standard."],
+   ["Map statutory requirements","List mandatory localizations (e.g., invoicing formats such as SAF-T, country-specific payroll, electronic tax filing)."],
+   ["Language and currency matrix","Define required system UI languages, document print outputs and multi-currency reporting frameworks."]]},
+  {id:"3b",t:"Legal Entities & Logistics Footprint",i:[
+   ["Map legal entities & company codes","Document the exact number of legal entities (company codes) and their countries to define the scope of the global chart of accounts, tax reporting and consolidation."],
+   has("mfg")&&["Define plant & production geography","List all manufacturing plants by country, identifying which need advanced production planning (PP-DS) versus standard assembly."],
+   has("sc")&&["Inventory internal warehouses","Detail the number, size and location of self-managed warehouses, specifying where complex warehouse management (SAP EWM) is needed versus basic inventory management."],
+   has("sc")&&["Quantify 3PL & 4PL outsourcing","Detail the third-party (3PL) and fourth-party (4PL) logistics providers and their operating countries, to scope standard shipping interfaces (EDI/API)."],
+   (has("sc")||has("sal"))&&["Establish the cross-border & intercompany matrix","Define the trade lanes between plants and warehouses to identify requirements for Global Trade Services (GTS), customs and automated cross-border intercompany billing."]]},
+  {id:"4",t:"Implementation Approach & Governance",i:[
+   ["Mandate the methodology",meth],
+   ["Define team resource allocation","Outline your internal team's availability (subject matter experts) versus what you expect from the system integrator (SI)."],
+   ["Program de-risking & mitigation strategy","Require the partner to submit a comprehensive strategy for de-risking the program."]]},
+  {id:"5",t:"Evaluation Criteria & Scoring",i:[
+   ["Create a weighted scoring model","Define your matrix (e.g., 40% functional fit, 30% commercial cost, 20% technical architecture, 10% vendor chemistry)."],
+   ["Establish minimum thresholds","Determine “deal-breakers” (e.g., at least 3 live references in your specific industry)."],
+   ["Standardize pricing templates","Send vendors comprehensive spreadsheet templates covering all costs, experience levels and shoring models. License or tool costs must be justified by efficiency and effort reduction."]]},
+  {id:"6",t:"Vendor Demonstrations & Oral Presentations",i:[
+   ["Script your demo scenarios","Do not let vendors show canned presentations. Provide 3 to 5 real-world business scenarios. Ideas for your scope: "+by(DEMO)+"."],
+   ["Score the team, not just the salesperson","Require the proposed Project Manager and Lead Solution Architects to present, not just the sales team."],
+   ["Set strict timeboxes","Allocate dedicated, equal blocks for system presentation, architecture review and Q&A."]]},
+  {id:"7",t:"AI Capabilities & Future Extensibility",i:[
+   ["Enforce clean core principles","Require the vendor to prove how customizations will be handled (e.g., with SAP Build / Business Technology Platform) without touching the core code."],
+   ["Request specific AI use cases","Ask how the vendor uses SAP Joule or embedded AI features to optimize your scope. Examples to probe: "+by(AIX)+"."],
+   ["Assess innovation roadmaps","Ensure the proposed solution accounts for the SAP upgrade cycles (twice-yearly or annual, depending on edition)."],
+   ["AI-driven lifecycle delivery","Require the vendor to detail how generative AI and automation agents are embedded across the project lifecycle (automated discovery, functional specs, configuration, code refactoring, data cleansing, testing, training creation) to reduce delivery cost while maximizing quality."]]},
+  {id:"8",t:"RFP Procurement Timeline & Milestones",i:[
+   ["RFP release & intention to bid","Issue the RFP package to qualified vendors and set a 48-hour deadline for their formal “Intention to Bid” or NDA."],
+   ["Vendor questions deadline & caps","Set a strict deadline for questions and cap them at 30 per vendor to prevent “RFP spamming” and force high-quality inquiries."],
+   ["Q&A resolution strategy","Specify whether answers go out as one combined, anonymized document to all vendors, or through isolated 1-on-1 calls for highly proprietary architectures."],
+   ["RFP submission deadline & hard cut-off","Set a definitive closing date and time (e.g., 6:00 PM CET) and state that late submissions via the procurement portal are locked out automatically."],
+   ["Down-selection & preselection notice","Allocate a structured window to score proposals and notify the top 2 to 3 vendors."],
+   ["Oral presentations and guided demos","Schedule a 2-week window for orals and enforce a standardized agenda across all vendors for objective scoring."],
+   ["SoW parallel negotiation","Start contract and SoW markups with the top two vendors simultaneously to keep commercial leverage before final selection."],
+   ["Final award & contract execution","Issue the award notice, execute the Master Services Agreement (MSA) and trigger the project kick-off."]]}
+  ];
+}
+
+const form=document.getElementById("params"),go=document.getElementById("go"),out=document.getElementById("out");
+const val=n=>{const e=form.querySelector('input[name="'+n+'"]:checked');return e?e.value:null};
+const scopes=()=>[...form.querySelectorAll('input[name="scope"]:checked')].map(e=>e.value);
+function ready(){go.disabled=!(val("type")&&val("phase")&&val("prio")&&scopes().length)}
+form.addEventListener("change",ready);
+out.addEventListener("change",()=>progress());
+
+function progress(){
+  const all=out.querySelectorAll(".items input"),n=[...all].filter(i=>i.checked).length;
+  const p=document.getElementById("pg");if(p)p.textContent=n+" / "+all.length+" items ticked";
+}
+form.addEventListener("submit",e=>{
+  e.preventDefault();ready();if(go.disabled)return;
+  const S={type:val("type"),phase:val("phase"),prio:val("prio"),scope:scopes()};
+  const focus=new Set([...PF[S.phase],...RF[S.prio]]);
+  const secs=sections(S);
+  let h=`<h2>Step 2: Your tailored RFP checklist</h2><ul class="chips"><li>${TY[S.type]}</li>`+S.scope.map(k=>`<li>${SC[k]}</li>`).join("")+`<li>${PH[S.phase]}</li><li>${PR[S.prio]}</li></ul>`+
+    `<p class="note">${PBAN[S.phase]}</p><p class="note">${RBAN[S.prio]}</p>`+
+    `<p class="prog" id="pg"></p><p class="noprint"><button type="button" class="btn" id="print">Print / save as PDF</button><button type="button" class="btn alt" id="edit">Change parameters</button></p>`;
+  secs.forEach(s=>{
+    const items=s.i.filter(Boolean);
+    h+=`<section class="sec${focus.has(s.id)?" focus":""}"><h3>${s.id}. ${s.t}${focus.has(s.id)?'<span class="badge">Focus for you</span>':""}</h3><ul class="items">`+
+      items.map(x=>`<li><label><input type="checkbox"><span><b>${x[0]}.</b><small>${x[1]}</small></span></label></li>`).join("")+`</ul>`;
+    if(s.id==="8"){
+      h+=`<p class="fine">Fill out these dates before sending the RFP package, to guarantee alignment.</p><div class="tw"><table><thead><tr><th>Milestone phase</th><th>Target date</th><th>Local time / format</th><th>Notes &amp; constraints</th></tr></thead><tbody>`+
+        MILES.map((m,k)=>`<tr><td><b>${m[0]}</b></td><td><input type="date" aria-label="Target date for ${m[0]}"></td><td>${m[1]}</td><td>${m[2]}</td></tr>`).join("")+`</tbody></table></div>`;
+    }
+    h+=`</section>`;
+  });
+  out.innerHTML=h;out.hidden=false;progress();
+  document.getElementById("print").onclick=()=>window.print();
+  document.getElementById("edit").onclick=()=>{form.scrollIntoView({behavior:"smooth"})};
+  out.scrollIntoView({behavior:"smooth",block:"start"});
+});
+</script>
+</body>
+</html>

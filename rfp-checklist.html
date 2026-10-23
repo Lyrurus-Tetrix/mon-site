@@ -58,7 +58,23 @@ td input[type=date]{font:inherit;padding:6px 8px;border:1px solid var(--line);bo
 @media print{header,.top,#params,.noprint{display:none!important}body{background:#fff}main{padding:0}.sec,.card{break-inside:avoid;box-shadow:none}}
 .home{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--navy);text-decoration:none;font-weight:700;padding:8px 16px;border-radius:8px;margin-right:auto}
 .home:hover{background:var(--sky)}
+
+/* buttons: slight lift, soft shadow and a small colour change on hover */
+.btn,.home{transition:transform .2s cubic-bezier(.2,.7,.2,1),box-shadow .2s ease,background-color .2s ease,border-color .2s ease,color .2s ease}
+@media (hover:hover){
+  .btn:not(:disabled):hover{background:var(--ridge)}
+  .btn.alt:not(:disabled):hover{background:#EAF0FA;border-color:var(--ridge)}
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .btn:not(:disabled):hover,.home:hover{transform:translateY(-2px);box-shadow:0 10px 18px -10px rgba(10,31,68,.55)}
+  .btn:not(:disabled):active,.home:active{transform:translateY(0);box-shadow:none}
+}
+:root{--deep-grad:linear-gradient(135deg,#050E24 0%,#0B2150 55%,#12306B 100%)}   /* darker navy, lightening slightly towards the bottom right */
+header{background:var(--deep-grad)}
+.top{background:var(--deep-grad)}
 </style>
+<script src="config.js"></script>
+<script src="features.js"></script>
 </head>
 <body>
 <header><div class="bar"><a class="home" href="index.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span>Home</span></a></div></header>

@@ -169,6 +169,31 @@ footer.foot{text-align:left;background:#fff;border-top:1px solid var(--line);pad
 .tool p{margin:0 0 20px;color:var(--muted)}
 .no-offer [data-feature="offer"],.no-tools [data-feature="tools"]{display:none!important}
 .form-off [data-feature="form"],.form-on [data-feature="deloitte"]{display:none!important}
+/* card hover: a very light lift with a soft shadow underneath */
+.svc>div,.tool,.dgrid .row,.exp.cards>div,.cert,.enable{transition:transform .28s cubic-bezier(.2,.7,.2,1),box-shadow .28s ease,border-color .28s ease}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .svc>div:hover,.svc>div:focus-within,.tool:hover,.dgrid .row:hover,.exp.cards>div:hover,.cert:hover,.enable:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 24px -14px rgba(10,31,68,.35),0 2px 6px rgba(10,31,68,.05)}
+  .svc>div:hover,.svc>div:focus-within,.tool:hover,.dgrid .row:hover,.exp.cards>div:hover,.cert:hover{border-color:#AEBBD3}
+}
+
+/* buttons: slight lift, soft shadow and a small colour change on hover */
+.btn{transition:transform .2s cubic-bezier(.2,.7,.2,1),box-shadow .2s ease,background-color .2s ease,border-color .2s ease,color .2s ease}
+@media (hover:hover){
+  .btn.p:hover{background:#A9CAFF}
+  .btn.s:hover{background:rgba(255,255,255,.14);border-color:#fff}
+  .btn.dk:hover{background:var(--ridge)}
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 18px -10px rgba(10,31,68,.55)}
+  .btn:active{transform:translateY(0);box-shadow:none}
+}
+:root{--deep-grad:linear-gradient(135deg,#050E24 0%,#0B2150 55%,#12306B 100%)}   /* darker navy, lightening slightly towards the bottom right */
+header{background:var(--deep-grad)}
+.hero{background:var(--deep-grad)}
+.enable{background:var(--deep-grad)}
+.contact{background:var(--deep-grad)}
 </style>
 <noscript><style>.hero:not(.ready) .hero-bg::before,.hero:not(.ready) .fog{opacity:1}</style></noscript>
 <script src="config.js"></script>
