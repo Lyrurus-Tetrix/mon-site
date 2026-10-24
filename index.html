@@ -194,6 +194,17 @@ header{background:var(--deep-grad)}
 .hero{background:var(--deep-grad)}
 .enable{background:var(--deep-grad)}
 .contact{background:var(--deep-grad)}
+/* footer: night-blue diagonal gradient over the summit photo, lighter towards the bottom right */
+footer.foot{position:relative;isolation:isolate;overflow:hidden;background:var(--deep-grad);color:#fff;border-top:0;padding:56px 24px 26px}
+footer.foot::before{content:"";position:absolute;inset:0;z-index:-2;background:url(footer.webp) right 8%/cover no-repeat}
+@media (min-width:761px){footer.foot::before{inset:0 0 0 26%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 32%);mask-image:linear-gradient(90deg,transparent 0,#000 32%)}}
+footer.foot::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(135deg,rgba(5,14,36,.92) 0%,rgba(11,33,80,.82) 55%,rgba(18,48,107,.66) 100%)}
+.foot strong{color:#fff}
+.foot p,.foot .cp{color:#D6E2FA}
+.foot .links a{color:#fff}
+.foot .links a,.foot strong,.foot p{text-shadow:0 1px 10px rgba(5,14,36,.6)}
+/* portrait: thin white edge and a soft two-layer shadow so it lifts off the page */
+.photo{box-shadow:0 0 0 3px #fff,0 22px 34px -18px rgba(5,14,36,.55),0 8px 14px -8px rgba(5,14,36,.3)}
 </style>
 <noscript><style>.hero:not(.ready) .hero-bg::before,.hero:not(.ready) .fog{opacity:1}</style></noscript>
 <script src="config.js"></script>
