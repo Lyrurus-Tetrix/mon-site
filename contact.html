@@ -48,6 +48,11 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 }
 :root{--deep-grad:linear-gradient(135deg,#050E24 0%,#0B2150 55%,#12306B 100%)}   /* darker navy, lightening slightly towards the bottom right */
 header{background:var(--deep-grad)}
+.find{margin-top:44px;border-top:1px solid var(--line);padding-top:30px}
+.find h2{margin:0 0 10px}
+.addr{margin:0 0 16px;color:var(--ink)}
+.map{position:relative;height:340px;border-radius:12px;overflow:hidden;background:var(--deep-grad);box-shadow:0 12px 24px -14px rgba(10,31,68,.35)}
+.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 </style>
 <script src="config.js"></script>
 <script src="features.js"></script>
@@ -72,6 +77,12 @@ header{background:var(--deep-grad)}
 <button class="btn" type="submit" id="send" data-i="send"></button>
 <p id="status" role="status" aria-live="polite"></p>
 </form>
+<section class="find" id="find">
+<h2 data-i="fm_h"></h2>
+<p class="addr"><strong>Rue du Pré-de-la-Bichette 1</strong><br>1202 Genève</p>
+<div class="map"><iframe id="mapframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title=""></iframe></div>
+<p class="fine" data-i="fm_note"></p>
+</section>
 <p class="note" data-i="note"></p>
 <a class="back" href="index.html" data-i="back"></a>
 </main>
@@ -85,23 +96,26 @@ en:{t:"Get in touch",intro:"Planning a transformation or preparing an RFP? Tell 
 l_name:"Your name",l_email:"Your email",l_msg:"Your message",send:"Send message",sending:"Sending...",
 ok:"Thank you, your message has been sent.",err:"Something went wrong. Please try again, or reach out on LinkedIn.",
 miss:"Please fill in your name, a valid email and a message.",key:"The form is not configured yet.",wait:"Please wait a moment before sending.",again:"A message was already sent from this browser. Please try again in a few minutes.",
-note:"Your message is delivered by email through the Web3Forms service and used only to reply to you.",sentbtn:"Already sent",lock:"A message was already sent from this browser. You can send another in about {m} min.",home:"Home",back:"Back to the site"},
+note:"Your message is delivered by email through the Web3Forms service and used only to reply to you.",sentbtn:"Already sent",lock:"A message was already sent from this browser. You can send another in about {m} min.",fm_h:"Find me",fm_note:"The map is provided by Google. Loading it connects your browser to Google, which may set cookies.",fm_title:"Map: Rue du Pré-de-la-Bichette 1, 1202 Geneva",hl:"en",home:"Home",back:"Back to the site"},
 fr:{t:"Me contacter",intro:"Un projet de transformation ou un appel d'offres en préparation ? Décrivez-le-moi en quelques lignes et je reviens vers vous.",
 l_name:"Votre nom",l_email:"Votre e-mail",l_msg:"Votre message",send:"Envoyer",sending:"Envoi en cours...",
 ok:"Merci, votre message a bien été envoyé.",err:"Une erreur est survenue. Réessayez, ou contactez-moi sur LinkedIn.",
 miss:"Merci de renseigner votre nom, un e-mail valide et un message.",key:"Le formulaire n'est pas encore configuré.",wait:"Merci de patienter un instant avant d’envoyer.",again:"Un message a déjà été envoyé depuis ce navigateur. Réessayez dans quelques minutes.",
-note:"Votre message est transmis par e-mail via le service Web3Forms et utilisé uniquement pour vous répondre.",sentbtn:"Déjà envoyé",lock:"Un message a déjà été envoyé depuis ce navigateur. Vous pourrez en envoyer un autre dans environ {m} min.",home:"Accueil",back:"Retour au site"},
+note:"Votre message est transmis par e-mail via le service Web3Forms et utilisé uniquement pour vous répondre.",sentbtn:"Déjà envoyé",lock:"Un message a déjà été envoyé depuis ce navigateur. Vous pourrez en envoyer un autre dans environ {m} min.",fm_h:"Me trouver",fm_note:"La carte est fournie par Google. Son chargement connecte votre navigateur à Google, qui peut déposer des cookies.",fm_title:"Carte : Rue du Pré-de-la-Bichette 1, 1202 Genève",hl:"fr",home:"Accueil",back:"Retour au site"},
 de:{t:"Kontakt aufnehmen",intro:"Eine Transformation geplant oder eine Ausschreibung in Vorbereitung? Schildern Sie mir kurz Ihr Anliegen, ich melde mich bei Ihnen.",
 l_name:"Ihr Name",l_email:"Ihre E-Mail",l_msg:"Ihre Nachricht",send:"Nachricht senden",sending:"Wird gesendet...",
 ok:"Vielen Dank, Ihre Nachricht wurde gesendet.",err:"Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie mir auf LinkedIn.",
 miss:"Bitte geben Sie Ihren Namen, eine gültige E-Mail und eine Nachricht ein.",key:"Das Formular ist noch nicht konfiguriert.",wait:"Bitte warten Sie einen Moment vor dem Senden.",again:"Von diesem Browser wurde bereits eine Nachricht gesendet. Bitte versuchen Sie es in einigen Minuten erneut.",
-note:"Ihre Nachricht wird per E-Mail über den Dienst Web3Forms zugestellt und nur zur Beantwortung verwendet.",sentbtn:"Bereits gesendet",lock:"Von diesem Browser wurde bereits eine Nachricht gesendet. Sie können in etwa {m} Min. eine weitere senden.",home:"Startseite",back:"Zurück zur Website"}
+note:"Ihre Nachricht wird per E-Mail über den Dienst Web3Forms zugestellt und nur zur Beantwortung verwendet.",sentbtn:"Bereits gesendet",lock:"Von diesem Browser wurde bereits eine Nachricht gesendet. Sie können in etwa {m} Min. eine weitere senden.",fm_h:"So finden Sie mich",fm_note:"Die Karte wird von Google bereitgestellt. Beim Laden verbindet sich Ihr Browser mit Google, das Cookies setzen kann.",fm_title:"Karte: Rue du Pré-de-la-Bichette 1, 1202 Genf",hl:"de",home:"Startseite",back:"Zurück zur Website"}
 };
 let L="en";
 function setLang(l){
   L=l;document.documentElement.lang=l;
   document.querySelectorAll("[data-i]").forEach(e=>{e.textContent=T[l][e.dataset.i]});
   document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===l));
+  const mf=document.getElementById("mapframe");   // "Find me" map, in the visitor's language
+  if(mf){const u="https://www.google.com/maps?q="+encodeURIComponent("Rue du Pré-de-la-Bichette 1, 1202 Genève")+"&hl="+T[l].hl+"&z=16&output=embed";
+    if(mf.getAttribute("src")!==u)mf.setAttribute("src",u);mf.title=T[l].fm_title}
   try{refreshSend(false)}catch(e){}   // not ready yet on the very first call
   try{localStorage.setItem("lang",l)}catch(e){}
 }
@@ -147,6 +161,7 @@ f.addEventListener("submit",async e=>{
   }catch(x){say(T[L].err,"err")}
   busyFlag=false;refreshSend(true);
 });
+
 </script>
 </body>
 </html>
