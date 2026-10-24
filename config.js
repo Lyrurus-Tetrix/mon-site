@@ -3,5 +3,8 @@
 window.SITE = {
   showOffer: true,        // "What I offer" section (the services) and its menu links
   showTools: true,        // "Interactive tools": readiness assessment and RFP checklist (section, menu links and the two tool pages)
-  showContactForm: true   // false: the contact section links to your Deloitte profile instead; true: the contact form is used
+  showContactForm: true,  // false: the contact section links to your Deloitte profile instead; true: the contact form is used
+  showChatbot: true,       // Botpress chat bubble on the home page (false = nothing is loaded from Botpress)
+  chatbotInjectUrl: "https://cdn.botpress.cloud/webchat/v3.7/inject.js",
+  chatbotConfigUrl: "https://files.bpcontent.cloud/2026/10/24/11/20261024111238-IHGIHQ8W.js"   // copy the new address here if you change the bot's look in Botpress
 };
