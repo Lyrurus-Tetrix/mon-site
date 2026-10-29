@@ -205,6 +205,9 @@ footer.foot::after{content:"";position:absolute;inset:0;z-index:-1;background:li
 .foot .links a,.foot strong,.foot p{text-shadow:0 1px 10px rgba(5,14,36,.6)}
 /* portrait: thin white edge and a soft two-layer shadow so it lifts off the page */
 .photo{box-shadow:0 0 0 3px #fff,0 22px 34px -18px rgba(5,14,36,.55),0 8px 14px -8px rgba(5,14,36,.3)}
+.contact .findbox{max-width:760px;margin:46px auto 0}
+.findbox .map{position:relative;height:320px;border-radius:12px;overflow:hidden;background:var(--navy);border:1px solid rgba(255,255,255,.18);box-shadow:0 18px 32px -18px rgba(0,0,0,.6)}
+.findbox .map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 </style>
 <noscript><style>.hero:not(.ready) .hero-bg::before,.hero:not(.ready) .fog{opacity:1}</style></noscript>
 <script src="config.js"></script>
@@ -339,7 +342,9 @@ footer.foot::after{content:"";position:absolute;inset:0;z-index:-1;background:li
 <p data-feature="deloitte" data-i="c_p2"></p>
 <a class="btn p" href="contact.html" data-feature="form" data-i="c_btn"></a>
 <a class="btn p" href="https://www.deloitte.com/ch/en/about/people/profiles.agavanier+fea06dc5.html" target="_blank" rel="noopener noreferrer" data-feature="deloitte" data-i="c_dl"></a>
-<a class="btn s" href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a></div></section>
+<a class="btn s" href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a>
+<div class="findbox" data-feature="deloitte"><div class="map"><iframe id="mapframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title=""></iframe></div></div>
+</div></section>
 <footer class="foot"><div class="fin"><div><strong>Arnaud Gavanier</strong><p data-i="f_tag"></p></div>
 <div class="links"><a href="#about" data-i="n_about"></a><a href="#services" data-feature="offer" data-i="n_svc"></a><a href="#experience" data-i="n_exp"></a><a href="transformation-readiness.html" data-feature="tools" data-i="n_assess"></a><a href="rfp-checklist.html" data-feature="tools" data-i="n_rfp"></a><a href="contact.html" data-feature="form" data-i="c_btn"></a><a href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a><a href="https://www.deloitte.com/ch/en/about/people/profiles.agavanier+fea06dc5.html" target="_blank" rel="noopener noreferrer" data-i="f_dl"></a></div></div>
 <p class="cp">© Arnaud Gavanier</p></footer>
@@ -384,7 +389,7 @@ dq_h:"What the study found",
 n_assess:"Readiness assessment",n_rfp:"RFP checklist",
 tl_h:"Interactive tools",tl_1t:"Transformation readiness assessment",tl_1p:"25 questions across 8 dimensions to see how ready your organization is for a transformation, with a radar view and a gap matrix.",tl_1b:"Start the assessment",tl_2t:"RFP checklist generator",tl_2p:"Choose your project type, scope, phase and priority to get a tailored SAP ERP RFP checklist and milestone plan.",tl_2b:"Generate my checklist",
 c_p2:"Planning a transformation or preparing an RFP? Get in touch through my Deloitte profile or on LinkedIn.",c_dl:"Contact me via Deloitte",
-c_h:"Let's talk",c_btn:"Send a message",c_p:"Planning a transformation or preparing an RFP? Send me a message."},
+fm_title:"Map: Deloitte Geneva, Rue du Pré-de-la-Bichette 1, 1202 Geneva",hl:"en",c_h:"Let's talk",c_btn:"Send a message",c_p:"Planning a transformation or preparing an RFP? Send me a message."},
 fr:{n_about:"À propos",n_svc:"Services",n_exp:"Expérience",n_con:"Contact",
 h_title:"Leader en transformation d’entreprise pour les programmes SAP S/4HANA",
 h_sub:"J’accompagne les organisations dans la simplification de leur modèle opérationnel, le déploiement de templates mondiaux et l’intégration concrète de l’IA.",
@@ -423,7 +428,7 @@ dq_h:"Ce que montre l’étude",
 n_assess:"Évaluation de maturité",n_rfp:"Checklist RFP",
 tl_h:"Outils interactifs",tl_1t:"Évaluation de la maturité et de la préparation",tl_1p:"25 questions réparties en 8 dimensions pour mesurer la préparation de votre organisation à une transformation, avec un radar et une matrice des écarts.",tl_1b:"Démarrer l’évaluation",tl_2t:"Générateur de checklist RFP",tl_2p:"Choisissez le type de projet, le périmètre, la phase et la priorité pour obtenir une checklist RFP SAP ERP adaptée et un plan de jalons (en anglais).",tl_2b:"Générer ma checklist",
 c_p2:"Un projet de transformation ou un appel d’offres en préparation ? Contactez-moi via mon profil Deloitte ou sur LinkedIn.",c_dl:"Me contacter via Deloitte",
-c_h:"Parlons-en",c_btn:"Envoyer un message",c_p:"Un projet de transformation ou un appel d'offres en préparation ? Écrivez-moi."},
+fm_title:"Carte : Deloitte Genève, Rue du Pré-de-la-Bichette 1, 1202 Genève",hl:"fr",c_h:"Parlons-en",c_btn:"Envoyer un message",c_p:"Un projet de transformation ou un appel d'offres en préparation ? Écrivez-moi."},
 de:{n_about:"Über mich",n_svc:"Leistungen",n_exp:"Erfahrung",n_con:"Kontakt",
 h_title:"Transformationsleiter für SAP-S/4HANA-Programme",
 h_sub:"Ich unterstütze Unternehmen dabei, ihr Operating Model zu vereinfachen, globale Templates skalierbar auszurollen und KI praxisnah einzusetzen.",
@@ -462,13 +467,16 @@ dq_h:"Was die Studie zeigt",
 n_assess:"Readiness-Assessment",n_rfp:"RFP-Checkliste",
 tl_h:"Interaktive Tools",tl_1t:"Reifegrad-Assessment für Transformationen",tl_1p:"25 Fragen in 8 Dimensionen, um zu sehen, wie bereit Ihr Unternehmen für eine Transformation ist, mit Radar-Ansicht und Gap-Matrix (auf Englisch oder Französisch).",tl_1b:"Assessment starten",tl_2t:"RFP-Checklisten-Generator",tl_2p:"Wählen Sie Projekttyp, Umfang, Phase und Priorität und erhalten Sie eine massgeschneiderte SAP-ERP-RFP-Checkliste samt Meilensteinplan (auf Englisch).",tl_2b:"Checkliste erstellen",
 c_p2:"Eine Transformation geplant oder eine Ausschreibung in Vorbereitung? Erreichen Sie mich über mein Deloitte-Profil oder auf LinkedIn.",c_dl:"Kontakt über Deloitte",
-c_h:"Sprechen wir",c_btn:"Nachricht senden",c_p:"Eine Transformation geplant oder eine Ausschreibung in Vorbereitung? Schreiben Sie mir."}
+fm_title:"Karte: Deloitte Genf, Rue du Pré-de-la-Bichette 1, 1202 Genf",hl:"de",c_h:"Sprechen wir",c_btn:"Nachricht senden",c_p:"Eine Transformation geplant oder eine Ausschreibung in Vorbereitung? Schreiben Sie mir."}
 };
 function setLang(l){
   document.documentElement.lang=l;
   document.querySelectorAll("[data-date]").forEach(e=>{e.textContent=new Date(e.dataset.date+"-01T00:00:00").toLocaleDateString(l,{month:"short",year:"numeric"})});
   document.querySelectorAll("[data-i]").forEach(e=>{e.textContent=T[l][e.dataset.i]});
   document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===l));
+  const mf=document.getElementById("mapframe");   // map of the Deloitte Geneva office, in the visitor's language
+  if(mf&&document.documentElement.classList.contains("form-off")){const u="https://www.google.com/maps?q="+encodeURIComponent("Deloitte, Rue du Pré-de-la-Bichette 1, 1202 Genève")+"&hl="+T[l].hl+"&z=16&output=embed";
+    if(mf.getAttribute("src")!==u)mf.setAttribute("src",u);mf.title=T[l].fm_title}
   try{localStorage.setItem("lang",l)}catch(e){}
 }
 document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>setLang(b.dataset.l));
