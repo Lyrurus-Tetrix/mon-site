@@ -2,6 +2,7 @@
 // Preview before launch: open index.html?preview (stays on for this browser tab; index.html?preview=off turns it off).
 (function () {
   var S = window.SITE || {};
+  if (!window.SITE && window.console) console.error("config.js could not be read: check it for a typo (for example fasle instead of false). Every option stays off until it is fixed.");
   var showOffer = !!S.showOffer, showTools = !!S.showTools, showForm = !!S.showContactForm, showChat = !!S.showChatbot;
   try {
     var q = location.search;
