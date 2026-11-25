@@ -1,5 +1,5 @@
 // Applies config.js to the page. Nothing to edit here.
-// Preview before launch: open index.html?preview (stays on for this browser tab; index.html?preview=off turns it off).
+// Preview before launch: open /?preview (stays on for this browser tab; /?preview=off turns it off).
 (function () {
   var S = window.SITE || {};
   if (!window.SITE && window.console) console.error("config.js could not be read: check it for a typo (for example fasle instead of false). Every option stays off until it is fixed.");
@@ -11,13 +11,15 @@
     if (sessionStorage.getItem("preview") === "1") { showOffer = true; showTools = true; showForm = true; showChat = true; }
   } catch (e) {}
   var h = document.documentElement;
+  var localeMatch = location.pathname.match(/^\/(fr|de)\//);
+  var homePath = localeMatch ? "/" + localeMatch[1] + "/" : "/";
   if (!showOffer) h.classList.add("no-offer");
   if (!showTools) h.classList.add("no-tools");
   h.classList.add(showForm ? "form-on" : "form-off");
   // the two tool pages are not reachable while the tools are switched off
-  if (!showTools && /(transformation-readiness|rfp-checklist)/.test(location.pathname)) location.replace("index.html");
+  if (!showTools && /(transformation-readiness|rfp-checklist)/.test(location.pathname)) location.replace(homePath);
   // the contact form page is not reachable while the form is switched off
-  if (!showForm && /(^|\/)contact(\.html)?\/?$/.test(location.pathname)) location.replace("index.html#contact");
+  if (!showForm && /(^|\/)(?:(?:en|fr|de)\/)?contact(\.html)?\/?$/.test(location.pathname)) location.replace(homePath + "#contact");
   // Botpress chat bubble: loaded after the page, only where <html data-chatbot> is set, and only if switched on
   if (showChat && S.chatbotInjectUrl && S.chatbotConfigUrl && h.hasAttribute("data-chatbot")) {
     window.addEventListener("load", function () {

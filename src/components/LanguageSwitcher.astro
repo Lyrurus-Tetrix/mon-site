@@ -1,0 +1,13 @@
+---
+const { lang } = Astro.props;
+const languages = [
+  { code: 'en', label: 'EN', href: '/' },
+  { code: 'fr', label: 'FR', href: '/fr/' },
+  { code: 'de', label: 'DE', href: '/de/' },
+];
+---
+<div class="lang" role="group" aria-label="Language">
+  {languages.map(({ code, label, href }) => (
+    <a href={href} aria-current={lang === code ? 'page' : undefined}>{label}</a>
+  ))}
+</div>

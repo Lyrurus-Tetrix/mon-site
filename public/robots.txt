@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arnaud.gavanier.com/sitemap-index.xml

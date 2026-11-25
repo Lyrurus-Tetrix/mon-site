@@ -1,0 +1,88 @@
+---
+const { lang, title, description, imageAlt, profilePhotoUrl } = Astro.props;
+const urlFor = (locale) => new URL(locale === 'en' ? '/' : `/${locale}/`, Astro.site);
+const canonical = urlFor(lang);
+const shareImage = new URL('/og-image.jpg', Astro.site);
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  url: canonical.href,
+  mainEntity: {
+    '@type': 'Person',
+    '@id': new URL('/#person', Astro.site).href,
+    name: 'Arnaud Gavanier',
+    url: new URL('/', Astro.site).href,
+    image: profilePhotoUrl,
+    description,
+    jobTitle: 'Business Transformation Leader, SAP S/4HANA',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Deloitte',
+    },
+    knowsLanguage: ['en', 'fr', 'de'],
+    knowsAbout: [
+      'SAP S/4HANA',
+      'Business transformation',
+      'Operating model design',
+      'Global template deployment',
+      'SAP Activate',
+      'SAP Business AI',
+    ],
+    sameAs: [
+      'https://www.linkedin.com/in/arnaud-gavanier/',
+      'https://www.deloitte.com/ch/en/about/people/profiles.agavanier+fea06dc5.html',
+    ],
+  },
+};
+const personSchemaJson = JSON.stringify(personSchema).replace(/</g, '\\u003c');
+const ogLocale = { en: 'en_US', fr: 'fr_FR', de: 'de_DE' }[lang] ?? 'en_US';
+---
+<!doctype html>
+<html lang={lang} data-chatbot>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0A1F44" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Arnaud Gavanier" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={shareImage} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta property="profile:first_name" content="Arnaud" />
+    <meta property="profile:last_name" content="Gavanier" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={shareImage} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+    <script type="application/ld+json" set:html={personSchemaJson}></script>
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" hreflang="en" href={urlFor('en')} />
+    <link rel="alternate" hreflang="fr" href={urlFor('fr')} />
+    <link rel="alternate" hreflang="de" href={urlFor('de')} />
+    <link rel="alternate" hreflang="x-default" href={urlFor('en')} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="preload" href="/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="preload" href="/hero.webp" as="image" fetchpriority="high" />
+    <noscript><style>.hero:not(.ready) .hero-bg::before,.hero:not(.ready) .fog{opacity:1}</style></noscript>
+    <script is:inline src="/config.js"></script>
+    <script is:inline src="/features.js"></script>
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      try { localStorage.setItem('lang', document.documentElement.lang); } catch (e) {}
+    </script>
+  </body>
+</html>

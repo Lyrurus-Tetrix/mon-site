@@ -1,0 +1,212 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { getImage } from 'astro:assets';
+import profilePhoto from '../assets/photo.jpg';
+import '../styles/home.css';
+import en from '../i18n/en.json';
+import fr from '../i18n/fr.json';
+import de from '../i18n/de.json';
+
+const { lang } = Astro.props;
+const dictionaries = { en, fr, de };
+const t = dictionaries[lang] ?? en;
+const optimizedPhoto = await getImage({
+  src: profilePhoto,
+  width: 520,
+  height: 650,
+  format: 'webp',
+  fit: 'cover',
+  quality: 82,
+});
+const profilePhotoUrl = new URL(optimizedPhoto.src, Astro.site).href;
+const title = {
+  en: 'Arnaud Gavanier | SAP S/4HANA Transformation',
+  fr: 'Arnaud Gavanier | Transformation SAP S/4HANA',
+  de: 'Arnaud Gavanier | SAP-S/4HANA-Transformation',
+}[lang] ?? 'Arnaud Gavanier | SAP S/4HANA Transformation';
+const imageAlt = {
+  en: 'Arnaud Gavanier, business transformation leader for SAP S/4HANA programs',
+  fr: 'Arnaud Gavanier, leader en transformation d’entreprise pour les programmes SAP S/4HANA',
+  de: 'Arnaud Gavanier, Transformationsleiter für SAP-S/4HANA-Programme',
+}[lang] ?? 'Arnaud Gavanier, business transformation leader for SAP S/4HANA programs';
+const mapUrl = 'https://www.google.com/maps?q=' + encodeURIComponent('Deloitte, Rue du Pré-de-la-Bichette 1, 1202 Genève') + '&hl=' + lang + '&z=16&output=embed';
+const annexHref = (page) => (lang === 'en' ? '' : '/' + lang) + '/' + page;
+---
+<SiteLayout lang={lang} title={title} description={t['h_sub']} imageAlt={imageAlt} profilePhotoUrl={profilePhotoUrl}>
+<header><div class="bar">
+<a class="brand" href="#top">Arnaud Gavanier</a>
+<nav><a href="#about">{t["n_about"]}</a><a href="#services" data-feature="offer">{t["n_svc"]}</a><a href="#experience">{t["n_exp"]}</a><a href="#certifications">{t["n_cert"]}</a><a href={annexHref("transformation-readiness.html")} data-feature="tools">{t["n_assess"]}</a><a href={annexHref("rfp-checklist.html")} data-feature="tools">{t["n_rfp"]}</a><a href="#contact">{t["n_con"]}</a></nav>
+<LanguageSwitcher lang={lang} />
+</div></header>
+
+<main>
+<div class="hero" id="top"><div class="hero-bg" aria-hidden="true"></div><div class="fog f1" aria-hidden="true"></div><div class="fog f2" aria-hidden="true"></div><div class="in">
+<h1>{t["h_title"]}</h1>
+<p>{t["h_sub"]}</p>
+<a class="btn p" href="#contact">{t["h_cta"]}</a><a class="btn s" href="#services" data-feature="offer">{t["h_cta2"]}</a>
+<div class="facts"><div><b data-count="18" data-suffix="+">18+</b><span>{t["hf1"]}</span></div><div><b data-count="5">5</b><span>{t["hf2"]}</span></div><div><b data-count="2">2</b><span>{t["hf3"]}</span></div></div>
+</div>
+</div>
+
+<section id="diq" class="diq"><h2>{t["d_h"]}</h2>
+<p class="dcap">{t["dq_h"]}</p>
+<div class="dstats"><div><b>&lt;20%</b><span>{t["dq1"]}</span></div><div><b>49%</b><span>{t["dq2"]}</span></div><div><b>~60%</b><span>{t["dq3"]}</span></div></div>
+<div class="dgrid"><div class="row"><p>{t["d_2"]}</p></div>
+<div class="row"><p>{t["d_2b"]}</p></div>
+<div class="row"><p>{t["d_2c"]}</p></div></div>
+<p class="src"><span>{t["d_src"]}</span> <a href="https://www.businesswire.com/news/home/20260202883729/en">{t["d_link"]}</a></p>
+<p class="q">{t["d_3"]}</p>
+</section>
+
+<section id="about"><h2>{t["a_h"]}</h2>
+<div class="about"><div><p>{t["a_1"]}</p><p>{t["a_2"]}</p><p>{t["a_3"]}</p></div>
+<div><img class="photo" src={optimizedPhoto.src} width={optimizedPhoto.attributes.width} height={optimizedPhoto.attributes.height} alt="Arnaud Gavanier" onerror="this.style.display='none'">
+<div class="sectors"><strong>{t["s_h"]}</strong><span>{t["s_1"]}</span><span>{t["s_2"]}</span><span>{t["s_3"]}</span><span>{t["s_4"]}</span><span>{t["s_5"]}</span></div></div></div></section>
+
+<section id="services" data-feature="offer"><h2>{t["v_h"]}</h2>
+<p class="hint">{t["v_hint"]}</p>
+<div class="svc">
+<div tabindex="0"><h3>{t["v1t"]}</h3><p>{t["v1"]}</p>
+<div class="tip"><div class="tipin"><div class="st"><b>55%</b><span>{t["st_a1"]}</span></div>
+<div class="st"><b>51%</b><span>{t["st_a2"]}</span></div>
+<div class="st"><b>30%</b><span>{t["st_a3"]}</span></div>
+<p class="sr"><span>{t["v_src"]}</span> <a href="https://erp-software.org/en/erp-statistics/">Panorama 2026 ERP Report (via erp-software.org)</a></p></div></div></div>
+<div tabindex="0"><h3>{t["v2t"]}</h3><p>{t["v2"]}</p>
+<div class="tip"><div class="tipin"><div class="st"><b>55%</b><span>{t["st_b1"]}</span></div>
+<div class="st"><b>34%</b><span>{t["st_b2"]}</span></div>
+<div class="st"><b>~60%</b><span>{t["st_b3"]}</span></div>
+<p class="sr"><span>{t["v_src"]}</span> <a href="https://sapinsider.org/research-reports/sapinsider-benchmark-research-erp-migration-and-transformation-2026/">SAPinsider 2026</a>, <a href="https://www.businesswire.com/news/home/20260202883729/en">ISG 2026</a></p></div></div></div>
+<div tabindex="0"><h3>{t["v4t"]}</h3><p>{t["v4"]}</p>
+<div class="tip"><div class="tipin"><div class="st"><b>17%</b><span>{t["st_d1"]}</span></div>
+<div class="st"><b>5–6%</b><span>{t["st_d2"]}</span></div>
+<div class="st"><b>90%</b><span>{t["st_d3"]}</span></div>
+<p class="sr"><span>{t["v_src"]}</span> <a href="https://www.slideshare.net/slideshow/gartner-buyer-enablement-winmoreb2bsalesdealspdf/258207352">Gartner, <i>Win More B2B Sales Deals</i> (via SlideShare)</a></p></div></div></div>
+<div tabindex="0"><h3>{t["v7t"]}</h3><p>{t["v7"]}</p>
+<div class="tip"><div class="tipin"><div class="st"><b>76%</b><span>{t["st_e1"]}</span></div>
+<div class="st"><b>24%</b><span>{t["st_e2"]}</span></div>
+<div class="st"><b>45%</b><span>{t["st_e3"]}</span></div>
+<p class="sr"><span>{t["v_src"]}</span> <a href="https://worldpokerfederation.org/wp-content/uploads/2023/10/CIGITAL-100M-Hand-AnalysisReport.pdf">Cigital study, 2009 (original report PDF, hosted by World Poker Federation)</a>; <a href="https://link.loopio.com/hubfs/loopio-trends-report-2025-digital.pdf">Loopio 2025</a></p></div></div></div>
+<div tabindex="0"><h3>{t["v5t"]}</h3><p>{t["v5"]}</p>
+<div class="tip"><div class="tipin"><div class="st"><b>1/6</b><span>{t["st_f1"]}</span></div>
+<div class="st"><b>+200%</b><span>{t["st_f2"]}</span></div>
+<div class="st"><b>+70%</b><span>{t["st_f3"]}</span></div>
+<p class="sr"><span>{t["v_src"]}</span> <a href="https://papers.ssrn.com/abstract=2229735">Flyvbjerg & Budzier, 2011</a></p></div></div></div>
+<div tabindex="0"><h3>{t["v6t"]}</h3><p>{t["v6"]}</p>
+<div class="tip"><div class="tipin"><div class="st"><b>39%</b><span>{t["st_g1"]}</span></div>
+<div class="st"><b>6%</b><span>{t["st_g2"]}</span></div>
+<div class="st"><b>≤10%</b><span>{t["st_g3"]}</span></div>
+<p class="sr"><span>{t["v_src"]}</span> <a href="https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/the-state-of-ai-2025">McKinsey, State of AI 2025</a></p></div></div></div>
+</div></section>
+
+<section id="experience"><h2>{t["e_h"]}</h2><p class="role"><span>{t["e_role"]}</span> <a class="ext" href="https://www.deloitte.com/ch/en/about/people/profiles.agavanier+fea06dc5.html" target="_blank" rel="noopener noreferrer">{t["e_link"]}</a></p>
+<div class="exp cards">
+<div><h3>{t["e1t"]}</h3><p>{t["e1"]}</p></div>
+<div><h3>{t["e2t"]}</h3><p>{t["e2"]}</p></div>
+<div><h3>{t["e3t"]}</h3><p>{t["e3"]}</p></div>
+</div>
+<details class="earlier"><summary>{t["j_h"]}</summary>
+<div class="exp">
+<div><h3>{t["j1t"]}</h3><p class="jm">{t["j1m"]}</p><p>{t["j1"]}</p>
+<ul><li>{t["j1a"]}</li><li>{t["j1b"]}</li><li>{t["j1c"]}</li><li>{t["j1d"]}</li></ul></div>
+<div><h3>{t["j2t"]}</h3><p class="jm">{t["j2m"]}</p><p>{t["j2"]}</p></div>
+</div></details></section>
+
+<section id="tools" data-feature="tools"><h2>{t["tl_h"]}</h2>
+<div class="tools">
+<div class="tool"><h3>{t["tl_1t"]}</h3><p>{t["tl_1p"]}</p><a class="btn dk" href={annexHref("transformation-readiness.html")}>{t["tl_1b"]}</a></div>
+<div class="tool"><h3>{t["tl_2t"]}</h3><p>{t["tl_2p"]}</p><a class="btn dk" href={annexHref("rfp-checklist.html")}>{t["tl_2b"]}</a></div>
+</div></section>
+
+<section id="certifications"><h2>{t["ct_h"]}</h2>
+<div class="enable"><h3>{t["ai_h"]}</h3><p>{t["ai_p"]}</p>
+<ul class="chips"><li>{t["ai_t1"]}</li><li>{t["ai_t2"]}</li><li>{t["ai_t3"]}</li><li>{t["ai_t4"]}</li></ul></div>
+<p class="sub first">{t["ct_main"]}</p>
+<div class="cert-grid">
+<div class="cert"><h3>SAP Certified - Positioning Business Transformation Management Solutions</h3>
+<p><span>{t["ct_id"]}</span> C_BCBTM</p>
+<a href="https://www.credly.com/badges/22ba7486-f477-4b2e-8b77-d698119c1746/public_url" target="_blank" rel="noopener noreferrer">{t["ct_ver"]}</a></div>
+<div class="cert"><h3>SAP Certified - Validating Business Transformation</h3>
+<p><span>{t["ct_id"]}</span> C_SIGVT_2601</p>
+<a href="https://www.credly.com/badges/72336142-a81d-4b26-be7c-5732eeb77250/public_url" target="_blank" rel="noopener noreferrer">{t["ct_ver"]}</a></div>
+<div class="cert"><h3>SAP Certified - Positioning SAP Business Suite</h3>
+<p><span>{t["ct_id"]}</span> C_BCSBS</p>
+<a href="https://www.credly.com/badges/edc60ab8-e6fb-4644-9802-caaac4865541" target="_blank" rel="noopener noreferrer">{t["ct_ver"]}</a></div>
+<div class="cert"><h3>SAP Certified Associate - Positioning SAP Business AI Solutions as part of SAP Business Suite</h3>
+<p><span>{t["ct_id"]}</span> C_BCBAI_2509</p>
+<a href="https://www.credly.com/badges/684ebb82-faf8-4f26-8243-9119b9b3ac9e/public_url" target="_blank" rel="noopener noreferrer">{t["ct_ver"]}</a></div>
+</div>
+<p class="sub">{t["ct_sub"]}</p>
+<div class="cert-grid">
+<div class="cert s"><h3>SAP Certified Associate - Implementation Consultant - SAP S/4HANA Cloud Public Edition</h3>
+<p><span>{t["ct_id"]}</span> C_S4CPB</p>
+<a href="https://www.credly.com/badges/e1d8f356-7b97-40e6-a6e6-3dfd7d0a1b4d/public_url" target="_blank" rel="noopener noreferrer">{t["ct_ver"]}</a></div>
+<div class="cert s"><h3>SAP Certified Associate - Implementation Consultant - SAP S/4HANA Cloud Public Edition - Sales</h3>
+<p><span>{t["ct_id"]}</span> C_S4CS</p>
+<a href="https://www.credly.com/badges/b314be1d-6454-4af3-87e2-bebbb095f0c1/public_url" target="_blank" rel="noopener noreferrer">{t["ct_ver"]}</a></div>
+<div class="cert s"><h3>SAP Certified Associate - Project Manager - SAP Activate</h3>
+<p><span>{t["ct_id"]}</span> C_ACT</p>
+<a href="https://www.credly.com/badges/94d15283-13be-47e7-963a-fbc2330e3928/public_url" target="_blank" rel="noopener noreferrer">{t["ct_ver"]}</a></div>
+<div class="cert s"><h3>SAP Certified Associate - SAP S/4HANA Cloud Private Edition, Sales</h3>
+<p><span>{t["ct_id"]}</span> C_TS462</p>
+<a href="https://www.credly.com/badges/2ee0e3dc-829e-46c9-a0ad-63f20df4c662" target="_blank" rel="noopener noreferrer">{t["ct_ver"]}</a></div>
+</div></section>
+
+<section id="contact"><div class="contact"><h2>{t["c_h"]}</h2><p data-feature="form">{t["c_p"]}</p>
+<p data-feature="deloitte">{t["c_p2"]}</p>
+<a class="btn p" href={annexHref("contact.html")} data-feature="form">{t["c_btn"]}</a>
+<a class="btn p" href="https://www.deloitte.com/ch/en/about/people/profiles.agavanier+fea06dc5.html" target="_blank" rel="noopener noreferrer" data-feature="deloitte">{t["c_dl"]}</a>
+<a class="btn s" href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a>
+<div class="findbox" data-feature="deloitte"><div class="map"><iframe id="mapframe" src={mapUrl} loading="lazy" referrerpolicy="no-referrer-when-downgrade" title={t.fm_title}></iframe></div>
+<p class="fine">{t["fm_note"]}</p></div>
+</div></section>
+</main>
+<footer class="foot"><div class="fin"><div><strong>Arnaud Gavanier</strong><p>{t["f_tag"]}</p></div>
+<div class="links"><a href="#about">{t["n_about"]}</a><a href="#services" data-feature="offer">{t["n_svc"]}</a><a href="#experience">{t["n_exp"]}</a><a href={annexHref("transformation-readiness.html")} data-feature="tools">{t["n_assess"]}</a><a href={annexHref("rfp-checklist.html")} data-feature="tools">{t["n_rfp"]}</a><a href={annexHref("contact.html")} data-feature="form">{t["c_btn"]}</a><a href="https://www.linkedin.com/in/arnaud-gavanier/">LinkedIn</a><a href="https://www.deloitte.com/ch/en/about/people/profiles.agavanier+fea06dc5.html" target="_blank" rel="noopener noreferrer">{t["f_dl"]}</a></div></div>
+<p class="cp">© Arnaud Gavanier</p></footer>
+
+<script is:inline>
+(function(){
+  var bg=document.querySelector(".hero-bg");
+  if(!bg||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  addEventListener("scroll",function(){bg.style.transform="translate3d(0,"+Math.min(scrollY,700)*0.25+"px,0)"},{passive:true});
+})();
+
+(function(){
+  var hero=document.querySelector(".hero"),done=false;
+  var nums=[].slice.call(document.querySelectorAll("[data-count]")),raf=0,
+      rm=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function show(el,v,fin){el.textContent=v+(fin&&el.dataset.suffix?el.dataset.suffix:"")}
+  function zero(){if(!rm)nums.forEach(function(el){show(el,0,false)})}
+  function count(){
+    if(rm){nums.forEach(function(el){show(el,+el.dataset.count,true)});return}
+    cancelAnimationFrame(raf);
+    var max=Math.max.apply(null,nums.map(function(el){return +el.dataset.count})),
+        rate=max/2000,t0=performance.now();   // same speed for every figure: the largest takes 2 s
+    function tick(now){
+      var dt=now-t0,all=true;
+      nums.forEach(function(el){var tg=+el.dataset.count,v=Math.min(tg,Math.floor(dt*rate));show(el,v,v>=tg);if(v<tg)all=false});
+      if(!all)raf=requestAnimationFrame(tick);
+    }
+    raf=requestAnimationFrame(tick);
+  }
+  zero();
+  function go(){if(done)return;done=true;hero.classList.add("ready");count()}
+  var im=new Image();im.onload=go;im.onerror=go;im.src="/hero.webp";
+  setTimeout(go,2500);
+  // replay the reveal each time the banner comes back into view
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(function(e){
+      if(!done)return;
+      var x=e[0];
+      if(!x.isIntersecting){hero.classList.remove("ready");cancelAnimationFrame(raf);zero()}
+      else if(x.intersectionRatio>=0.15&&!hero.classList.contains("ready")){hero.classList.add("ready");count()}
+    },{threshold:[0,0.15]}).observe(hero);
+  }
+})();
+
+// footer photo: requested only when the footer is close to the screen
+(function(){var f=document.querySelector("footer.foot");if(!f)return;function on(){f.classList.add("img-on")}
+  if("IntersectionObserver" in window){new IntersectionObserver(function(e,o){if(e[0].isIntersecting){on();o.disconnect()}},{rootMargin:"600px"}).observe(f)}else on()})();
+</script>
+</SiteLayout>
