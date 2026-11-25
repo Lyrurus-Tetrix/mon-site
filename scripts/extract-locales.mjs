@@ -11,6 +11,7 @@ const siteUrl = 'https://arnaud.gavanier.com';
 const siteConfig = await readFile(new URL('../config.js', import.meta.url), 'utf8');
 const showTools = readBooleanOption('showTools');
 const showContactForm = readBooleanOption('showContactForm');
+const assetVersion = encodeURIComponent(process.env.PUBLIC_BUILD_ID || 'local');
 
 const pageSeo = {
   'contact.html': {
@@ -91,5 +92,8 @@ function withSeo(html, page, locale, enabled) {
   const withTitle = withoutOldDescription.replace(/<title>[\s\S]*?<\/title>/i, `<title>${title}</title>`);
   const withSeoTags = withTitle.replace('</head>', `${seoTags}\n</head>`);
   const heading = escapeHtml(metadata.heading);
-  return withSeoTags.replace(/<h1([^>]*data-i="(?:t|title)"[^>]*)>[\s\S]*?<\/h1>/i, `<h1$1>${heading}</h1>`);
+  return withSeoTags
+    .replace(/<h1([^>]*data-i="(?:t|title)"[^>]*)>[\s\S]*?<\/h1>/i, `<h1$1>${heading}</h1>`)
+    .replaceAll('src="/config.js"', `src="/config.js?v=${assetVersion}"`)
+    .replaceAll('src="/features.js"', `src="/features.js?v=${assetVersion}"`);
 }

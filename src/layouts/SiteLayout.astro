@@ -36,6 +36,7 @@ const personSchema = {
 };
 const personSchemaJson = JSON.stringify(personSchema).replace(/</g, '\\u003c');
 const ogLocale = { en: 'en_US', fr: 'fr_FR', de: 'de_DE' }[lang] ?? 'en_US';
+const assetVersion = import.meta.env.PUBLIC_BUILD_ID || 'local';
 ---
 <!doctype html>
 <html lang={lang} data-chatbot>
@@ -76,8 +77,8 @@ const ogLocale = { en: 'en_US', fr: 'fr_FR', de: 'de_DE' }[lang] ?? 'en_US';
     <link rel="stylesheet" href="/fonts/fonts.css" />
     <link rel="preload" href="/hero.webp" as="image" fetchpriority="high" />
     <noscript><style>.hero:not(.ready) .hero-bg::before,.hero:not(.ready) .fog{opacity:1}</style></noscript>
-    <script is:inline src="/config.js"></script>
-    <script is:inline src="/features.js"></script>
+    <script is:inline src={`/config.js?v=${assetVersion}`}></script>
+    <script is:inline src={`/features.js?v=${assetVersion}`}></script>
   </head>
   <body>
     <slot />

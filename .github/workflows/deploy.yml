@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ASTRO_TELEMETRY_DISABLED: '1'
+      PUBLIC_BUILD_ID: ${{ github.sha }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
